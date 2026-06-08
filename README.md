@@ -111,7 +111,16 @@ saglamalidir:
 - `README.md`, `og-image.svg` kapak gorselini en ustte gosterir.
 - Kok dizinde 1200 x 630 boyutunda bir `og-image.svg` bulunur.
 - Her HTML sayfasinda kendisine ait `canonical` ve `og:url` adresi bulunur.
-- Her HTML sayfasi `og:image` ve `twitter:image` ile kokteki kapak gorseline baglanir.
+- Her HTML sayfasinda tek bir `og:image` ve tek bir `twitter:image` bulunur; ikisi
+  de kokteki ayni mutlak `og-image.svg` URL'sine baglanir.
+- Sosyal gorsel metadata'sinda `image/svg+xml`, 1200 x 630 olcu ve erisilebilir
+  alt metin bilgileri yer alir. Twitter kart tipi `summary_large_image` olur.
+- Handbook OG gorselleri ortak yerlesimi kullanir: koyu zemin ve panel, ortali
+  marka isareti, baslik, kisa aciklama, kapsam satiri, seviye rozetleri, konu
+  ozeti ve yayin adresi. Yalnizca marka rengi ve icerik metni degisir.
+- Handbook `README.md` dosyalari su sirayi izler: kapak, deger onerisi, canli
+  baglantilar, cozuldugu problemler, hedef kitle, seviyeli icerik haritasi,
+  yaklasim, production ilkeleri, teknik yapi, katki ve lisans.
 - `sitemap.xml`, index dahil yayinlanan tum HTML sayfalarini icerir.
 - Yeni sayfa eklendiginde veya yol degistirildiginde sitemap ve metadata birlikte
   guncellenir.
@@ -139,6 +148,14 @@ Tum handbook klasorunu birlikte kontrol etmek:
 
 ```powershell
 .\tools\validate-handbook-suite.ps1 -HandbooksRoot ..\..\Handbooks
+```
+
+Donusumu tamamlanan secili handbook'lari kontrol etmek:
+
+```powershell
+.\tools\validate-handbook-suite.ps1 `
+  -HandbooksRoot ..\..\Handbooks `
+  -Projects hangfire-handbook,elasticsearch-handbook
 ```
 
 `tools/sync-features.ps1` yalnizca offline veya vendored asset gerektiren istisnai projeler icindir.

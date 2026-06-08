@@ -23,8 +23,8 @@ $utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
 $managedPatterns = @(
     '(?m)^\s*<meta\s+name="robots"[^>]*>\s*\r?\n?',
     '(?m)^\s*<link\s+rel="canonical"[^>]*>\s*\r?\n?',
-    '(?m)^\s*<meta\s+property="og:(type|title|description|url|site_name|locale|image)"[^>]*>\s*\r?\n?',
-    '(?m)^\s*<meta\s+name="twitter:(card|title|description|image)"[^>]*>\s*\r?\n?'
+    '(?m)^\s*<meta\s+property="og:(type|title|description|url|site_name|locale|image|image:type|image:width|image:height|image:alt)"[^>]*>\s*\r?\n?',
+    '(?m)^\s*<meta\s+name="twitter:(card|title|description|image|image:alt)"[^>]*>\s*\r?\n?'
 )
 
 $htmlFiles = Get-ChildItem -LiteralPath $root -Recurse -Filter "*.html" -File |
@@ -70,10 +70,15 @@ foreach ($htmlFile in $htmlFiles) {
 <meta property="og:site_name" content="$SiteName">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:image" content="$imageUrl">
+<meta property="og:image:type" content="image/svg+xml">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="$SiteName">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="$title">
 <meta name="twitter:description" content="$description">
 <meta name="twitter:image" content="$imageUrl">
+<meta name="twitter:image:alt" content="$SiteName">
 "@
 
     $descriptionTag = $descriptionMatch.Value

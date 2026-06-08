@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory = $true)]
-    [string]$HandbooksRoot
+    [string]$HandbooksRoot,
+
+    [string[]]$Projects = @()
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,6 +14,14 @@ $failed = [System.Collections.Generic.List[string]]::new()
 $handbooks = Get-ChildItem -LiteralPath $root -Directory |
     Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName "index.html") -PathType Leaf } |
     Sort-Object Name
+
+if ($Projects.Count -gt 0) {
+    $handbooks = $handbooks | Where-Object { $_.Name -in $Projects }
+    $missingProjects = $Projects | Where-Object { $_ -notin $handbooks.Name }
+    if ($missingProjects.Count -gt 0) {
+        throw "Handbook bulunamadi: $($missingProjects -join ', ')"
+    }
+}
 
 foreach ($handbook in $handbooks) {
     Write-Host ""
