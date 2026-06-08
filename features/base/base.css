@@ -383,7 +383,7 @@ td > code:first-child { margin-left: -.4rem; }
 
 /* ── SVG diagrams ── */
 .diagram-wrapper { display: flex; justify-content: center; margin: 1.5rem 0 2rem; }
-.diagram-wrapper svg { max-width: min(100%, 820px); height: auto; }
+.diagram-wrapper svg { width: 100%; max-width: 820px; min-width: 0; height: auto; }
 
 /* ── Scenario cards ── */
 .scenario-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem; margin: 1.4rem 0; box-shadow: var(--shadow); overflow: hidden; }
