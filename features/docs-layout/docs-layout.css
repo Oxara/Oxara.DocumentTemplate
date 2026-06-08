@@ -441,7 +441,7 @@
 .docs-home-card {
     display: flex;
     flex-direction: column;
-    min-height: 230px;
+    min-height: 0;
     padding: 2rem 2rem 2rem 0;
     color: var(--text);
     border-bottom: 1px solid var(--border);
@@ -457,7 +457,7 @@
 .docs-home-card-label { color: var(--text-dim); font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; }
 .docs-home-card strong { margin: .65rem 0 .55rem; font-size: 1.25rem; }
 .docs-home-card > span:not(.docs-home-card-label, .docs-home-card-action) { color: var(--text-muted); font-size: .88rem; line-height: 1.65; }
-.docs-home-card-action { margin-top: auto; padding-top: 1.5rem; color: var(--brand); font-size: .8rem; font-weight: 600; }
+.docs-home-card-action { display: none; }
 .docs-home-card:hover strong { color: var(--brand); }
 
 .docs-home-principles {
