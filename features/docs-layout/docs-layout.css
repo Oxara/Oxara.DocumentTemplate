@@ -145,10 +145,15 @@
     font-weight: 600;
 }
 
-.docs-main { min-width: 0; }
+.docs-main,
+.docs-article,
+.docs-article > section {
+    min-width: 0;
+}
 
 .docs-article {
     width: 100%;
+    max-width: 100%;
     padding: clamp(3.5rem, 7vw, 6.5rem) 0 6rem;
 }
 

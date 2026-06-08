@@ -5,6 +5,10 @@
 
 pre {
     position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     background: var(--code-surface);
     border: 1px solid var(--code-border);
     border-radius: 8px;

@@ -74,6 +74,9 @@
 }
 
 .code-tabs {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     margin: 1.25rem 0 1.5rem;
     overflow: hidden;
     background: var(--surface);
@@ -113,6 +116,8 @@
 }
 
 .code-tab-panel {
+    max-width: 100%;
+    min-width: 0;
     padding: 1rem 1.2rem 1.2rem;
 }
 
@@ -125,6 +130,9 @@
 }
 
 .code-tab-panel pre {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     margin: 0;
 }
 
