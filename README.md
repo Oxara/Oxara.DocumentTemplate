@@ -33,7 +33,7 @@ Tum feature asset yollarini `features/features.json` manifestinde bulabilirsiniz
 ## Kaynak kurali
 
 - `features/` altindaki `base` ve diger feature'lar bu repoda gelistirilir.
-- Projelerdeki `features/` klasorleri dagitim kopyasidir; projeye ozel feature uretilmez.
+- Projeler varsayilan olarak surumlenmis jsDelivr URL'lerini kullanir; yerel `features/` kopyasi tutulmaz.
 - Ortak davranis gerekiyorsa once bu Template guncellenir, sonra hedef projeler senkronlanir.
 - Domain'e ozel icerik, renk veya davranis ortak feature'a eklenmez. Proje ihtiyaci ayri bir proje CSS dosyasinda tutulur.
 - Handbook ana icerigi statik ve semantik HTML olarak yazilir; Markdown parser veya runtime icerik uretimi kullanilmaz.
@@ -62,9 +62,11 @@ Oxara.DocumentTemplate/
 ## Yeni dokuman
 
 1. Ihtiyac duyulan feature listesini belirleyin.
-2. `tools/sync-features.ps1` ile feature'lari proje klasorune dagitin.
+2. Gerekli CSS ve JS dosyalarini surumlenmis jsDelivr URL'leriyle ekleyin.
 3. `index.html` icinde gerekli feature HTML iskeletlerini canli rehberden alin.
 4. Projeye ozel stilleri `document.css` gibi ayri bir dosyada tutun.
+
+`tools/sync-features.ps1` yalnizca offline veya vendored asset gerektiren istisnai projeler icindir.
 
 Tum feature'lari dagitmak:
 
