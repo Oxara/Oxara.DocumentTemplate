@@ -80,9 +80,11 @@ Oxara.DocumentTemplate/
     scroll-top/
     reading-progress/
     features.json
-    README.md
   tools/
     sync-features.ps1
+    update-document-metadata.ps1
+    validate-document.ps1
+    validate-handbook-suite.ps1
 ```
 
 ## Yeni dokuman
@@ -94,6 +96,45 @@ Oxara.DocumentTemplate/
 5. Gerekli feature HTML iskeletlerini canli rehberden alin.
 6. Projeye ozel stilleri `document.css` gibi ayri bir dosyada tutun.
 7. Giris kartlarinda `Konuyu ac` gibi tekrar eden aksiyon satirlari kullanmayin.
+
+## Yayin standardi
+
+Her handbook ve guide yayinlanmadan once ayni temel dosya ve metadata standardini
+saglamalidir:
+
+- Kok dizinde projeyi ve canli dokumani aciklayan tek bir `README.md` bulunur.
+- `README.md`, `og-image.svg` kapak gorselini en ustte gosterir.
+- Kok dizinde 1200 x 630 boyutunda bir `og-image.svg` bulunur.
+- Her HTML sayfasinda kendisine ait `canonical` ve `og:url` adresi bulunur.
+- Her HTML sayfasi `og:image` ve `twitter:image` ile kokteki kapak gorseline baglanir.
+- `sitemap.xml`, index dahil yayinlanan tum HTML sayfalarini icerir.
+- Yeni sayfa eklendiginde veya yol degistirildiginde sitemap ve metadata birlikte
+  guncellenir.
+- Bir dokumanda ortak tasarim, navigasyon, metadata veya yayin yapisi degistiginde
+  ayni template'i kullanan diger dokumanlar da kontrol edilir.
+- Ortak bir eksik veya tutarsizlik tekrar ediyorsa yalnizca ilgili proje
+  duzeltilmez; kural ve otomatik kontrol Template reposuna eklenir.
+
+Bu kontrolleri calistirmak:
+
+```powershell
+.\tools\validate-document.ps1 -DocumentRoot ..\ornek-handbook
+```
+
+Metadata ve sitemap'i tum HTML sayfalarindan yeniden olusturmak:
+
+```powershell
+.\tools\update-document-metadata.ps1 `
+  -DocumentRoot ..\ornek-handbook `
+  -SiteUrl https://oxara.github.io/ornek-handbook/ `
+  -SiteName "Ornek Gelistirici El Kitabi"
+```
+
+Tum handbook klasorunu birlikte kontrol etmek:
+
+```powershell
+.\tools\validate-handbook-suite.ps1 -HandbooksRoot ..\..\Handbooks
+```
 
 `tools/sync-features.ps1` yalnizca offline veya vendored asset gerektiren istisnai projeler icindir.
 

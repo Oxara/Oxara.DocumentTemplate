@@ -56,7 +56,6 @@ foreach ($feature in $selected) {
 }
 
 Copy-Item -LiteralPath (Join-Path $sourceRoot "features.json") -Destination $targetFeatures -Force
-Copy-Item -LiteralPath (Join-Path $sourceRoot "README.md") -Destination $targetFeatures -Force
 
 Write-Host "Senkronlanan hedef: $targetFeatures"
 Write-Host "Feature'lar: $($selected -join ', ')"
