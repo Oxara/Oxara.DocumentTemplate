@@ -2,7 +2,9 @@
 
 Handbook ve guide projelerinde kullanilan ortak, domain-free dokuman arayuzu.
 
-Canli feature rehberi: `feature-guide.html`
+Canli feature rehberi: <https://oxara.github.io/Oxara.DocumentTemplate/feature-guide.html>
+
+Baslangic sablonu: <https://oxara.github.io/Oxara.DocumentTemplate/>
 
 ## CDN kullanimi
 
