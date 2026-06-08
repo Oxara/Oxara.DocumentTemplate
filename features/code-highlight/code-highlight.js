@@ -85,23 +85,46 @@
     }
 
     /* ── XML token vurgulama ── */
+    function highlightXmlAttributes(attributes) {
+        var output = '';
+        var cursor = 0;
+        var attributePattern = /([\w:.-]+)(\s*=\s*)("[^"]*"|'[^']*')/g;
+        var match;
+
+        while ((match = attributePattern.exec(attributes)) !== null) {
+            output += escapeHtml(attributes.slice(cursor, match.index));
+            output += token('attr', match[1]);
+            output += token('punctuation', match[2]);
+            output += token('string', match[3]);
+            cursor = match.index + match[0].length;
+        }
+
+        return output + escapeHtml(attributes.slice(cursor));
+    }
+
     function highlightXml(code) {
-        return escapeHtml(code).replace(
-            /(&lt;!--[\s\S]*?--&gt;)|(&lt;\/?)([\w:.-]+)([^&]*?)(&gt;)/g,
-            function (match, comment, open, tag, attrs, close) {
-                if (comment) return '<span class="code-token comment">' + comment + '</span>';
-                var attrHtml = attrs.replace(
-                    /([\w:.-]+)(=)(&quot;.*?&quot;|&#39;.*?&#39;)/g,
-                    '<span class="code-token attr">$1</span>' +
-                    '<span class="code-token punctuation">$2</span>' +
-                    '<span class="code-token string">$3</span>'
-                );
-                return '<span class="code-token punctuation">' + open + '</span>' +
-                    '<span class="code-token tag">' + tag + '</span>' +
-                    attrHtml +
-                    '<span class="code-token punctuation">' + close + '</span>';
+        var output = '';
+        var cursor = 0;
+        var markupPattern = /<!--[\s\S]*?-->|<\/?[\w:.-]+(?:\s+(?:"[^"]*"|'[^']*'|[^"'<>])*)?\s*\/?>/g;
+        var match;
+
+        while ((match = markupPattern.exec(code)) !== null) {
+            output += escapeHtml(code.slice(cursor, match.index));
+
+            if (match[0].indexOf('<!--') === 0) {
+                output += token('comment', match[0]);
+            } else {
+                var parts = match[0].match(/^(<\/?)([\w:.-]+)([\s\S]*?)(\/?>)$/);
+                output += token('punctuation', parts[1]);
+                output += token('tag', parts[2]);
+                output += highlightXmlAttributes(parts[3]);
+                output += token('punctuation', parts[4]);
             }
-        );
+
+            cursor = match.index + match[0].length;
+        }
+
+        return output + escapeHtml(code.slice(cursor));
     }
 
     /* ── JSON token vurgulama ── */

@@ -54,6 +54,10 @@ foreach ($htmlFile in $htmlFiles) {
     $relativePath = $htmlFile.FullName.Substring($root.Length).TrimStart("\", "/")
     $html = Get-Content -LiteralPath $htmlFile.FullName -Raw -Encoding UTF8
 
+    if ($html -match '&amp;(?:lt|gt|quot|amp);') {
+        Add-ValidationError "$relativePath cift kacirilmis HTML entity iceriyor."
+    }
+
     foreach ($pattern in @(
         'rel="canonical"',
         'property="og:url"',
