@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dokuman Basligi</title>
+    <meta name="description" content="Dokuman aciklamasi">
+    <link rel="stylesheet" href="features/base/base.css">
+    <link rel="stylesheet" href="features/theme/theme.css">
+    <link rel="stylesheet" href="features/code-highlight/code-highlight.css">
+    <link rel="stylesheet" href="features/copy-code/copy-code.css">
+    <link rel="stylesheet" href="features/sidemenu/sidemenu.css">
+    <link rel="stylesheet" href="features/scroll-top/scroll-top.css">
+    <link rel="stylesheet" href="features/reading-progress/reading-progress.css">
+    <link rel="stylesheet" href="features/search/search.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Icerige atla</a>
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <nav class="sidenav" id="sidenav" aria-label="Dokuman menusu">
+        <div class="sidenav-header">
+            <span>Icindekiler</span>
+            <button class="sidenav-close" type="button" onclick="sidemenu.closeSidenav()" aria-label="Menuyu kapat">&times;</button>
+        </div>
+        <div id="sidenav-body"></div>
+    </nav>
+    <div class="sidenav-overlay" id="sidenavOverlay" onclick="sidemenu.closeSidenav()"></div>
+
+    <button class="menu-toggle" type="button" onclick="sidemenu.toggleSidenav()" aria-label="Menuyu ac">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <div class="header-actions">
+        <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap">
+            <span>Ara</span>
+            <kbd>Ctrl+K</kbd>
+        </button>
+        <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Tema degistir">
+            <span class="theme-toggle-icon"></span>
+            <span class="theme-toggle-label">Dark</span>
+        </button>
+    </div>
+
+    <div class="search-overlay" id="searchOverlay" onclick="search.closeSearchOnOverlay(event)">
+        <div class="search-modal" onclick="event.stopPropagation()">
+            <div class="search-input-wrapper">
+                <input class="search-input" id="searchInput" type="text" placeholder="Dokumanda ara..." autocomplete="off">
+                <button class="search-close" type="button" onclick="search.closeSearch()" aria-label="Aramayi kapat">&times;</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Basa don">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <main class="container section-dividers" id="main-content" tabindex="-1">
+        <header>
+            <h1>Dokuman Basligi</h1>
+            <p>Dokumanin amacini tek paragrafta aciklayin.</p>
+        </header>
+
+        <section>
+            <h2 id="ilk-bolum">Ilk Bolum</h2>
+            <p>Ana icerigi statik ve semantik HTML olarak yazin.</p>
+
+            <h3 id="kod-ornegi">Kod Ornegi</h3>
+            <pre data-lang="csharp"><code class="language-csharp">Console.WriteLine("Merhaba");</code></pre>
+        </section>
+    </main>
+
+    <script src="features/theme/theme.js"></script>
+    <script src="features/code-highlight/code-highlight.js"></script>
+    <script src="features/copy-code/copy-code.js"></script>
+    <script src="features/sidemenu/sidemenu.js"></script>
+    <script src="features/scroll-top/scroll-top.js"></script>
+    <script src="features/reading-progress/reading-progress.js"></script>
+    <script src="features/search/search.js"></script>
+</body>
+</html>
+
