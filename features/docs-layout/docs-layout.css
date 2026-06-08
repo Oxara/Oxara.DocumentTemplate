@@ -485,6 +485,7 @@
 @media (max-width: 860px) {
     .docs-topbar-inner { width: min(calc(100% - 1rem), 1440px); gap: .6rem; }
     .docs-menu-toggle { display: block; }
+    .docs-top-actions { position: absolute; right: 0; }
     .docs-brand span:last-child { display: none; }
     .docs-top-links { display: none; }
     .docs-shell { display: block; width: min(calc(100% - 2rem), var(--docs-content-width)); }
