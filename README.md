@@ -1,8 +1,22 @@
 # Oxara Document Template
 
-Handbook ve guide projelerinde kullanilan ortak, domain-free dokuman arayuzu.
+Handbook, guide ve teknik makalelerde kullanilan ortak, domain-free dokuman arayuzu.
 
-Canli feature rehberi: <https://oxara.github.io/Oxara.DocumentTemplate/>
+Canli dokumantasyon ve feature rehberi: <https://oxara.github.io/Oxara.DocumentTemplate/>
+
+## Tasarim yaklasimi
+
+Template'in varsayilan yapisi cok sayfalidir:
+
+- `index.html` kisa bir karsilama ve konu secim sayfasidir.
+- Her ana konu ayri bir HTML sayfasinda tutulur.
+- Sol menu sayfalar arasinda gezinmeyi saglar.
+- Sag menu yalnizca aktif sayfanin `h2` ve `h3` basliklarini gosterir.
+- Ana icerik kolonu okunabilir bir genislikte tutulur.
+- Kutu, callout ve vurgu yuzeyleri yalnizca anlam tasidiklarinda kullanilir.
+
+Tek sayfalik makale veya kisa rehberlerde eski `sidemenu` feature'i kullanilabilir. Uzun
+handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
 
 ## CDN kullanimi
 
@@ -11,10 +25,12 @@ Production ortaminda surum etiketini sabitleyin:
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/base/base.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/theme/theme.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/docs-layout/docs-layout.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/code-highlight/code-highlight.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/copy-code/copy-code.css">
 
 <script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/theme/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/docs-layout/docs-layout.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/code-highlight/code-highlight.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@v1.0.0/features/copy-code/copy-code.js"></script>
 ```
@@ -43,8 +59,16 @@ Tum feature asset yollarini `features/features.json` manifestinde bulabilirsiniz
 ```text
 Oxara.DocumentTemplate/
   index.html
+  docs/
+    getting-started.html
+    document-components.html
+    code-features.html
+    navigation.html
+    configuration.html
+    reference.html
   features/
     base/
+    docs-layout/
     theme/
     code-highlight/
     copy-code/
@@ -63,8 +87,10 @@ Oxara.DocumentTemplate/
 
 1. Ihtiyac duyulan feature listesini belirleyin.
 2. Gerekli CSS ve JS dosyalarini surumlenmis jsDelivr URL'leriyle ekleyin.
-3. `index.html` icinde gerekli feature HTML iskeletlerini canli rehberden alin.
-4. Projeye ozel stilleri `document.css` gibi ayri bir dosyada tutun.
+3. Uzun icerigi konu bazli HTML sayfalarina bolun.
+4. Sol navigasyonu tum sayfalarda ayni bilgi mimarisiyle kullanin.
+5. Gerekli feature HTML iskeletlerini canli rehberden alin.
+6. Projeye ozel stilleri `document.css` gibi ayri bir dosyada tutun.
 
 `tools/sync-features.ps1` yalnizca offline veya vendored asset gerektiren istisnai projeler icindir.
 

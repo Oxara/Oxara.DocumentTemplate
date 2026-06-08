@@ -21,6 +21,36 @@
       ".content-figure"
     ]
   },
+  "docs-layout": {
+    "css": [
+      "features/docs-layout/docs-layout.css"
+    ],
+    "js": [
+      "features/docs-layout/docs-layout.js"
+    ],
+    "requires": [
+      "base"
+    ],
+    "provides": [
+      "multi-page documentation shell",
+      "persistent site navigation",
+      "automatic on-this-page navigation",
+      "mobile navigation drawer",
+      "previous and next page navigation"
+    ],
+    "html": [
+      ".docs-topbar",
+      ".docs-shell",
+      "[data-docs-sidebar]",
+      "[data-docs-toc]",
+      "[data-docs-nav-toggle]",
+      "[data-docs-overlay]"
+    ],
+    "api": [
+      "docsLayout.toggleNavigation()",
+      "docsLayout.closeNavigation()"
+    ]
+  },
   "theme": {
     "css": [
       "features/theme/theme.css"
@@ -151,6 +181,10 @@
     ],
     "requires": [
       "base"
+    ],
+    "provides": [
+      "current-page content search",
+      "optional cross-page search entries"
     ],
     "html": [
       "#searchOverlay",

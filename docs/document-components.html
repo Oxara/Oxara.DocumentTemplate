@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doküman Bileşenleri — Oxara Document Template</title>
+<meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
+<link rel="stylesheet" href="../features/base/base.css">
+<link rel="stylesheet" href="../features/theme/theme.css">
+<link rel="stylesheet" href="../features/docs-layout/docs-layout.css">
+<link rel="stylesheet" href="../features/code-highlight/code-highlight.css">
+<link rel="stylesheet" href="../features/copy-code/copy-code.css">
+<link rel="stylesheet" href="../features/code-tabs/code-tabs.css">
+<link rel="stylesheet" href="../features/search/search.css">
+<link rel="stylesheet" href="../features/scroll-top/scroll-top.css">
+<link rel="stylesheet" href="../features/reading-progress/reading-progress.css">
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main-content">İçeriğe atla</a>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+<header class="docs-topbar">
+    <div class="docs-topbar-inner">
+        <button class="docs-menu-toggle" type="button" data-docs-nav-toggle aria-label="Doküman menüsünü aç"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
+        <nav class="docs-top-links" aria-label="Üst navigasyon">
+            <a href="getting-started.html">Rehber</a>
+            <a href="reference.html">Feature API</a>
+        </nav>
+        <div class="docs-top-actions">
+            <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+            <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Tema değiştir"><span class="theme-toggle-icon">☀️</span><span class="theme-toggle-label">Dark</span></button>
+        </div>
+    </div>
+</header>
+<div class="docs-overlay" data-docs-overlay></div>
+<div class="docs-shell">
+    <aside class="docs-sidebar" data-docs-sidebar>
+        <div class="docs-sidebar-inner">
+            
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Başlangıç</div>
+    <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
+    <a class="docs-nav-link active" href="document-components.html">Doküman Bileşenleri</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature'lar</div>
+    <a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
+    <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
+    <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Referans</div>
+    <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
+    <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+</div>
+        </div>
+    </aside>
+    <main class="docs-main" id="main-content" tabindex="-1">
+        <article class="docs-article">
+            <header class="docs-article-header">
+                <p class="docs-eyebrow">İçerik sistemi</p>
+                <h1>Doküman Bileşenleri</h1>
+                <p class="docs-lead">Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.</p>
+            </header>
+            <section id="s-base">
+            <h2 id="h-base">Base</h2>
+            <p><code>base</code> doküman sayfalarının görsel omurgasıdır. Diğer CSS dosyaları çoğunlukla buradaki tokenlara dayanır.</p>
+            <p>Callout'ları yalnızca okuyucunun kararını veya uygulamasını değiştiren kritik bilgi için kullanın. Aynı konu altında art arda kutu dizmeyin; örnekleri ve ilgili bağlantıları düz içerik olarak gösterin.</p>
+            <h3 id="h-base-code">Kod</h3>
+            <script class="code-block language-html" type="text/plain">
+<div class="callout callout-info">Bilgilendirme metni</div>
+<div class="callout callout-warning">Dikkat edilmesi gereken metin</div>
+<div class="callout callout-error">Hata veya yasaklı durum</div>
+<div class="callout callout-success">Başarılı durum</div>
+
+<span class="badge-required">Z</span>
+<span class="badge-optional">O</span>
+<span class="badge-conditional">Ş</span>
+            </script>
+            <h3 id="h-base-output">Çıktı</h3>
+            <div class="demo-output">
+                <span class="demo-label">Callout ve badge örnekleri</span>
+                <div class="callout callout-info">Bilgilendirme metni</div>
+                <div class="callout callout-warning">Dikkat edilmesi gereken metin</div>
+                <div class="callout callout-error">Hata veya yasaklı durum</div>
+                <div class="callout callout-success">Başarılı durum</div>
+                <div class="mini-actions">
+                    <span class="badge-required">Z</span>
+                    <span class="badge-optional">O</span>
+                    <span class="badge-conditional">Ş</span>
+                </div>
+            </div>
+            <p class="content-example"><strong>Örnek:</strong> Gerçek hayat senaryoları renkli kutu yerine bu daha sakin içerik biçimiyle anlatılır.</p>
+            <nav class="section-links" aria-label="İlgili örnek bölümler"><strong>İlgili bölümler:</strong> <a href="#h-table-component">Tablo</a> · <a href="#h-heading-levels">Başlık hiyerarşisi</a></nav>
+        </section>
+
+<section id="s-document-components">
+            <h2 id="h-document-components">Temel Doküman Bileşenleri</h2>
+            <p>Feature'lardan bağımsız olarak, bu doküman tipinde sık kullanılan temel HTML/CSS bileşenleri de <code>base</code> içinde gelir. Aşağıdaki örnekler sayfa yazarken en çok lazım olan parçaları gösterir.</p>
+
+            <h3 id="h-heading-levels">Başlık hiyerarşisi</h3>
+            <p><code>h2</code> ana bölüm, <code>h3</code> alt bölüm, <code>h4</code> detay başlık için kullanılır. Sidemenu ve search için başlıklara <code>id</code> vermek iyi alışkanlıktır.</p>
+            <script class="code-block language-html" type="text/plain">
+<section id="invoice-flow">
+  <h2 id="invoice-flow-title">Belge Akışı</h2>
+  <h3 id="invoice-flow-validation">Validasyon</h3>
+  <p>İstek önce iş kurallarına göre doğrulanır.</p>
+  <h4 id="invoice-flow-validation-errors">Hata durumları</h4>
+  <p>Eksik alan varsa süreç durur.</p>
+</section>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Başlık çıktısı</span>
+                <h2 id="demo-heading-main">Belge Akışı</h2>
+                <h3 id="demo-heading-sub">Validasyon</h3>
+                <p>İstek önce iş kurallarına göre doğrulanır.</p>
+                <h4 id="demo-heading-detail">Hata durumları</h4>
+                <p>Eksik alan varsa süreç durur.</p>
+            </div>
+
+            <h3 id="h-section-divider-component">Section ayırıcıları</h3>
+            <p>Ana konuların birbirinden net ayrılması için kapsayıcıya <code>.section-dividers</code> ekleyin. İlk section hariç doğrudan çocuk section'ların başına çizgi ve nefes alanı otomatik gelir.</p>
+            <script class="code-block language-html" type="text/plain">
+<main class="container section-dividers">
+  <section>
+    <h2>Birinci konu</h2>
+    <p>Birinci konunun içeriği.</p>
+  </section>
+
+  <section>
+    <h2>İkinci konu</h2>
+    <p>İkinci konunun içeriği.</p>
+  </section>
+</main>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Section geçişi çıktısı</span>
+                <div class="section-dividers">
+                    <section>
+                        <h4>Birinci konu</h4>
+                        <p>Birinci konu burada tamamlanır.</p>
+                    </section>
+                    <section>
+                        <h4>İkinci konu</h4>
+                        <p>Çizgiden sonra yeni konu başlar.</p>
+                    </section>
+                </div>
+            </div>
+
+            <h3 id="h-skip-link-component">İçeriğe atlama bağlantısı</h3>
+            <p>Klavye kullanıcılarının tekrarlanan navigasyonu geçip doğrudan ana içeriğe ulaşmasını sağlar. Normalde gizlidir ve <code>Tab</code> ile odaklandığında görünür.</p>
+            <script class="code-block language-html" type="text/plain">
+<a class="skip-link" href="#main-content">İçeriğe atla</a>
+
+<main id="main-content" tabindex="-1">
+  ...
+</main>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Skip link çıktısı</span>
+                <a class="skip-link is-preview" href="#h-skip-link-component">İçeriğe atla</a>
+            </div>
+
+            <h3 id="h-slogan-banner-component">Slogan banner</h3>
+            <p>Kısa ve akılda kalıcı bir ana kuralı veya bölüm sonucunu öne çıkarmak için kullanın. Uzun açıklamalar ve uyarılar için callout tercih edin.</p>
+            <script class="code-block language-html" type="text/plain">
+<div class="slogan-banner">
+  <p class="slogan-message">
+    <span class="slogan-highlight">Global</span> Kaydet,
+    <span class="slogan-highlight">Yerel</span> Görüntüle
+  </p>
+  <p class="slogan-description">Tek kural. Zamanı UTC olarak sakla, kullanıcının diliminde göster.</p>
+</div>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Slogan çıktısı</span>
+                <div class="slogan-banner">
+                    <p class="slogan-message">
+                        <span class="slogan-highlight">Global</span> Kaydet,
+                        <span class="slogan-highlight">Yerel</span> Görüntüle
+                    </p>
+                    <p class="slogan-description">Tek kural. Zamanı UTC olarak sakla, kullanıcının diliminde göster.</p>
+                </div>
+            </div>
+
+            <h3 id="h-content-image-component">İçerik görseli</h3>
+            <p>Ekran görüntüsü, fotoğraf ve dış kaynaklı görselleri semantik <code>figure</code> yapısıyla ekleyin. Standart görünüm resmi çerçeveler; dar görsellerde <code>.is-compact</code>, logo ve şeffaf görsellerde <code>.is-unframed</code> kullanılır.</p>
+            <script class="code-block language-html" type="text/plain">
+<figure class="content-figure is-compact">
+  <img
+    src="https://oxara.github.io/timezone-article/og-image.svg"
+    alt="Uluslararası zaman yönetimi makalesinin kapak görseli"
+    width="1200"
+    height="630"
+    loading="lazy"
+    decoding="async">
+  <figcaption>Dış kaynaktan gelen görsel, dokümanın ortak çerçeve ve açıklama standardına uyar.</figcaption>
+</figure>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Dış kaynaklı görsel çıktısı</span>
+                <figure class="content-figure is-compact">
+                    <img
+                        src="https://oxara.github.io/timezone-article/og-image.svg"
+                        alt="Uluslararası zaman yönetimi makalesinin kapak görseli"
+                        width="1200"
+                        height="630"
+                        loading="lazy"
+                        decoding="async">
+                    <figcaption>Dış kaynaktan gelen görsel, dokümanın ortak çerçeve ve açıklama standardına uyar.</figcaption>
+                </figure>
+            </div>
+            <div class="callout callout-info"><b>Seçim:</b> Ekran görüntüsü ve fotoğrafta standart çerçeve; logo ve kendi zemini olan şeffaf görselde <code>.is-unframed</code> kullanın.</div>
+
+            <h3 id="h-table-component">Tablo</h3>
+            <p>Tabloları yatay taşma sorunlarına karşı her zaman <code>.table-wrapper</code> içine alın. Sütun adları okuyucunun hangi kararı vereceğini açıkça anlatmalı; boş “Kullan/Kullanma” sütunları veya emojiyle kodlanan anlam kullanılmamalıdır.</p>
+            <script class="code-block language-html" type="text/plain">
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr><th>Alan</th><th>Zorunluluk</th><th>Açıklama</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>ExpenseVoucherTypeCode</code></td><td><span class="badge-required">Z</span></td><td>SATIS veya IADE</td></tr>
+      <tr><td><code>UUId</code></td><td><span class="badge-optional">O</span></td><td>Boşsa platform üretir</td></tr>
+    </tbody>
+  </table>
+</div>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Tablo çıktısı</span>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Alan</th><th>Zorunluluk</th><th>Açıklama</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ExpenseVoucherTypeCode</code></td><td><span class="badge-required">Z</span></td><td>SATIS veya IADE</td></tr>
+                            <tr><td><code>UUId</code></td><td><span class="badge-optional">O</span></td><td>Boşsa platform üretir</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h3 id="h-rowspan-table-component">Rowspan ile ortak kural</h3>
+            <p>Bir kural birden fazla satırı kapsıyorsa boş hücreleri tekrar etmek yerine <code>rowspan</code> kullanın. Kural hücresindeki dikey çizgi, kapsanan satır grubunu görsel olarak ayırır.</p>
+            <script class="code-block language-html" type="text/plain">
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr><th>Alan</th><th>Değer</th><th>Kural</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>TypeCode</td><td><code>IADE</code></td><td></td></tr>
+      <tr><td>SchemeId</td><td><code>PASAPORTNO</code></td><td></td></tr>
+      <tr><td>ChannelCodeName</td><td><code>IADE_PROVIDER</code></td><td rowspan="3">Kargo → zorunlu</td></tr>
+      <tr><td>VerificationInfo.Type</td><td><code>IADEKODU</code></td></tr>
+      <tr><td>CargoCompany</td><td>Dolu</td></tr>
+    </tbody>
+  </table>
+</div>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Rowspan tablo çıktısı</span>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr><th>Alan</th><th>Değer</th><th>Kural</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>TypeCode</td><td><code>IADE</code></td><td></td></tr>
+                            <tr><td>SchemeId</td><td><code>PASAPORTNO</code></td><td></td></tr>
+                            <tr><td>ChannelCodeName</td><td><code>IADE_PROVIDER</code></td><td rowspan="3">Kargo → zorunlu</td></tr>
+                            <tr><td>VerificationInfo.Type</td><td><code>IADEKODU</code></td></tr>
+                            <tr><td>CargoCompany</td><td>Dolu</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h3 id="h-endpoint-component">Endpoint kartı</h3>
+            <p>API referansı yazarken endpoint kartı kullanın. Method etiketi için <code>method-post</code> veya <code>method-get</code> class'ı ekleyin.</p>
+            <script class="code-block language-html" type="text/plain">
+<div class="endpoint-card">
+  <div class="endpoint-header">
+    <span class="endpoint-method method-post">POST</span>
+    <span class="endpoint-path">/api/ExpenseVoucherApi/AddOutgoingExpenseVoucher</span>
+  </div>
+  <div class="endpoint-body">
+    <p class="endpoint-description">Yeni bir e-Gider Pusulası oluşturur.</p>
+  </div>
+</div>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Endpoint çıktısı</span>
+                <div class="endpoint-card">
+                    <div class="endpoint-header">
+                        <span class="endpoint-method method-post">POST</span>
+                        <span class="endpoint-path">/api/ExpenseVoucherApi/AddOutgoingExpenseVoucher</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p class="endpoint-description">Yeni bir e-Gider Pusulası oluşturur.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="h-scenario-component">Senaryo kartı</h3>
+            <p>İş senaryolarını gruplamak için kullanılır. İçine tablo, callout veya kod bloğu koyabilirsiniz.</p>
+            <script class="code-block language-html" type="text/plain">
+<div class="scenario-card">
+  <h4 id="scenario-cargo-return">Kargo ile İade</h4>
+  <p class="scenario-description">Kargo iadede iade kodu ve kargo şirketi bilgisi zorunludur.</p>
+  <div class="callout callout-warning">IADE_PROVIDER + IADEKODU beklenir.</div>
+</div>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Senaryo çıktısı</span>
+                <div class="scenario-card">
+                    <h4 id="demo-scenario-cargo-return">Kargo ile İade</h4>
+                    <p class="scenario-description">Kargo iadede iade kodu ve kargo şirketi bilgisi zorunludur.</p>
+                    <div class="callout callout-warning">IADE_PROVIDER + IADEKODU beklenir.</div>
+                </div>
+            </div>
+
+            <h3 id="h-details-component">Açılır örnek bloğu</h3>
+            <p>Uzun JSON/XML örneklerini sayfayı şişirmeden göstermek için <code>details.example-details</code> kullanın.</p>
+            <script class="code-block language-html" type="text/plain">
+<details class="example-details">
+  <summary><b>Örnek:</b> SATIS request</summary>
+  <div class="example-body">
+    <p>Basit satın alma senaryosu.</p>
+    <pre><code class="language-json">{"ExpenseVoucherTypeCode":"SATIS"}</code></pre>
+  </div>
+</details>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Açılır blok çıktısı</span>
+                <details class="example-details">
+                    <summary><b>Örnek:</b> SATIS request</summary>
+                    <div class="example-body">
+                        <p>Basit satın alma senaryosu.</p>
+                        <pre><code class="language-json">{"ExpenseVoucherTypeCode":"SATIS"}</code></pre>
+                    </div>
+                </details>
+            </div>
+
+            <h3 id="h-diagram-component">Diagram wrapper</h3>
+            <p>SVG diyagramlarını ortalamak ve responsive genişlik vermek için <code>.diagram-wrapper</code> kullanın. Diyagramın dışına ayrıca kart, çerçeve veya gölge eklenmez.</p>
+            <script class="code-block language-html" type="text/plain">
+<div class="diagram-wrapper">
+  <svg viewBox="0 0 320 80" role="img" aria-label="Basit akış">
+    <rect x="10" y="20" width="90" height="40" rx="8" fill="var(--svg-box)" stroke="var(--svg-stroke)"/>
+    <text x="55" y="45" text-anchor="middle" fill="var(--svg-text)">Request</text>
+    <path d="M105 40 L205 40" stroke="var(--svg-line)" marker-end="url(#arrow)"/>
+    <rect x="210" y="20" width="90" height="40" rx="8" fill="var(--svg-ok-bg)" stroke="var(--svg-ok-s)"/>
+    <text x="255" y="45" text-anchor="middle" fill="var(--svg-ok-s)">OK</text>
+  </svg>
+</div>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Diagram çıktısı</span>
+                <div class="diagram-wrapper">
+                    <svg viewBox="0 0 320 80" role="img" aria-label="Basit akış">
+                        <defs><marker id="demo-arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="var(--svg-line)"/></marker></defs>
+                        <rect x="10" y="20" width="90" height="40" rx="8" fill="var(--svg-box)" stroke="var(--svg-stroke)"/>
+                        <text x="55" y="45" text-anchor="middle" dominant-baseline="middle" fill="var(--svg-text)">Request</text>
+                        <path d="M105 40 L205 40" stroke="var(--svg-line)" marker-end="url(#demo-arrow)"/>
+                        <rect x="210" y="20" width="90" height="40" rx="8" fill="var(--svg-ok-bg)" stroke="var(--svg-ok-s)"/>
+                        <text x="255" y="45" text-anchor="middle" dominant-baseline="middle" fill="var(--svg-ok-s)">OK</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="callout callout-warning"><b>Tema zorunluluğu:</b> SVG içinde sabit hex <code>fill</code> veya <code>stroke</code> kullanılmaz. Diyagramlar light ve dark temada aynı semantik tokenlarla çalışmalıdır.</div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Amaç</th><th>Token</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Kart zemini ve kenarı</td><td><code>--svg-box</code>, <code>--svg-stroke</code></td></tr>
+                        <tr><td>Ana ve yardımcı metin</td><td><code>--svg-text</code>, <code>--svg-muted</code></td></tr>
+                        <tr><td>Bağlantı ve ok çizgisi</td><td><code>--svg-line</code></td></tr>
+                        <tr><td>Brand / başarı / uyarı / hata</td><td><code>--svg-brand-s</code>, <code>--svg-ok-s</code>, <code>--svg-warn-s</code>, <code>--svg-err-s</code></td></tr>
+                        <tr><td>Anlamsal renkli zemin</td><td><code>--svg-brand-bg</code>, <code>--svg-ok-bg</code>, <code>--svg-warn-bg</code>, <code>--svg-err-bg</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+            <nav class="docs-pagination" aria-label="Sayfalar">
+                <a class="docs-page-link docs-page-previous" href="getting-started.html"><span>Önceki</span><strong>Başlangıç</strong></a>
+                <a class="docs-page-link docs-page-next" href="code-features.html"><span>Sonraki</span><strong>Kod Özellikleri</strong></a>
+            </nav>
+        </article>
+    </main>
+    <aside class="docs-toc" aria-label="Bu sayfada">
+        <div class="docs-toc-inner">
+            <div class="docs-toc-title">Bu sayfada</div>
+            <nav data-docs-toc></nav>
+        </div>
+    </aside>
+</div>
+<div class="search-overlay" id="searchOverlay" onclick="search.closeSearchOnOverlay(event)">
+    <div class="search-modal" onclick="event.stopPropagation()">
+        <div class="search-input-wrapper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><input type="text" class="search-input" id="searchInput" placeholder="Bu sayfada ara..." autocomplete="off"><button class="search-close" type="button" onclick="search.closeSearch()" aria-label="Kapat">×</button></div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+<button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+<script src="../features/theme/theme.js"></script>
+<script src="../features/code-highlight/code-highlight.js"></script>
+<script src="../features/copy-code/copy-code.js"></script>
+<script src="../features/code-tabs/code-tabs.js"></script>
+<script src="../features/docs-layout/docs-layout.js"></script>
+<script>
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Feature seçimi, kurulum ve yeni bir dokümanı ayağa kaldırmak için gereken minimum adımlar.","keywords":"Temel yaklaşım s-overview s-install s-packages s-checklist","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Kod Özellikleri","text":"Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.","keywords":"Teknik örnekler s-code s-copy-code s-code-tabs","url":"code-features.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Uyarlama s-theme s-config","url":"configuration.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu ve bağımsız feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Hızlı başvuru ","url":"reference.html","sectionType":"Sayfa"}] };
+window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
+</script>
+<script src="../features/search/search.js"></script>
+<script src="../features/scroll-top/scroll-top.js"></script>
+<script src="../features/reading-progress/reading-progress.js"></script>
+</body>
+</html>

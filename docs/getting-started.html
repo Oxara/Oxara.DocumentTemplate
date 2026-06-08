@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Başlangıç — Oxara Document Template</title>
+<meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
+<link rel="stylesheet" href="../features/base/base.css">
+<link rel="stylesheet" href="../features/theme/theme.css">
+<link rel="stylesheet" href="../features/docs-layout/docs-layout.css">
+<link rel="stylesheet" href="../features/code-highlight/code-highlight.css">
+<link rel="stylesheet" href="../features/copy-code/copy-code.css">
+<link rel="stylesheet" href="../features/code-tabs/code-tabs.css">
+<link rel="stylesheet" href="../features/search/search.css">
+<link rel="stylesheet" href="../features/scroll-top/scroll-top.css">
+<link rel="stylesheet" href="../features/reading-progress/reading-progress.css">
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main-content">İçeriğe atla</a>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+<header class="docs-topbar">
+    <div class="docs-topbar-inner">
+        <button class="docs-menu-toggle" type="button" data-docs-nav-toggle aria-label="Doküman menüsünü aç"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
+        <nav class="docs-top-links" aria-label="Üst navigasyon">
+            <a href="getting-started.html">Rehber</a>
+            <a href="reference.html">Feature API</a>
+        </nav>
+        <div class="docs-top-actions">
+            <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+            <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Tema değiştir"><span class="theme-toggle-icon">☀️</span><span class="theme-toggle-label">Dark</span></button>
+        </div>
+    </div>
+</header>
+<div class="docs-overlay" data-docs-overlay></div>
+<div class="docs-shell">
+    <aside class="docs-sidebar" data-docs-sidebar>
+        <div class="docs-sidebar-inner">
+            
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Başlangıç</div>
+    <a class="docs-nav-link active" href="getting-started.html">Genel Bakış</a>
+    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature'lar</div>
+    <a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
+    <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
+    <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Referans</div>
+    <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
+    <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+</div>
+        </div>
+    </aside>
+    <main class="docs-main" id="main-content" tabindex="-1">
+        <article class="docs-article">
+            <header class="docs-article-header">
+                <p class="docs-eyebrow">Temel yaklaşım</p>
+                <h1>Başlangıç</h1>
+                <p class="docs-lead">Feature seçimi, kurulum ve yeni bir dokümanı ayağa kaldırmak için gereken minimum adımlar.</p>
+            </header>
+            <section id="s-overview">
+            <h2 id="h-overview">Feature Mantığı</h2>
+            <p>Her feature küçük bir UI veya davranış parçasıdır. <code>base</code> ortak tasarım tokenlarını ve doküman stillerini sağlar; diğer feature'lar bunun üstüne kendi CSS/JS davranışını ekler.</p>
+            <div class="callout callout-info"><b>Kural:</b> Bir feature'ın CSS dosyasını taşıyorsanız, yanında <code>features/base/base.css</code> dosyasını da taşıyın.</div>
+            <div class="docs-feature-groups">
+<div><strong>İçerik ve yerleşim</strong><span><code>base</code>, <code>docs-layout</code>, <code>theme</code></span></div>
+<div><strong>Kod örnekleri</strong><span><code>code-highlight</code>, <code>copy-code</code>, <code>code-tabs</code></span></div>
+<div><strong>Okuma araçları</strong><span><code>search</code>, <code>scroll-top</code>, <code>reading-progress</code>, <code>sidemenu</code></span></div>
+</div>
+        </section>
+
+<section id="s-install">
+            <h2 id="h-install">Çok Sayfalı Kurulum</h2>
+            <p>Tüm feature'ları birlikte kullanmak için CSS dosyalarını <code>head</code> içinde, JS dosyalarını <code>body</code> sonunda yükleyin.</p>
+            <pre><code class="language-html">&lt;link rel="stylesheet" href="features/base/base.css"&gt;
+&lt;link rel="stylesheet" href="features/theme/theme.css"&gt;
+&lt;link rel="stylesheet" href="features/docs-layout/docs-layout.css"&gt;
+&lt;link rel="stylesheet" href="features/code-highlight/code-highlight.css"&gt;
+&lt;link rel="stylesheet" href="features/copy-code/copy-code.css"&gt;
+&lt;link rel="stylesheet" href="features/scroll-top/scroll-top.css"&gt;
+&lt;link rel="stylesheet" href="features/reading-progress/reading-progress.css"&gt;
+&lt;link rel="stylesheet" href="features/search/search.css"&gt;
+
+&lt;script src="features/theme/theme.js"&gt;&lt;/script&gt;
+&lt;script src="features/docs-layout/docs-layout.js"&gt;&lt;/script&gt;
+&lt;script src="features/code-highlight/code-highlight.js"&gt;&lt;/script&gt;
+&lt;script src="features/copy-code/copy-code.js"&gt;&lt;/script&gt;
+&lt;script src="features/scroll-top/scroll-top.js"&gt;&lt;/script&gt;
+&lt;script src="features/reading-progress/reading-progress.js"&gt;&lt;/script&gt;
+&lt;script src="features/search/search.js"&gt;&lt;/script&gt;</code></pre>
+        </section>
+
+<section id="s-packages">
+            <h2 id="h-packages">Minimal Paketler</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Senaryo</th><th>Kopyalanacak feature'lar</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sadece tema</td><td><code>base</code> + <code>theme</code></td></tr>
+                        <tr><td>Kod blokları</td><td><code>base</code> + <code>code-highlight</code></td></tr>
+                        <tr><td>Kod blokları + copy-code</td><td><code>base</code> + <code>code-highlight</code> + <code>copy-code</code></td></tr>
+                        <tr><td>Çok sayfalı doküman</td><td><code>base</code> + <code>docs-layout</code></td></tr><tr><td>Tek sayfalı yan menü</td><td><code>base</code> + <code>sidemenu</code></td></tr>
+                        <tr><td>Arama</td><td><code>base</code> + <code>search</code></td></tr>
+                        <tr><td>Başa dön</td><td><code>base</code> + <code>scroll-top</code></td></tr>
+                        <tr><td>Okuma ilerlemesi</td><td><code>base</code> + <code>reading-progress</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<section id="s-checklist">
+            <h2 id="h-checklist">Taşıma Checklist</h2>
+            <ol>
+                <li>İhtiyacın olan feature'ları seç.</li>
+                <li><code>base/base.css</code> dosyasını unutma.</li>
+                <li>Feature HTML iskeletini ilgili bölümden kopyala.</li>
+                <li><code>code-highlight</code> ve <code>copy-code</code> kullanıyorsan script sırasına dikkat et.</li>
+                <li>Başlık tabanlı navigasyon için <code>id</code> alanlarını kontrol et.</li>
+                <li><code>.container</code> yerine başka kapsayıcı kullanıyorsan opsiyonel config ekle.</li>
+            </ol>
+        </section>
+            <nav class="docs-pagination" aria-label="Sayfalar">
+                <span></span>
+                <a class="docs-page-link docs-page-next" href="document-components.html"><span>Sonraki</span><strong>Doküman Bileşenleri</strong></a>
+            </nav>
+        </article>
+    </main>
+    <aside class="docs-toc" aria-label="Bu sayfada">
+        <div class="docs-toc-inner">
+            <div class="docs-toc-title">Bu sayfada</div>
+            <nav data-docs-toc></nav>
+        </div>
+    </aside>
+</div>
+<div class="search-overlay" id="searchOverlay" onclick="search.closeSearchOnOverlay(event)">
+    <div class="search-modal" onclick="event.stopPropagation()">
+        <div class="search-input-wrapper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><input type="text" class="search-input" id="searchInput" placeholder="Bu sayfada ara..." autocomplete="off"><button class="search-close" type="button" onclick="search.closeSearch()" aria-label="Kapat">×</button></div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+<button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+<script src="../features/theme/theme.js"></script>
+<script src="../features/code-highlight/code-highlight.js"></script>
+<script src="../features/copy-code/copy-code.js"></script>
+<script src="../features/code-tabs/code-tabs.js"></script>
+<script src="../features/docs-layout/docs-layout.js"></script>
+<script>
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Kod Özellikleri","text":"Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.","keywords":"Teknik örnekler s-code s-copy-code s-code-tabs","url":"code-features.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Uyarlama s-theme s-config","url":"configuration.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu ve bağımsız feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Hızlı başvuru ","url":"reference.html","sectionType":"Sayfa"}] };
+window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
+</script>
+<script src="../features/search/search.js"></script>
+<script src="../features/scroll-top/scroll-top.js"></script>
+<script src="../features/reading-progress/reading-progress.js"></script>
+</body>
+</html>

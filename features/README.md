@@ -16,6 +16,7 @@ Gorsel ve kopyalanabilir ornekler icin kok dizindeki `index.html` dosyasini acin
 Feature'lari iki grupta dusunun:
 
 - `base`: Ortak tasarim zemini. Renk tokenlari, typo, container, tablo, callout, endpoint kartlari gibi dokuman stillerini verir.
+- `docs-layout`: Uzun dokumanlari cok sayfali bir kabukta sunar. Sol site menusu, dar okuma kolonu, sag sayfa ici menu ve mobil cekmece saglar.
 - Diger feature'lar: Tek bir davranis veya UI parcasi ekler. Ornegin `theme`, `search`, `sidemenu`.
 
 En guvenli kural:
@@ -32,6 +33,9 @@ JS dosyalari ise mumkun oldugunca kendi kendine calisir. Tek siralama kurali: `c
 features/
   base/
     base.css
+  docs-layout/
+    docs-layout.css
+    docs-layout.js
   theme/
     theme.css
     theme.js
@@ -67,6 +71,7 @@ Tum feature'lari mevcut ornekteki gibi kullanmak istiyorsaniz:
 <head>
   <link rel="stylesheet" href="features/base/base.css">
   <link rel="stylesheet" href="features/theme/theme.css">
+  <link rel="stylesheet" href="features/docs-layout/docs-layout.css">
   <link rel="stylesheet" href="features/code-highlight/code-highlight.css">
   <link rel="stylesheet" href="features/copy-code/copy-code.css">
   <link rel="stylesheet" href="features/sidemenu/sidemenu.css">
@@ -78,6 +83,7 @@ Tum feature'lari mevcut ornekteki gibi kullanmak istiyorsaniz:
   <!-- Feature HTML iskeletleri burada olur. Asagidaki bolumlerde tek tek anlatiliyor. -->
 
   <script src="features/theme/theme.js"></script>
+  <script src="features/docs-layout/docs-layout.js"></script>
   <script src="features/code-highlight/code-highlight.js"></script>
   <script src="features/copy-code/copy-code.js"></script>
   <script src="features/sidemenu/sidemenu.js"></script>
@@ -97,14 +103,16 @@ CSS:
 JS:
 
 1. `theme/theme.js` erken yuklenebilir. Tema tercihini sayfa acilisinda uygular.
-2. `code-highlight/code-highlight.js`
-3. `copy-code/copy-code.js`
-4. Digerleri herhangi bir sirada yuklenebilir: `sidemenu`, `scroll-top`, `reading-progress`, `search`
+2. `docs-layout/docs-layout.js`
+3. `code-highlight/code-highlight.js`
+4. `copy-code/copy-code.js`
+5. Digerleri herhangi bir sirada yuklenebilir: `sidemenu`, `scroll-top`, `reading-progress`, `search`
 
 Pratikte mevcut sira iyi bir varsayilandir:
 
 ```html
 <script src="features/theme/theme.js"></script>
+<script src="features/docs-layout/docs-layout.js"></script>
 <script src="features/code-highlight/code-highlight.js"></script>
 <script src="features/copy-code/copy-code.js"></script>
 <script src="features/sidemenu/sidemenu.js"></script>
@@ -118,14 +126,65 @@ Pratikte mevcut sira iyi bir varsayilandir:
 | Ihtiyac | Kullanilacak feature |
 | --- | --- |
 | Sadece dokuman sayfasi stilleri, tablo, callout, endpoint kartlari | `base` |
+| Cok sayfali handbook veya guide | `base` + `docs-layout` |
 | Light/dark tema butonu | `base` + `theme` |
 | Kod bloklarini otomatik formatlama ve renklendirme | `base` + `code-highlight` |
 | Kod bloklarina kopyala butonu | `base` + `code-highlight` + `copy-code` |
-| Basliklardan otomatik sol/yan menu | `base` + `sidemenu` |
+| Tek sayfada basliklardan otomatik yan menu | `base` + `sidemenu` |
 | Sayfa icinde Ctrl+K arama | `base` + `search` |
 | Basa don butonu | `base` + `scroll-top` |
 | Okuma ilerleme cubugu | `base` + `reading-progress` |
 | Mevcut rehber gibi tam dokuman deneyimi | Hepsi |
+
+## docs-layout
+
+### Ne zaman kullanilir?
+
+Bir dokuman birden fazla ana konuya ayriliyorsa veya tek sayfada uzun bir icerik yigini
+olusuyorsa kullanilir. `index.html` karsilama sayfasi olur; ana konular `docs/` altinda
+ayri HTML dosyalarinda tutulur.
+
+### Dosyalar
+
+```html
+<link rel="stylesheet" href="features/docs-layout/docs-layout.css">
+<script src="features/docs-layout/docs-layout.js"></script>
+```
+
+### Temel iskelet
+
+```html
+<header class="docs-topbar">...</header>
+<div class="docs-overlay" data-docs-overlay></div>
+
+<div class="docs-shell">
+  <aside class="docs-sidebar" data-docs-sidebar>
+    <a class="docs-nav-link" href="getting-started.html">Baslangic</a>
+  </aside>
+
+  <main class="docs-main">
+    <article class="docs-article">
+      <header class="docs-article-header">
+        <p class="docs-eyebrow">Kategori</p>
+        <h1>Sayfa basligi</h1>
+        <p class="docs-lead">Kisa sayfa ozeti.</p>
+      </header>
+      <section><h2 id="konu">Konu</h2></section>
+    </article>
+  </main>
+
+  <aside class="docs-toc">
+    <nav data-docs-toc></nav>
+  </aside>
+</div>
+```
+
+Sol navigasyon statik HTML'dir; boylece bilgi mimarisi acik ve linkler JavaScript
+olmadan da calisir. Sag navigasyon aktif sayfadaki `h2` ve `h3` basliklarindan otomatik
+uretilir. Mobil menu `[data-docs-nav-toggle]` ile acilir.
+
+`sidemenu` ile ayni sayfada birlikte kullanilmaz. `docs-layout` cok sayfali dokumanlar,
+`sidemenu` ise standalone tek sayfalar icindir.
 
 ## base
 
@@ -599,7 +658,9 @@ okunabilir menu basligina cevirir. Gruplama gerekmiyorsa bu iki ayari eklemeyin.
 
 ### Ne zaman kullanilir?
 
-Uzun dokumanlarda Ctrl+K ile sayfa ici arama istiyorsaniz kullanin.
+Uzun dokumanlarda Ctrl+K ile arama istiyorsaniz kullanin. Varsayilan olarak aktif
+sayfayi indeksler. `externalItems` ile diger HTML sayfalarini da baslik ve ozet
+duzeyinde arama sonuclarina ekleyebilir.
 
 ### Dosyalar
 
@@ -687,6 +748,14 @@ window.SEARCH_CONFIG = {
   maxResults: 50,
   debounceMs: 200,
   noResultsText: 'Sonuc bulunamadi.',
+  externalItems: [
+    {
+      title: 'Kurulum',
+      text: 'Baslangic ve kurulum adimlari',
+      url: 'getting-started.html',
+      sectionType: 'Sayfa'
+    }
+  ],
   sectionTypes: {
     'scenario-card': 'Senaryo',
     'endpoint-card': 'Endpoint',

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kod Özellikleri — Oxara Document Template</title>
+<meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
+<link rel="stylesheet" href="../features/base/base.css">
+<link rel="stylesheet" href="../features/theme/theme.css">
+<link rel="stylesheet" href="../features/docs-layout/docs-layout.css">
+<link rel="stylesheet" href="../features/code-highlight/code-highlight.css">
+<link rel="stylesheet" href="../features/copy-code/copy-code.css">
+<link rel="stylesheet" href="../features/code-tabs/code-tabs.css">
+<link rel="stylesheet" href="../features/search/search.css">
+<link rel="stylesheet" href="../features/scroll-top/scroll-top.css">
+<link rel="stylesheet" href="../features/reading-progress/reading-progress.css">
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main-content">İçeriğe atla</a>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+<header class="docs-topbar">
+    <div class="docs-topbar-inner">
+        <button class="docs-menu-toggle" type="button" data-docs-nav-toggle aria-label="Doküman menüsünü aç"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
+        <nav class="docs-top-links" aria-label="Üst navigasyon">
+            <a href="getting-started.html">Rehber</a>
+            <a href="reference.html">Feature API</a>
+        </nav>
+        <div class="docs-top-actions">
+            <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+            <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Tema değiştir"><span class="theme-toggle-icon">☀️</span><span class="theme-toggle-label">Dark</span></button>
+        </div>
+    </div>
+</header>
+<div class="docs-overlay" data-docs-overlay></div>
+<div class="docs-shell">
+    <aside class="docs-sidebar" data-docs-sidebar>
+        <div class="docs-sidebar-inner">
+            
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Başlangıç</div>
+    <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
+    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature'lar</div>
+    <a class="docs-nav-link active" href="code-features.html">Kod Özellikleri</a>
+    <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
+    <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Referans</div>
+    <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
+    <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+</div>
+        </div>
+    </aside>
+    <main class="docs-main" id="main-content" tabindex="-1">
+        <article class="docs-article">
+            <header class="docs-article-header">
+                <p class="docs-eyebrow">Teknik örnekler</p>
+                <h1>Kod Özellikleri</h1>
+                <p class="docs-lead">Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.</p>
+            </header>
+            <section id="s-code">
+            <h2 id="h-code">Code Highlight</h2>
+            <p>HTML/XML, JSON, C#, Bash, YAML ve SQL kodlarını okunabilir sözdizimi renkleriyle göstermek için kullanılır. <code>script.code-block</code> yöntemi, HTML içinde XML yazarken kaçış karakterleriyle uğraşmayı azaltır.</p>
+            <h3 id="h-code-code">Kod</h3>
+            <pre><code class="language-html">&lt;script class="code-block language-json" type="text/plain"&gt;
+{"ExpenseVoucherTypeCode":"SATIS","ProfileId":"GIDERPUSULASI","Lines":[{"Name":"Hizmet","Amount":1200}]}
+&lt;/script&gt;</code></pre>
+            <h3 id="h-code-output">Çıktı</h3>
+            <script class="code-block language-json" type="text/plain">
+{"ExpenseVoucherTypeCode":"SATIS","ProfileId":"GIDERPUSULASI","Lines":[{"Name":"Hizmet","Amount":1200}]}
+            </script>
+            <h3 id="h-code-csharp-output">C# çıktısı</h3>
+            <pre><code class="language-csharp">public async Task SendAsync(int orderId)
+{
+    await emailService.SendAsync(orderId);
+}</code></pre>
+            <div class="callout callout-info"><b>Dil class'ı:</b> Renklendirme için kod bloğunda <code>language-csharp</code>, <code>language-bash</code>, <code>language-yaml</code> veya desteklenen başka bir dil class'ı bulunmalıdır.</div>
+        </section>
+
+<section id="s-copy-code">
+            <h2 id="h-copy-code">Copy Code</h2>
+            <p><code>copy-code</code> feature'ı mevcut <code>pre > code</code> bloklarına otomatik kopyalama butonu ekler. Bu sayfadaki tüm kod bloklarının sağ üstünde Copy Code butonu vardır.</p>
+            <div class="callout callout-warning"><b>Sıra önemli:</b> <code>copy-code.js</code>, <code>code-highlight.js</code> sonrasında yüklenmelidir.</div>
+            <pre><code class="language-html">&lt;script src="features/code-highlight/code-highlight.js"&gt;&lt;/script&gt;
+&lt;script src="features/copy-code/copy-code.js"&gt;&lt;/script&gt;</code></pre>
+        </section>
+
+<section id="s-code-tabs">
+            <h2 id="h-code-tabs">Code Tabs</h2>
+            <p>Farklı provider, istemci veya yaklaşım örneklerini aynı alanda göstermek için kullanılır. Yerel sekmeler yalnızca kendi panelini; global seçim ise aynı group değerindeki tüm panelleri değiştirir.</p>
+            <div class="code-tabs-global" data-code-tabs-global="guide-client">
+                <div class="code-tabs-global-copy">
+                    <span class="code-tabs-global-label">Kod örneği tercihi</span>
+                    <span class="code-tabs-global-description">Bu gruptaki tüm sekmeli örnekleri birlikte değiştirir.</span>
+                </div>
+                <div class="code-tabs-global-options" role="group" aria-label="Kod örneği tercihi">
+                    <button type="button" data-code-option="rest">REST API</button>
+                    <button type="button" data-code-option="dotnet">.NET Client</button>
+                </div>
+            </div>
+            <div class="code-tabs" data-code-tabs data-code-tabs-group="guide-client" data-code-tabs-default="rest">
+                <div class="code-tabs-list" data-code-tabs-list>
+                    <button class="code-tab" type="button" data-code-tab data-code-option="rest">REST API</button>
+                    <button class="code-tab" type="button" data-code-tab data-code-option="dotnet">.NET Client</button>
+                </div>
+                <div class="code-tab-panel" data-code-panel data-code-option="rest">
+                    <pre><code class="language-bash">curl https://api.example.com/items</code></pre>
+                </div>
+                <div class="code-tab-panel" data-code-panel data-code-option="dotnet">
+                    <pre><code class="language-csharp">await client.GetAsync("/items");</code></pre>
+                </div>
+            </div>
+            <div class="callout callout-warning"><b>Yerleşim standardı:</b> Global seçim kontrolü ilgili bölümün içinde, ilk sekmeli örnekten hemen önce bulunur. <code>.header-actions</code> içine yerleştirilmez; bu alan yalnızca arama ve tema gibi sayfa aksiyonları içindir.</div>
+            <div class="callout callout-info"><b>Domain-free kuralı:</b> Feature REST, .NET, Redis veya başka bir teknoloji adı bilmez; eşleşmeyi yalnızca <code>data-code-option</code> ve <code>data-code-tabs-group</code> değerleri üzerinden yapar.</div>
+        </section>
+            <nav class="docs-pagination" aria-label="Sayfalar">
+                <a class="docs-page-link docs-page-previous" href="document-components.html"><span>Önceki</span><strong>Doküman Bileşenleri</strong></a>
+                <a class="docs-page-link docs-page-next" href="navigation.html"><span>Sonraki</span><strong>Navigasyon ve Okuma</strong></a>
+            </nav>
+        </article>
+    </main>
+    <aside class="docs-toc" aria-label="Bu sayfada">
+        <div class="docs-toc-inner">
+            <div class="docs-toc-title">Bu sayfada</div>
+            <nav data-docs-toc></nav>
+        </div>
+    </aside>
+</div>
+<div class="search-overlay" id="searchOverlay" onclick="search.closeSearchOnOverlay(event)">
+    <div class="search-modal" onclick="event.stopPropagation()">
+        <div class="search-input-wrapper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><input type="text" class="search-input" id="searchInput" placeholder="Bu sayfada ara..." autocomplete="off"><button class="search-close" type="button" onclick="search.closeSearch()" aria-label="Kapat">×</button></div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+<button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+<script src="../features/theme/theme.js"></script>
+<script src="../features/code-highlight/code-highlight.js"></script>
+<script src="../features/copy-code/copy-code.js"></script>
+<script src="../features/code-tabs/code-tabs.js"></script>
+<script src="../features/docs-layout/docs-layout.js"></script>
+<script>
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Feature seçimi, kurulum ve yeni bir dokümanı ayağa kaldırmak için gereken minimum adımlar.","keywords":"Temel yaklaşım s-overview s-install s-packages s-checklist","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Uyarlama s-theme s-config","url":"configuration.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu ve bağımsız feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Hızlı başvuru ","url":"reference.html","sectionType":"Sayfa"}] };
+window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
+</script>
+<script src="../features/search/search.js"></script>
+<script src="../features/scroll-top/scroll-top.js"></script>
+<script src="../features/reading-progress/reading-progress.js"></script>
+</body>
+</html>

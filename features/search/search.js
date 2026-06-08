@@ -33,6 +33,9 @@
  *     maxResults: 50,
  *     debounceMs: 200,
  *     noResultsText: '✨ Sonuç bulunamadı.',
+ *     externalItems: [         // opsiyonel: diğer HTML sayfaları
+ *       { title: 'Kurulum', text: 'Başlangıç ve kurulum', url: 'getting-started.html' }
+ *     ],
  *     sectionTypes: {           // CSS class → etiket
  *       scenario-card: 'Senaryo',
  *       endpoint-card: 'Endpoint',
@@ -55,6 +58,7 @@
     var MAX_RESULTS    = searchConfig.maxResults      || 50;
     var DEBOUNCE_MS    = searchConfig.debounceMs      || 200;
     var NO_RESULTS_MESSAGE = searchConfig.noResultsText   || '✨ Sonuç bulunamadı. Farklı bir kelime deneyin.';
+    var EXTERNAL_ITEMS = searchConfig.externalItems || [];
 
     var SECTION_TYPES = Object.assign({
         'scenario-card': 'Senaryo',
@@ -138,6 +142,19 @@
                 id:          heading.id,
             });
         });
+
+        EXTERNAL_ITEMS.forEach(function (item) {
+            searchableContent.push({
+                element: null,
+                title: item.title || '',
+                text: (item.title || '') + ' ' + (item.text || '') + ' ' + (item.keywords || ''),
+                preview: item.preview || item.text || '',
+                sectionId: '',
+                sectionType: item.sectionType || 'Sayfa',
+                id: item.anchor || '',
+                url: item.url || ''
+            });
+        });
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -216,7 +233,7 @@
 
             resultsHtml +=
                 '<div class="search-result-item"' +
-                ' onclick="search.navigateToResult(\'' + anchor + '\',\'' + result.sectionId + '\')">' +
+                ' onclick="search.navigateToResult(\'' + anchor + '\',\'' + result.sectionId + '\',\'' + (result.url || '') + '\')">' +
                 badge +
                 '<div class="search-result-title">' + (highlightedTitle || '(Başlıksız)') + '</div>' +
                 '<div class="search-result-content">' + highlightedPreview + '</div>' +
@@ -230,7 +247,12 @@
     /* ══════════════════════════════════════════════════════════
        NAVİGASYON
     ══════════════════════════════════════════════════════════ */
-    function navigateToResult(anchor, sectionId) {
+    function navigateToResult(anchor, sectionId, url) {
+        if (url) {
+            closeSearch();
+            window.location.href = url + (anchor ? '#' + anchor : '');
+            return;
+        }
         var target = null;
         if (anchor   && document.getElementById(anchor))   target = document.getElementById(anchor);
         if (!target && sectionId && document.getElementById(sectionId)) target = document.getElementById(sectionId);
