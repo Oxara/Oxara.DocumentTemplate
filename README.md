@@ -14,6 +14,8 @@ Template'in varsayilan yapisi cok sayfalidir:
 - Sag menu yalnizca aktif sayfanin `h2` ve `h3` basliklarini gosterir.
 - Ana icerik kolonu okunabilir bir genislikte tutulur.
 - Kutu, callout ve vurgu yuzeyleri yalnizca anlam tasidiklarinda kullanilir.
+- Giris sayfasindaki konu kartinin tamami baglantidir; kart icinde tekrar eden CTA metni kullanilmaz.
+- Konu kartlari icerige gore boyutlanir; sabit veya minimum kart yuksekligi verilmez.
 
 Tek sayfalik makale veya kisa rehberlerde eski `sidemenu` feature'i kullanilabilir. Uzun
 handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
@@ -91,6 +93,7 @@ Oxara.DocumentTemplate/
 4. Sol navigasyonu tum sayfalarda ayni bilgi mimarisiyle kullanin.
 5. Gerekli feature HTML iskeletlerini canli rehberden alin.
 6. Projeye ozel stilleri `document.css` gibi ayri bir dosyada tutun.
+7. Giris kartlarinda `Konuyu ac` gibi tekrar eden aksiyon satirlari kullanmayin.
 
 `tools/sync-features.ps1` yalnizca offline veya vendored asset gerektiren istisnai projeler icindir.
 
