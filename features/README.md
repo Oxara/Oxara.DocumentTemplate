@@ -9,7 +9,7 @@ Bu rehberin amaci, `features/` klasorundeki parcalari baska bir HTML sayfasina k
 
 Mevcut `e-gider-pusulasi.html` ornegi tum feature'lari birlikte kullanan tam ornektir. Bu README ise daha sonra ayni feature'lari parca parca tasirken kaybolmamak icindir.
 
-Gorsel ve kopyalanabilir ornekler icin kok dizindeki `feature-guide.html` dosyasini acin. Bu sayfa feature'larin kendisini kullanarak hazirlanmis canli bir rehberdir.
+Gorsel ve kopyalanabilir ornekler icin kok dizindeki `index.html` dosyasini acin. Bu sayfa feature'larin kendisini kullanarak hazirlanmis canli bir rehberdir.
 
 ## Mental model
 

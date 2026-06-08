@@ -2,9 +2,7 @@
 
 Handbook ve guide projelerinde kullanilan ortak, domain-free dokuman arayuzu.
 
-Canli feature rehberi: <https://oxara.github.io/Oxara.DocumentTemplate/feature-guide.html>
-
-Baslangic sablonu: <https://oxara.github.io/Oxara.DocumentTemplate/>
+Canli feature rehberi: <https://oxara.github.io/Oxara.DocumentTemplate/>
 
 ## CDN kullanimi
 
@@ -45,7 +43,6 @@ Tum feature asset yollarini `features/features.json` manifestinde bulabilirsiniz
 ```text
 Oxara.DocumentTemplate/
   index.html
-  feature-guide.html
   features/
     base/
     theme/
@@ -64,9 +61,9 @@ Oxara.DocumentTemplate/
 
 ## Yeni dokuman
 
-1. `index.html` dosyasini yeni proje klasorune kopyalayin.
-2. Ihtiyac duyulan feature listesini belirleyin.
-3. `tools/sync-features.ps1` ile feature'lari proje klasorune dagitin.
+1. Ihtiyac duyulan feature listesini belirleyin.
+2. `tools/sync-features.ps1` ile feature'lari proje klasorune dagitin.
+3. `index.html` icinde gerekli feature HTML iskeletlerini canli rehberden alin.
 4. Projeye ozel stilleri `document.css` gibi ayri bir dosyada tutun.
 
 Tum feature'lari dagitmak:
