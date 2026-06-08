@@ -13,9 +13,17 @@ function Add-ValidationError {
     $errors.Add($Message)
 }
 
-foreach ($requiredFile in @("README.md", "og-image.svg", "sitemap.xml")) {
+foreach ($requiredFile in @("README.md", "LICENSE", "og-image.svg", "sitemap.xml")) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $requiredFile) -PathType Leaf)) {
         Add-ValidationError "Eksik kok dosya: $requiredFile"
+    }
+}
+
+$licensePath = Join-Path $root "LICENSE"
+if (Test-Path -LiteralPath $licensePath -PathType Leaf) {
+    $license = Get-Content -LiteralPath $licensePath -Raw -Encoding UTF8
+    if ($license -notmatch '^MIT License' -or $license -notmatch 'Copyright \(c\) \d{4} Oxara') {
+        Add-ValidationError "LICENSE standart Oxara MIT lisans metni degil."
     }
 }
 

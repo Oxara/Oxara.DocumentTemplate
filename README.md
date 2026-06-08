@@ -106,6 +106,8 @@ Her handbook ve guide yayinlanmadan once ayni temel dosya ve metadata standardin
 saglamalidir:
 
 - Kok dizinde projeyi ve canli dokumani aciklayan tek bir `README.md` bulunur.
+- Kok dizinde projenin kullanim kosullarini tanimlayan bir `LICENSE` dosyasi
+  bulunur. Oxara dokuman projelerinde varsayilan lisans MIT'dir.
 - `README.md`, `og-image.svg` kapak gorselini en ustte gosterir.
 - Kok dizinde 1200 x 630 boyutunda bir `og-image.svg` bulunur.
 - Her HTML sayfasinda kendisine ait `canonical` ve `og:url` adresi bulunur.
