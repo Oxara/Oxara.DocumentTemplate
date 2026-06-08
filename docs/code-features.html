@@ -64,21 +64,22 @@
             </header>
             <section id="s-code">
             <h2 id="h-code">Code Highlight</h2>
-            <p>HTML/XML, JSON, C#, Bash, YAML ve SQL kodlarını okunabilir sözdizimi renkleriyle göstermek için kullanılır. <code>script.code-block</code> yöntemi, HTML içinde XML yazarken kaçış karakterleriyle uğraşmayı azaltır.</p>
-            <h3 id="h-code-code">Kod</h3>
+            <p>HTML/XML, JSON, C#, Bash, YAML ve SQL kodlarını okunabilir sözdizimi renkleriyle göstermek için kullanılır. <code>script.code-block</code> etiketi gösterilecek kodun parçası değildir; yalnızca sayfa kaynağında dili tanımlayan ve içeriği highlighter'a taşıyan kapsayıcıdır.</p>
+            <h3 id="h-code-code">HTML'de kullanım</h3>
             <pre><code class="language-html">&lt;script class="code-block language-json" type="text/plain"&gt;
 {"ExpenseVoucherTypeCode":"SATIS","ProfileId":"GIDERPUSULASI","Lines":[{"Name":"Hizmet","Amount":1200}]}
 &lt;/script&gt;</code></pre>
-            <h3 id="h-code-output">Çıktı</h3>
+            <h3 id="h-code-output">Okuyucunun gördüğü JSON</h3>
             <script class="code-block language-json" type="text/plain">
 {"ExpenseVoucherTypeCode":"SATIS","ProfileId":"GIDERPUSULASI","Lines":[{"Name":"Hizmet","Amount":1200}]}
             </script>
-            <h3 id="h-code-csharp-output">C# çıktısı</h3>
+            <h3 id="h-code-csharp-output">Diğer dil örneği</h3>
             <pre><code class="language-csharp">public async Task SendAsync(int orderId)
 {
     await emailService.SendAsync(orderId);
 }</code></pre>
             <div class="callout callout-info"><b>Dil class'ı:</b> Renklendirme için kod bloğunda <code>language-csharp</code>, <code>language-bash</code>, <code>language-yaml</code> veya desteklenen başka bir dil class'ı bulunmalıdır.</div>
+            <p><strong>İçerik kuralı:</strong> Handbook ve guide sayfalarında okuyucuya yalnızca gerçek JSON, XML veya kaynak kod gösterilir. <code>script.code-block</code> kapsayıcısı yalnızca Template feature kullanımını açıklayan teknik örneklerde görünür.</p>
         </section>
 
 <section id="s-copy-code">

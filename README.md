@@ -55,6 +55,9 @@ Tum feature asset yollarini `features/features.json` manifestinde bulabilirsiniz
 - Ortak davranis gerekiyorsa once bu Template guncellenir, sonra hedef projeler senkronlanir.
 - Domain'e ozel icerik, renk veya davranis ortak feature'a eklenmez. Proje ihtiyaci ayri bir proje CSS dosyasinda tutulur.
 - Handbook ana icerigi statik ve semantik HTML olarak yazilir; Markdown parser veya runtime icerik uretimi kullanilmaz.
+- Kod orneklerinde okuyucuya yalnizca gercek JSON, XML veya kaynak kod gosterilir.
+  `script.code-block` gibi teknik kapsayicilar sadece Template feature kullanimini
+  anlatan orneklerde gorunur.
 
 ## Yapi
 
