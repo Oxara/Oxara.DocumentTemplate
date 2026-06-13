@@ -25,16 +25,18 @@ handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
 Production ortaminda surum etiketini sabitleyin:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/base/base.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/theme/theme.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/docs-layout/docs-layout.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/code-highlight/code-highlight.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/copy-code/copy-code.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/base/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/theme/theme.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/docs-layout/docs-layout.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/code-highlight/code-highlight.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/copy-code/copy-code.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/navigation-progress/navigation-progress.css">
 
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/theme/theme.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/docs-layout/docs-layout.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/code-highlight/code-highlight.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.0/features/copy-code/copy-code.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/theme/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/docs-layout/docs-layout.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/code-highlight/code-highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/copy-code/copy-code.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.2/features/navigation-progress/navigation-progress.js"></script>
 ```
 
 Gelistirme sirasinda en guncel `main` branch'i kullanilabilir:
@@ -44,7 +46,7 @@ https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@main/features/...
 ```
 
 `@main` degisebilir ve cache nedeniyle gec guncellenebilir. Production projelerinde daima
-`@refs/tags/v1.0.0` gibi bir tag veya commit SHA kullanin.
+`@refs/tags/v1.0.2` gibi bir tag veya commit SHA kullanin.
 
 Tum feature asset yollarini `features/features.json` manifestinde bulabilirsiniz.
 
@@ -71,6 +73,7 @@ Oxara.DocumentTemplate/
     navigation.html
     configuration.html
     reference.html
+    changelog.html
   features/
     base/
     docs-layout/
@@ -90,6 +93,22 @@ Oxara.DocumentTemplate/
     validate-document.ps1
     validate-handbook-suite.ps1
 ```
+
+## Surum yonetimi
+
+Kullaniciya donuk her degisiklik ayni commit veya pull request icinde
+[`docs/changelog.html`](docs/changelog.html) sayfasina eklenir.
+
+Yeni surum yayinlanirken:
+
+1. `Unreleased` maddeleri tarihli surum basligina tasinir.
+2. Degisiklik ve changelog birlikte commit edilir.
+3. Commit icin yeni bir annotated SemVer etiketi olusturulur.
+4. Etiket origin'e gonderilir ve ayni notlarla GitHub Release olusturulur.
+5. Tuketici projeler yeni etikete acikca gecirilir.
+
+Yayinlanmis bir etiket silinmez, yeniden olusturulmaz veya baska bir commit'e
+zorla tasinmaz. Duzeltmeler her zaman yeni bir patch surumuyle yayinlanir.
 
 ## Yeni dokuman
 

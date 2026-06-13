@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Değişiklikler — Oxara Document Template</title>
+<meta name="description" content="Oxara Document Template sürüm geçmişi, değişiklik notları ve önce-sonra demoları.">
+<link rel="stylesheet" href="../features/base/base.css">
+<link rel="stylesheet" href="../features/theme/theme.css">
+<link rel="stylesheet" href="../features/docs-layout/docs-layout.css">
+<link rel="stylesheet" href="../features/code-highlight/code-highlight.css">
+<link rel="stylesheet" href="../features/copy-code/copy-code.css">
+<link rel="stylesheet" href="../features/code-tabs/code-tabs.css">
+<link rel="stylesheet" href="../features/search/search.css">
+<link rel="stylesheet" href="../features/scroll-top/scroll-top.css">
+<link rel="stylesheet" href="../features/reading-progress/reading-progress.css">
+<link rel="stylesheet" href="../features/navigation-progress/navigation-progress.css">
+<style>
+.release-list { display: grid; gap: 4rem; }
+.release-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.release-header h2 { margin-bottom: .5rem; }
+.release-date { color: var(--text-dim); font-size: .78rem; white-space: nowrap; }
+.release-changes {
+    display: grid;
+    gap: .7rem;
+    margin: 1.25rem 0 2rem;
+    padding: 0;
+    list-style: none;
+}
+.release-changes li {
+    position: relative;
+    margin: 0;
+    padding-left: 1.15rem;
+}
+.release-changes li::before {
+    content: "";
+    position: absolute;
+    top: .7em;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background: var(--brand);
+    border-radius: 50%;
+}
+.release-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
+.release-demo { min-width: 0; padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+.release-demo-label { display: block; margin-bottom: 1rem; color: var(--text-dim); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.release-demo-stage { min-height: 100px; padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+.release-demo-actions { display: flex; align-items: center; justify-content: flex-end; min-height: 56px; }
+.release-old-theme {
+    padding: .42rem .8rem;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font: inherit;
+    font-size: .78rem;
+}
+.release-demo .theme-toggle { pointer-events: none; }
+.release-old-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, .8fr); align-items: end; gap: 2rem; }
+.release-old-heading h3,
+.release-new-heading h3 { margin: 0; font-size: 1.35rem; }
+.release-old-heading p { margin: 0; color: var(--text-muted); font-size: .78rem; line-height: 1.6; text-align: right; }
+.release-new-heading { padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+.release-no-feedback { display: grid; min-height: 72px; place-items: center; color: var(--text-dim); font-size: .82rem; }
+.release-progress-stage { position: relative; display: grid; min-height: 72px; place-items: center; overflow: hidden; }
+.release-progress-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0 16% auto 0;
+    height: 3px;
+    background: var(--brand);
+    transform-origin: left center;
+    animation: release-progress 2.8s ease-in-out infinite;
+}
+.release-progress-stage span { color: var(--text-muted); font-size: .82rem; }
+.release-note { padding: 1rem 1.1rem; color: var(--text-muted); background: var(--surface); border-left: 3px solid var(--brand); font-size: .86rem; line-height: 1.65; }
+@keyframes release-progress {
+    0% { transform: scaleX(.08); }
+    65% { transform: scaleX(.82); }
+    100% { transform: scaleX(1); }
+}
+@media (max-width: 720px) {
+    .release-comparison { grid-template-columns: 1fr; }
+    .release-old-heading { grid-template-columns: 1fr; align-items: start; gap: .75rem; }
+    .release-old-heading p { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .release-progress-stage::before { animation: none; transform: scaleX(.72); }
+}
+</style>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main-content">İçeriğe atla</a>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+<header class="docs-topbar">
+    <div class="docs-topbar-inner">
+        <button class="docs-menu-toggle" type="button" data-docs-nav-toggle aria-label="Doküman menüsünü aç"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
+        <nav class="docs-top-links" aria-label="Üst navigasyon">
+            <a href="getting-started.html">Rehber</a>
+            <a href="reference.html">Feature API</a>
+            <a href="changelog.html">Değişiklikler</a>
+            <a href="https://oxara.github.io/">Portfolyo</a>
+        </nav>
+        <div class="docs-top-actions">
+            <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+            <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
+        </div>
+    </div>
+</header>
+<div class="docs-overlay" data-docs-overlay></div>
+<div class="docs-shell">
+    <aside class="docs-sidebar" data-docs-sidebar>
+        <div class="docs-sidebar-inner">
+            <div class="docs-nav-group">
+                <div class="docs-nav-label">Başlangıç</div>
+                <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
+                <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
+            </div>
+            <div class="docs-nav-group">
+                <div class="docs-nav-label">Feature'lar</div>
+                <a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
+                <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
+                <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
+            </div>
+            <div class="docs-nav-group">
+                <div class="docs-nav-label">Referans</div>
+                <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
+                <a class="docs-nav-link active" href="changelog.html">Değişiklikler</a>
+                <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+            </div>
+        </div>
+    </aside>
+    <main class="docs-main" id="main-content" tabindex="-1">
+        <article class="docs-article">
+            <header class="docs-article-header">
+                <p class="docs-eyebrow">Sürüm geçmişi</p>
+                <h1>Değişiklikler</h1>
+                <p class="docs-lead">Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.</p>
+            </header>
+            <div class="release-list">
+                <section id="gelistirme-surumu">
+                    <div class="release-header"><h2>Geliştirme sürümü</h2><span class="release-date">Henüz yayınlanmadı</span></div>
+                    <p>Bir sonraki sürüme girecek kullanıcıya dönük değişiklikler burada birikir.</p>
+                    <ul class="release-changes">
+                        <li>Sürüm geçmişi bağımsız bir HTML sayfasına taşındı.</li>
+                        <li>Üst navigasyon ve doküman menüsüne <strong>Değişiklikler</strong> bağlantısı eklendi.</li>
+                        <li>Görsel değişiklikler için önce ve sonra demoları eklendi.</li>
+                    </ul>
+                </section>
+                <section id="v1-0-2">
+                    <div class="release-header"><h2>v1.0.2</h2><span class="release-date">14 Haziran 2026</span></div>
+                    <p>Sayfalar arası geçiş sırasında kullanıcının işlemin devam ettiğini görebilmesi için ortak navigasyon ilerleme göstergesi eklendi.</p>
+                    <ul class="release-changes">
+                        <li>Yeni <code>navigation-progress</code> CSS/JS feature'ı eklendi.</li>
+                        <li>Normal bağlantılarda çalışır; yeni sekme, indirme ve sayfa içi bağlantılara karışmaz.</li>
+                        <li>Hareket azaltma tercihini destekler ve HTML elementi gerektirmez.</li>
+                    </ul>
+                    <div class="release-comparison">
+                        <div class="release-demo">
+                            <span class="release-demo-label">Önce</span>
+                            <div class="release-demo-stage release-no-feedback">Tıklama sonrası görünür geri bildirim yok</div>
+                        </div>
+                        <div class="release-demo">
+                            <span class="release-demo-label">Sonra</span>
+                            <div class="release-demo-stage release-progress-stage"><span>Sayfa açılıyor</span></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="v1-0-1">
+                    <div class="release-header"><h2>v1.0.1</h2><span class="release-date">14 Haziran 2026</span></div>
+                    <p>Üst bar kontrolleri ve handbook giriş başlıkları ortak bir görsel standarda taşındı.</p>
+                    <ul class="release-changes">
+                        <li>Tema kontrolü metinli pill görünümünden kompakt SVG ikon butonuna geçirildi.</li>
+                        <li>Arama ve tema kontrollerinin ölçüleri ile border dili hizalandı.</li>
+                        <li>Doküman üst navigasyonuna portfolyo bağlantısı eklendi.</li>
+                        <li>Handbook bölüm başlıkları sade, tam genişlik ayırıcılı yapıya geçirildi.</li>
+                    </ul>
+                    <h3>Tema kontrolü</h3>
+                    <div class="release-comparison">
+                        <div class="release-demo">
+                            <span class="release-demo-label">Önce</span>
+                            <div class="release-demo-stage release-demo-actions"><button class="release-old-theme" type="button">Light</button></div>
+                        </div>
+                        <div class="release-demo">
+                            <span class="release-demo-label">Sonra</span>
+                            <div class="release-demo-stage release-demo-actions"><button class="theme-toggle" type="button" aria-label="Tema değiştir"><span class="theme-toggle-label">Tema değiştir</span></button></div>
+                        </div>
+                    </div>
+                    <h3>Bölüm başlığı</h3>
+                    <div class="release-comparison">
+                        <div class="release-demo">
+                            <span class="release-demo-label">Önce</span>
+                            <div class="release-demo-stage release-old-heading"><h3>Geliştirici el kitapları</h3><p>Kavramdan production kullanımına uzanan kaynaklar.</p></div>
+                        </div>
+                        <div class="release-demo">
+                            <span class="release-demo-label">Sonra</span>
+                            <div class="release-demo-stage"><div class="release-new-heading"><h3>Geliştirici el kitapları</h3></div></div>
+                        </div>
+                    </div>
+                    <p class="release-note"><strong>Geçmiş notu:</strong> <code>v1.0.0</code> etiketi yayınlandıktan sonra taşındığı için Git deposunda <code>v1.0.0</code> ve <code>v1.0.1</code> aynı commit'e işaret eder. CDN eski <code>v1.0.0</code> snapshot'ını tutabildiğinden URL'ler farklı içerik sunabilir. Yayınlanmış etiketler bundan sonra taşınmaz.</p>
+                </section>
+                <section id="v1-0-0">
+                    <div class="release-header"><h2>v1.0.0</h2><span class="release-date">8 Haziran 2026</span></div>
+                    <p>Domain bağımsız HTML doküman template'inin ilk genel sürümü.</p>
+                    <ul class="release-changes">
+                        <li>Ortak tasarım token'ları ve doküman yerleşimi.</li>
+                        <li>Tema, arama, kod gösterimi, kopyalama, sekmeler ve okuma araçları.</li>
+                        <li>Production kullanımı için sürümlenmiş jsDelivr asset bağlantıları.</li>
+                    </ul>
+                </section>
+            </div>
+            <nav class="docs-pagination" aria-label="Sayfalar">
+                <a class="docs-page-link docs-page-previous" href="reference.html"><span>Önceki</span><strong>Feature Referansı</strong></a>
+            </nav>
+        </article>
+    </main>
+    <aside class="docs-toc" aria-label="Bu sayfada">
+        <div class="docs-toc-inner">
+            <div class="docs-toc-title">Bu sayfada</div>
+            <nav data-docs-toc></nav>
+        </div>
+    </aside>
+</div>
+<div class="search-overlay" id="searchOverlay" onclick="search.closeSearchOnOverlay(event)">
+    <div class="search-modal" onclick="event.stopPropagation()">
+        <div class="search-input-wrapper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><input type="text" class="search-input" id="searchInput" placeholder="Bu sayfada ara..." autocomplete="off"><button class="search-close" type="button" onclick="search.closeSearch()" aria-label="Kapat">×</button></div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+<button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+<script src="../features/theme/theme.js"></script>
+<script src="../features/code-highlight/code-highlight.js"></script>
+<script src="../features/copy-code/copy-code.js"></script>
+<script src="../features/code-tabs/code-tabs.js"></script>
+<script src="../features/docs-layout/docs-layout.js"></script>
+<script>
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30 };
+window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
+</script>
+<script src="../features/search/search.js"></script>
+<script src="../features/scroll-top/scroll-top.js"></script>
+<script src="../features/reading-progress/reading-progress.js"></script>
+<script src="../features/navigation-progress/navigation-progress.js"></script>
+</body>
+</html>
