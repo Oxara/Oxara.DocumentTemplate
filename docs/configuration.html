@@ -25,10 +25,10 @@
         <nav class="docs-top-links" aria-label="Üst navigasyon">
             <a href="getting-started.html">Rehber</a>
             <a href="reference.html">Feature API</a>
-        </nav>
+        <a href="https://oxara.github.io/">Portfolyo</a></nav>
         <div class="docs-top-actions">
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
-            <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Tema değiştir"><span class="theme-toggle-icon">☀️</span><span class="theme-toggle-label">Dark</span></button>
+            <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
         </div>
     </div>
 </header>
@@ -64,20 +64,18 @@
             </header>
             <section id="s-theme">
             <h2 id="h-theme">Theme</h2>
-            <p>Light/dark tema geçişi için kullanılır. Bu sayfanın sağ üstündeki tema butonu da aynı feature'ı kullanır.</p>
+            <p>Light/dark tema geçişi için kullanılır. Kontrol, standart olarak kompakt bir SVG ikon butonu şeklinde görünür; durum metni ekran okuyucular için korunur.</p>
             <h3 id="h-theme-code">Kod</h3>
             <script class="code-block language-html" type="text/plain">
-<button class="theme-toggle" onclick="theme.toggleTheme()" aria-label="Tema değiştir">
-  <span class="theme-toggle-icon">☀️</span>
-  <span class="theme-toggle-label">Dark</span>
+<button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç">
+  <span class="theme-toggle-label">Koyu tema</span>
 </button>
             </script>
             <h3 id="h-theme-output">Çıktı</h3>
             <div class="demo-output">
                 <span class="demo-label">Canlı tema butonu</span>
-                <button class="theme-toggle" onclick="theme.toggleTheme()" aria-label="Tema değiştir">
-                    <span class="theme-toggle-icon">☀️</span>
-                    <span class="theme-toggle-label">Dark</span>
+                <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç">
+                    <span class="theme-toggle-label">Koyu tema</span>
                 </button>
             </div>
         </section>

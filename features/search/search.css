@@ -6,23 +6,37 @@
 /* ── Header aksiyon grubu (tema + arama butonları birlikte) ── */
 /* ── Arama tetik butonu ── */
 .search-trigger {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 0.35rem 0.9rem;
-    cursor: pointer;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    display: flex;
+    display: inline-flex;
+    min-height: 38px;
+    padding: 0 0.75rem;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: var(--shadow);
-    transition: all 0.2s;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+    cursor: pointer;
+    font-size: 0.78rem;
+    transition:
+        color .18s ease,
+        background-color .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        transform .18s ease;
 }
 
 .search-trigger:hover {
-    border-color: var(--brand);
-    color: var(--brand);
+    color: var(--text);
+    background: var(--surface-muted);
+    border-color: var(--brand-border);
+    box-shadow: 0 3px 8px rgba(15, 23, 42, .07);
+    transform: translateY(-1px);
+}
+
+.search-trigger:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
 }
 
 .search-trigger svg {
@@ -36,9 +50,19 @@
 .search-trigger kbd {
     font-size: 0.7rem;
     background: var(--surface-2);
+    border: 1px solid var(--border);
     padding: 0.1rem 0.35rem;
     border-radius: 6px;
     font-family: monospace;
+    line-height: 1.2;
+}
+
+[data-theme="dark"] .search-trigger {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .16);
+}
+
+[data-theme="dark"] .search-trigger:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .24);
 }
 
 /* ── Modal overlay ── */
@@ -191,12 +215,21 @@
     .search-trigger kbd { display: none; }
 
     .search-trigger {
-        padding: 0.35rem 0.7rem;
+        width: 38px;
+        min-width: 38px;
+        padding: 0;
+        justify-content: center;
     }
 
     .search-trigger svg {
         width: 14px;
         height: 14px;
         margin: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .search-trigger {
+        transition: none;
     }
 }

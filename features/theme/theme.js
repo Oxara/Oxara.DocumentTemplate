@@ -34,14 +34,15 @@
     theme.setTheme = setTheme;
     window.theme = theme;
 
-    /** Buton ikon/label'ını senkronize eder. */
+    /** Butonun erişilebilir durum metnini senkronize eder. */
     function updateThemeToggleUI(themeName) {
         var themeToggleButton = document.querySelector('.theme-toggle');
         if (!themeToggleButton) return;
-        var icon = themeToggleButton.querySelector('.theme-toggle-icon');
         var label = themeToggleButton.querySelector('.theme-toggle-label');
-        if (icon)  icon.textContent  = themeName === 'dark' ? '🌙' : '☀️';
-        if (label) label.textContent = themeName === 'dark' ? 'Light' : 'Dark';
+        var nextThemeLabel = themeName === 'dark' ? 'Açık' : 'Koyu';
+        if (label) label.textContent = nextThemeLabel + ' tema';
+        themeToggleButton.setAttribute('aria-label', nextThemeLabel + ' temaya geç');
+        themeToggleButton.setAttribute('title', nextThemeLabel + ' temaya geç');
     }
 
     /* Sayfa yüklenirken kayıtlı temayı uygula (FOUC'u önlemek için
