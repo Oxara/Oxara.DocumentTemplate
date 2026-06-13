@@ -161,6 +161,27 @@ window.SIDEMENU_CONFIG = {
             </div>
             <div class="callout callout-info"><b>Kullanım kararı:</b> Uzun dokümanlarda faydalıdır; kısa sayfalarda eklenmesi gerekmez.</div>
         </section>
+
+<section id="s-navigation-progress">
+            <h2 id="h-navigation-progress">Navigation Progress</h2>
+            <p>Bir bağlantıya tıklandıktan sonra yeni sayfa açılana kadar ekranın altında ince bir ilerleme çizgisi gösterir. Üstteki <code>Reading Progress</code> okuma konumunu, alttaki <code>Navigation Progress</code> ise sayfa geçişinin sürdüğünü anlatır.</p>
+            <h3 id="h-navigation-progress-code">Kod</h3>
+            <script class="code-block language-html" type="text/plain">
+<link rel="stylesheet" href="features/navigation-progress/navigation-progress.css">
+
+&lt;script src="features/navigation-progress/navigation-progress.js"&gt;&lt;/script&gt;
+            </script>
+            <p>Ek HTML elementi veya yapılandırma gerekmez. Script, göstergeyi sayfaya otomatik ekler ve normal bağlantı tıklamalarını dinler.</p>
+            <h3 id="h-navigation-progress-behavior">Davranış</h3>
+            <ul>
+                <li>Aynı sekmede açılan HTTP ve HTTPS bağlantılarında çalışır.</li>
+                <li>Yeni sekme, indirme, e-posta, telefon ve sayfa içi anchor bağlantılarını yok sayar.</li>
+                <li>Okuma ilerlemesiyle karışmaması için ekranın altında konumlanır.</li>
+                <li><code>prefers-reduced-motion</code> tercihini destekler.</li>
+                <li>Tarayıcının geri/ileri önbelleğinden dönüldüğünde göstergeyi otomatik temizler.</li>
+            </ul>
+            <div class="callout callout-info"><b>Kullanım kararı:</b> Çok sayfalı dokümanlarda ve uzak sayfalara giden kartlarda standart olarak eklenmelidir.</div>
+        </section>
             <nav class="docs-pagination" aria-label="Sayfalar">
                 <a class="docs-page-link docs-page-previous" href="code-features.html"><span>Önceki</span><strong>Kod Özellikleri</strong></a>
                 <a class="docs-page-link docs-page-next" href="configuration.html"><span>Sonraki</span><strong>Tema ve Yapılandırma</strong></a>

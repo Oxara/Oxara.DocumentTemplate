@@ -67,7 +67,7 @@
 .release-progress-stage::before {
     content: "";
     position: absolute;
-    inset: 0 16% auto 0;
+    inset: auto 16% 0 0;
     height: 3px;
     background: var(--brand);
     transform-origin: left center;
@@ -140,13 +140,14 @@
                 <p class="docs-lead">Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.</p>
             </header>
             <div class="release-list">
-                <section id="gelistirme-surumu">
-                    <div class="release-header"><h2>Geliştirme sürümü</h2><span class="release-date">Henüz yayınlanmadı</span></div>
-                    <p>Bir sonraki sürüme girecek kullanıcıya dönük değişiklikler burada birikir.</p>
+                <section id="v1-0-3">
+                    <div class="release-header"><h2>v1.0.3</h2><span class="release-date">14 Haziran 2026</span></div>
+                    <p>Sürüm geçmişi görünür hale getirildi ve iki progress göstergesinin görevleri görsel olarak ayrıştırıldı.</p>
                     <ul class="release-changes">
                         <li>Sürüm geçmişi bağımsız bir HTML sayfasına taşındı.</li>
                         <li>Üst navigasyon ve doküman menüsüne <strong>Değişiklikler</strong> bağlantısı eklendi.</li>
                         <li>Görsel değişiklikler için önce ve sonra demoları eklendi.</li>
+                        <li>Navigation Progress, Reading Progress ile karışmaması için ekranın altına taşındı.</li>
                     </ul>
                 </section>
                 <section id="v1-0-2">

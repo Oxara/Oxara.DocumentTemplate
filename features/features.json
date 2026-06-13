@@ -172,6 +172,21 @@
     ],
     "config": "window.READING_PROGRESS_CONFIG"
   },
+  "navigation-progress": {
+    "css": [
+      "features/navigation-progress/navigation-progress.css"
+    ],
+    "js": [
+      "features/navigation-progress/navigation-progress.js"
+    ],
+    "requires": [
+      "base"
+    ],
+    "provides": [
+      "navigation loading feedback"
+    ],
+    "html": []
+  },
   "search": {
     "css": [
       "features/search/search.css"
