@@ -82,6 +82,7 @@ Oxara.DocumentTemplate/
     search/
     scroll-top/
     reading-progress/
+    navigation-progress/
     features.json
   tools/
     sync-features.ps1
