@@ -172,6 +172,13 @@ window.SIDEMENU_CONFIG = {
 &lt;script src="features/navigation-progress/navigation-progress.js"&gt;&lt;/script&gt;
             </script>
             <p>Ek HTML elementi veya yapılandırma gerekmez. Script, göstergeyi sayfaya otomatik ekler ve normal bağlantı tıklamalarını dinler.</p>
+            <h3 id="h-navigation-progress-flow">Çalışma Akışı</h3>
+            <ol>
+                <li>Kullanıcı aynı sekmede açılan normal bir sayfa bağlantısına tıklar.</li>
+                <li>Gösterge ekranın altında belirir ve yeni sayfa yüklenirken ilerler.</li>
+                <li>Yeni sayfa açıldığında veya kullanıcı geri/ileri geçmişinden döndüğünde gösterge temizlenir.</li>
+            </ol>
+            <p>Bu gösterge gerçek indirme yüzdesini ölçmez; bağlantı tıklaması ile yeni sayfanın açılması arasındaki bekleme süresine görünür geri bildirim verir.</p>
             <h3 id="h-navigation-progress-behavior">Davranış</h3>
             <ul>
                 <li>Aynı sekmede açılan HTTP ve HTTPS bağlantılarında çalışır.</li>

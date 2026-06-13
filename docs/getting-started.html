@@ -72,7 +72,7 @@
             <div class="docs-feature-groups">
 <div><strong>İçerik ve yerleşim</strong><span><code>base</code>, <code>docs-layout</code>, <code>theme</code></span></div>
 <div><strong>Kod örnekleri</strong><span><code>code-highlight</code>, <code>copy-code</code>, <code>code-tabs</code></span></div>
-<div><strong>Okuma araçları</strong><span><code>search</code>, <code>scroll-top</code>, <code>reading-progress</code>, <code>sidemenu</code></span></div>
+<div><strong>Okuma ve geçiş araçları</strong><span><code>search</code>, <code>scroll-top</code>, <code>reading-progress</code>, <code>navigation-progress</code>, <code>sidemenu</code></span></div>
 </div>
         </section>
 
@@ -97,6 +97,7 @@
 &lt;script src="features/reading-progress/reading-progress.js"&gt;&lt;/script&gt;
 &lt;script src="features/navigation-progress/navigation-progress.js"&gt;&lt;/script&gt;
 &lt;script src="features/search/search.js"&gt;&lt;/script&gt;</code></pre>
+            <div class="callout callout-info"><b>Navigation Progress:</b> Ek HTML veya yapılandırma istemez. CSS ve JS dosyaları yüklendiğinde aynı sekmede açılan sayfa bağlantılarını otomatik izler ve geçiş tamamlanana kadar ekranın altında ince bir ilerleme çizgisi gösterir.</div>
         </section>
 
 <section id="s-packages">
@@ -110,10 +111,12 @@
                         <tr><td>Sadece tema</td><td><code>base</code> + <code>theme</code></td></tr>
                         <tr><td>Kod blokları</td><td><code>base</code> + <code>code-highlight</code></td></tr>
                         <tr><td>Kod blokları + copy-code</td><td><code>base</code> + <code>code-highlight</code> + <code>copy-code</code></td></tr>
-                        <tr><td>Çok sayfalı doküman</td><td><code>base</code> + <code>docs-layout</code></td></tr><tr><td>Tek sayfalı yan menü</td><td><code>base</code> + <code>sidemenu</code></td></tr>
+                        <tr><td>Çok sayfalı doküman</td><td><code>base</code> + <code>docs-layout</code> + <code>navigation-progress</code></td></tr>
+                        <tr><td>Tek sayfalı yan menü</td><td><code>base</code> + <code>sidemenu</code></td></tr>
                         <tr><td>Arama</td><td><code>base</code> + <code>search</code></td></tr>
                         <tr><td>Başa dön</td><td><code>base</code> + <code>scroll-top</code></td></tr>
                         <tr><td>Okuma ilerlemesi</td><td><code>base</code> + <code>reading-progress</code></td></tr>
+                        <tr><td>Sayfa geçişi geri bildirimi</td><td><code>base</code> + <code>navigation-progress</code></td></tr>
                     </tbody>
                 </table>
             </div>
