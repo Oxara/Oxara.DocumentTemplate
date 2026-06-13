@@ -25,18 +25,18 @@ handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
 Production ortaminda surum etiketini sabitleyin:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/base/base.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/theme/theme.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/docs-layout/docs-layout.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/code-highlight/code-highlight.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/copy-code/copy-code.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/navigation-progress/navigation-progress.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/base/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/theme/theme.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/docs-layout/docs-layout.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/code-highlight/code-highlight.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/copy-code/copy-code.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/navigation-progress/navigation-progress.css">
 
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/theme/theme.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/docs-layout/docs-layout.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/code-highlight/code-highlight.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/copy-code/copy-code.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.3/features/navigation-progress/navigation-progress.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/theme/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/docs-layout/docs-layout.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/code-highlight/code-highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/copy-code/copy-code.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@refs/tags/v1.0.4/features/navigation-progress/navigation-progress.js"></script>
 ```
 
 Gelistirme sirasinda en guncel `main` branch'i kullanilabilir:
@@ -46,7 +46,7 @@ https://cdn.jsdelivr.net/gh/Oxara/Oxara.DocumentTemplate@main/features/...
 ```
 
 `@main` degisebilir ve cache nedeniyle gec guncellenebilir. Production projelerinde daima
-`@refs/tags/v1.0.3` gibi bir tag veya commit SHA kullanin.
+`@refs/tags/v1.0.4` gibi bir tag veya commit SHA kullanin.
 
 Tum feature asset yollarini `features/features.json` manifestinde bulabilirsiniz.
 

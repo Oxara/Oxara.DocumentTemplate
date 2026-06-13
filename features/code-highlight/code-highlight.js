@@ -22,6 +22,13 @@
         });
     }
 
+    /* Raw-text script bloklarindaki HTML entity'lerini bir kez cozer. */
+    function decodeHtmlEntities(value) {
+        var decoder = document.createElement('textarea');
+        decoder.innerHTML = value;
+        return decoder.value;
+    }
+
     /* ── Başındaki/sonundaki boş satırları at, ortak girintiyi sıfırla ── */
     function normalizeCode(value) {
         var lines = value.replace(/\r\n/g, '\n').split('\n');
@@ -314,6 +321,7 @@
 
     window.CodeHighlight = {
         escapeHtml:    escapeHtml,
+        decodeHtmlEntities: decodeHtmlEntities,
         normalizeCode: normalizeCode,
         detectLanguage: detectLanguage,
         formatCode:    formatCode,
@@ -332,7 +340,7 @@
             var langClass = classes.find(function (className) { return className.indexOf('language-') === 0; });
             var lang = langClass ? langClass.replace('language-', '') : '';
 
-            code.textContent = normalizeCode(source.textContent);
+            code.textContent = normalizeCode(decodeHtmlEntities(source.textContent));
             if (lang) code.className = 'language-' + lang;
             codeBlockWrapper.appendChild(code);
             source.parentNode.replaceChild(codeBlockWrapper, source);

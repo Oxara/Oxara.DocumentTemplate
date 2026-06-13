@@ -140,6 +140,15 @@
                 <p class="docs-lead">Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.</p>
             </header>
             <div class="release-list">
+                <section id="v1-0-4">
+                    <div class="release-header"><h2>v1.0.4</h2><span class="release-date">14 Haziran 2026</span></div>
+                    <p>Dokümantasyon içindeki dinamik HTML kod örneklerinde entity metinlerinin görünür kalmasına neden olan renderer hatası düzeltildi.</p>
+                    <ul class="release-changes">
+                        <li><code>script.code-block[type="text/plain"]</code> kaynakları render edilmeden önce bir kez decode edilir.</li>
+                        <li><code>&amp;lt;script&amp;gt;</code> ve benzeri metinler artık gerçek kod etiketi olarak gösterilir ve kopyalanır.</li>
+                        <li>Statik <code>pre &gt; code</code> örneklerinin mevcut davranışı korunur.</li>
+                    </ul>
+                </section>
                 <section id="v1-0-3">
                     <div class="release-header"><h2>v1.0.3</h2><span class="release-date">14 Haziran 2026</span></div>
                     <p>Sürüm geçmişi görünür hale getirildi ve iki progress göstergesinin görevleri görsel olarak ayrıştırıldı.</p>
