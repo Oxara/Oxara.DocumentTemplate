@@ -2,7 +2,7 @@
 
 Handbook, guide ve teknik makalelerde kullanilan ortak, domain-free dokuman arayuzu.
 
-Canli dokumantasyon ve feature rehberi: <https://oxara.github.io/Oxara.DocumentTemplate/>
+Demo ve canli dokumantasyon: <https://oxara.github.io/Oxara.DocumentTemplate/>
 
 ## Tasarim yaklasimi
 
