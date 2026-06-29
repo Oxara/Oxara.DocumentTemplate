@@ -5,16 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tema ve Yapılandırma — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
-<link rel="stylesheet" href="../features/base/base.css">
-<link rel="stylesheet" href="../features/theme/theme.css">
-<link rel="stylesheet" href="../features/docs-layout/docs-layout.css">
-<link rel="stylesheet" href="../features/code-highlight/code-highlight.css">
-<link rel="stylesheet" href="../features/copy-code/copy-code.css">
-<link rel="stylesheet" href="../features/code-tabs/code-tabs.css">
-<link rel="stylesheet" href="../features/search/search.css">
-<link rel="stylesheet" href="../features/scroll-top/scroll-top.css">
-<link rel="stylesheet" href="../features/reading-progress/reading-progress.css">
-<link rel="stylesheet" href="../features/navigation-progress/navigation-progress.css">
+<link rel="stylesheet" href="../feature-packages/full.css">
 </head>
 <body class="docs-page">
 <a class="skip-link" href="#main-content">İçeriğe atla</a>
@@ -25,9 +16,8 @@
         <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
         <nav class="docs-top-links" aria-label="Üst navigasyon">
             <a href="getting-started.html">Rehber</a>
-            <a href="reference.html">Feature API</a>
-            <a href="changelog.html">Değişiklikler</a>
-        <a href="https://erdemozkara.com/">Portfolyo</a></nav>
+            <a href="reference.html">Referans</a>
+            <a href="changelog.html">Değişiklikler</a></nav>
         <div class="docs-top-actions">
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
             <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
@@ -37,24 +27,32 @@
 <div class="docs-overlay" data-docs-overlay></div>
 <div class="docs-shell">
     <aside class="docs-sidebar" data-docs-sidebar>
-        <div class="docs-sidebar-inner">
+        <div class="docs-sidebar-inner sticky-block-container">
             
 <div class="docs-nav-group">
     <div class="docs-nav-label">Başlangıç</div>
     <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
-    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
 </div>
 <div class="docs-nav-group">
     <div class="docs-nav-label">Feature'lar</div>
+    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
     <a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
     <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
     <a class="docs-nav-link active" href="configuration.html">Tema ve Yapılandırma</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature Paketleri</div>
+    <a class="docs-nav-link" href="reference.html#hazir-paketler">Hazır Paketler</a>
 </div>
 <div class="docs-nav-group">
     <div class="docs-nav-label">Referans</div>
     <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
     <a class="docs-nav-link" href="changelog.html">Değişiklikler</a>
     <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+</div>
+<div class="docs-sidebar-footer sticky-block-bottom">
+    <div class="docs-nav-label">Yazar</div>
+    <a class="docs-nav-link" href="https://erdemozkara.com/">erdemozkara.com</a>
 </div>
         </div>
     </aside>
@@ -102,8 +100,7 @@ window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector
         </section>
             <nav class="docs-pagination" aria-label="Sayfalar">
                 <a class="docs-page-link docs-page-previous" href="navigation.html"><span>Önceki</span><strong>Navigasyon ve Okuma</strong></a>
-                <a class="docs-page-link docs-page-next" href="reference.html"><span>Sonraki</span><strong>Feature Referansı</strong></a>
-            </nav>
+                <a class="docs-page-link docs-page-next" href="reference.html"><span>Sonraki</span><strong>Feature Referansı</strong></a></nav>
         </article>
     </main>
     <aside class="docs-toc" aria-label="Bu sayfada">
@@ -120,18 +117,10 @@ window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector
     </div>
 </div>
 <button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
-<script src="../features/theme/theme.js"></script>
-<script src="../features/code-highlight/code-highlight.js"></script>
-<script src="../features/copy-code/copy-code.js"></script>
-<script src="../features/code-tabs/code-tabs.js"></script>
-<script src="../features/docs-layout/docs-layout.js"></script>
 <script>
-window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Feature seçimi, kurulum ve yeni bir dokümanı ayağa kaldırmak için gereken minimum adımlar.","keywords":"Temel yaklaşım s-overview s-install s-packages s-checklist","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Kod Özellikleri","text":"Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.","keywords":"Teknik örnekler s-code s-copy-code s-code-tabs","url":"code-features.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu ve bağımsız feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Hızlı başvuru ","url":"reference.html","sectionType":"Sayfa"}] };
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Document Template, hazır paketler ve tekil feature'larla doküman sitenizi hızlıca kurmanızı sağlar.","keywords":"Temel yaklaşım s-overview s-feature-summary s-install","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Kod Özellikleri","text":"Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.","keywords":"Teknik örnekler s-code s-copy-code s-code-tabs","url":"code-features.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu, bağımsız feature'lar ve hazır feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Hızlı başvuru ","url":"reference.html","sectionType":"Sayfa"}] };
 window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
 </script>
-<script src="../features/search/search.js"></script>
-<script src="../features/scroll-top/scroll-top.js"></script>
-<script src="../features/reading-progress/reading-progress.js"></script>
-<script src="../features/navigation-progress/navigation-progress.js"></script>
+<script src="../feature-packages/full.js"></script>
 </body>
 </html>

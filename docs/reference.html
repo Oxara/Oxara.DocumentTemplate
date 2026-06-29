@@ -5,16 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Feature Referansı — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
-<link rel="stylesheet" href="../features/base/base.css">
-<link rel="stylesheet" href="../features/theme/theme.css">
-<link rel="stylesheet" href="../features/docs-layout/docs-layout.css">
-<link rel="stylesheet" href="../features/code-highlight/code-highlight.css">
-<link rel="stylesheet" href="../features/copy-code/copy-code.css">
-<link rel="stylesheet" href="../features/code-tabs/code-tabs.css">
-<link rel="stylesheet" href="../features/search/search.css">
-<link rel="stylesheet" href="../features/scroll-top/scroll-top.css">
-<link rel="stylesheet" href="../features/reading-progress/reading-progress.css">
-<link rel="stylesheet" href="../features/navigation-progress/navigation-progress.css">
+<link rel="stylesheet" href="../feature-packages/full.css">
 </head>
 <body class="docs-page">
 <a class="skip-link" href="#main-content">İçeriğe atla</a>
@@ -25,9 +16,8 @@
         <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
         <nav class="docs-top-links" aria-label="Üst navigasyon">
             <a href="getting-started.html">Rehber</a>
-            <a href="reference.html">Feature API</a>
-            <a href="changelog.html">Değişiklikler</a>
-        <a href="https://erdemozkara.com/">Portfolyo</a></nav>
+            <a href="reference.html">Referans</a>
+            <a href="changelog.html">Değişiklikler</a></nav>
         <div class="docs-top-actions">
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
             <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
@@ -37,24 +27,32 @@
 <div class="docs-overlay" data-docs-overlay></div>
 <div class="docs-shell">
     <aside class="docs-sidebar" data-docs-sidebar>
-        <div class="docs-sidebar-inner">
+        <div class="docs-sidebar-inner sticky-block-container">
             
 <div class="docs-nav-group">
     <div class="docs-nav-label">Başlangıç</div>
     <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
-    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
 </div>
 <div class="docs-nav-group">
     <div class="docs-nav-label">Feature'lar</div>
+    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
     <a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
     <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
     <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature Paketleri</div>
+    <a class="docs-nav-link" href="reference.html#hazir-paketler">Hazır Paketler</a>
 </div>
 <div class="docs-nav-group">
     <div class="docs-nav-label">Referans</div>
     <a class="docs-nav-link active" href="reference.html">Feature Referansı</a>
     <a class="docs-nav-link" href="changelog.html">Değişiklikler</a>
     <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+</div>
+<div class="docs-sidebar-footer sticky-block-bottom">
+    <div class="docs-nav-label">Yazar</div>
+    <a class="docs-nav-link" href="https://erdemozkara.com/">erdemozkara.com</a>
 </div>
         </div>
     </aside>
@@ -63,40 +61,107 @@
             <header class="docs-article-header">
                 <p class="docs-eyebrow">Hızlı başvuru</p>
                 <h1>Feature Referansı</h1>
-                <p class="docs-lead">Çok sayfalı doküman kabuğu ve bağımsız feature paketleri için dosya, bağımlılık ve yükleme özeti.</p>
+                <p class="docs-lead">Çok sayfalı doküman kabuğu, bağımsız feature'lar ve hazır feature paketleri için dosya, bağımlılık ve yükleme özeti.</p>
             </header>
             <section id="feature-paketleri">
-<h2 id="feature-paketleri-baslik">Feature Paketleri</h2>
-<p>Her feature tek bir davranış veya görsel sorumluluk taşır. <code>base</code> ortak tasarım zemini, <code>docs-layout</code> ise çok sayfalı doküman kabuğudur.</p>
+<h2 id="feature-paketleri-baslik">Feature'lar</h2>
+<p>Her feature tek bir davranış veya görsel sorumluluk taşır. <code>base</code> ortak tasarım zemini, <code>docs-layout</code> ise çok sayfalı doküman kabuğudur. Birden fazla feature'ı birlikte yükleyen hazır giriş noktaları <code>feature-packages</code> altında tutulur.</p>
 <div class="table-wrapper"><table>
 <thead><tr><th>Feature</th><th>Amaç</th><th>Bağımlılık</th></tr></thead>
 <tbody>
 <tr><td><code>base</code></td><td>Token, tipografi ve içerik bileşenleri</td><td>Yok</td></tr>
-<tr><td><code>docs-layout</code></td><td>Üst bar, sol site menüsü, sağ sayfa içi menü</td><td><code>base</code></td></tr>
+<tr><td><code>sticky-block</code></td><td>Kapsayıcı içinde alta sabitlenen içerik blokları</td><td><code>base</code></td></tr>
+<tr><td><code>docs-layout</code></td><td>Üst bar, sol site menüsü, sağ sayfa içi menü</td><td><code>base</code>, <code>sticky-block</code></td></tr>
 <tr><td><code>theme</code></td><td>Light/dark tema tercihi</td><td><code>base</code></td></tr>
 <tr><td><code>code-highlight</code></td><td>Kod renklendirme</td><td><code>base</code></td></tr>
 <tr><td><code>copy-code</code></td><td>Kod kopyalama</td><td><code>code-highlight</code></td></tr>
+<tr><td><code>copy-table</code></td><td>Key/value tablolarında satır değeri kopyalama</td><td><code>base</code></td></tr>
 <tr><td><code>code-tabs</code></td><td>Yerel ve grup bazlı kod sekmeleri</td><td><code>base</code></td></tr>
 <tr><td><code>search</code></td><td>Aktif sayfada Ctrl+K arama</td><td><code>base</code></td></tr>
 <tr><td><code>navigation-progress</code></td><td>Aynı sekmedeki sayfa geçişlerinde ekranın altında ilerleme geri bildirimi</td><td><code>base</code></td></tr>
 </tbody></table></div>
 </section>
-<section id="cok-sayfali-kurulum">
-<h2 id="cok-sayfali-kurulum-baslik">Çok Sayfalı Kurulum</h2>
+<section id="hazir-paketler">
+<h2 id="hazir-paketler-baslik">Hazır Paketler</h2>
+<p>Paketler feature değildir; birden fazla feature dosyasını ortak kullanım senaryoları için tek girişten yükler. Paket manifesti <code>feature-packages/packages.json</code> dosyasındadır; her paketin kapsadığı feature listesi manifestteki <code>includes</code> alanıyla aynı tutulur.</p>
+<div class="table-wrapper"><table>
+<thead><tr><th>Paket</th><th>Amaç</th><th>İçerdiği feature'lar</th></tr></thead>
+<tbody>
+<tr><td><code>core</code></td><td>Hafif site kabuğu</td><td><code>base</code>, <code>sticky-block</code>, <code>theme</code>, <code>docs-layout</code>, <code>navigation-progress</code></td></tr>
+<tr><td><code>full</code></td><td>Tüm doküman feature seti</td><td><code>base</code>, <code>sticky-block</code>, <code>theme</code>, <code>docs-layout</code>, <code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code>, <code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code>, <code>navigation-progress</code></td></tr>
+</tbody></table></div>
+</section>
+<section id="custom-feature-secimi">
+<h2 id="custom-feature-secimi-baslik">Custom Feature Seçimi</h2>
+<p>Hazır paketler ihtiyacınızdan büyükse, sadece kullanılacak feature dosyalarını taşıyın. Aşağıdaki tablo yaygın senaryolar için minimum başlangıç listesini verir; dosya sırası için bir sonraki bölümdeki <a href="#ozel-paket-sirasi">Özel Paket Sırası</a> kuralını izleyin.</p>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr><th>Senaryo</th><th>Kopyalanacak feature'lar</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Sadece tema</td><td><code>base</code> + <code>theme</code></td></tr>
+            <tr><td>Kod blokları</td><td><code>base</code> + <code>code-highlight</code></td></tr>
+            <tr><td>Kod blokları + copy-code</td><td><code>base</code> + <code>code-highlight</code> + <code>copy-code</code></td></tr>
+            <tr><td>Kopyalanabilir key/value tablo</td><td><code>base</code> + <code>copy-table</code></td></tr>
+            <tr><td>Alt sabit içerik alanı</td><td><code>base</code> + <code>sticky-block</code></td></tr>
+            <tr><td>Çok sayfalı doküman</td><td><code>base</code> + <code>sticky-block</code> + <code>docs-layout</code> + <code>navigation-progress</code></td></tr>
+            <tr><td>Tek sayfalı yan menü</td><td><code>base</code> + <code>sidemenu</code></td></tr>
+            <tr><td>Arama</td><td><code>base</code> + <code>search</code></td></tr>
+            <tr><td>Başa dön</td><td><code>base</code> + <code>scroll-top</code></td></tr>
+            <tr><td>Okuma ilerlemesi</td><td><code>base</code> + <code>reading-progress</code></td></tr>
+            <tr><td>Sayfa geçişi geri bildirimi</td><td><code>base</code> + <code>navigation-progress</code></td></tr>
+        </tbody>
+    </table>
+</div>
+</section>
+<section id="ozel-paket-sirasi">
+<h2 id="ozel-paket-sirasi-baslik">Özel Paket Sırası</h2>
+<p>Kendi paketinizi oluştururken dosyaları sadece ihtiyaca göre seçmek yetmez; bağımlı feature'lar önce yüklenmelidir. CSS tarafında temel tokenlar ve kapsayıcı davranışları önce, görsel ve etkileşim katmanları sonra gelir. JS tarafında da DOM üzerinde hazırlık yapan feature'lar, o çıktıya buton veya davranış ekleyen feature'lardan önce çalışmalıdır.</p>
+<div class="table-wrapper"><table>
+<thead><tr><th>Katman</th><th>CSS sırası</th><th>JS sırası</th></tr></thead>
+<tbody>
+<tr><td>Temel zemin</td><td><code>base</code>, <code>sticky-block</code></td><td>Yok</td></tr>
+<tr><td>Doküman kabuğu</td><td><code>theme</code>, <code>docs-layout</code>, <code>navigation-progress</code></td><td><code>theme</code>, <code>docs-layout</code>, <code>navigation-progress</code></td></tr>
+<tr><td>Kod örnekleri</td><td><code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code></td><td><code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code></td></tr>
+<tr><td>Okuma araçları</td><td><code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code></td><td><code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code></td></tr>
+</tbody></table></div>
 <pre><code class="language-html">&lt;link rel="stylesheet" href="features/base/base.css"&gt;
+&lt;link rel="stylesheet" href="features/sticky-block/sticky-block.css"&gt;
 &lt;link rel="stylesheet" href="features/theme/theme.css"&gt;
 &lt;link rel="stylesheet" href="features/docs-layout/docs-layout.css"&gt;
-&lt;link rel="stylesheet" href="features/navigation-progress/navigation-progress.css"&gt;
+&lt;link rel="stylesheet" href="features/code-highlight/code-highlight.css"&gt;
+&lt;link rel="stylesheet" href="features/copy-code/copy-code.css"&gt;
+&lt;link rel="stylesheet" href="features/copy-table/copy-table.css"&gt;
+&lt;link rel="stylesheet" href="features/code-tabs/code-tabs.css"&gt;
+&lt;link rel="stylesheet" href="features/search/search.css"&gt;
 
 &lt;script src="features/theme/theme.js"&gt;&lt;/script&gt;
+&lt;script src="features/code-highlight/code-highlight.js"&gt;&lt;/script&gt;
+&lt;script src="features/copy-code/copy-code.js"&gt;&lt;/script&gt;
+&lt;script src="features/copy-table/copy-table.js"&gt;&lt;/script&gt;
+&lt;script src="features/code-tabs/code-tabs.js"&gt;&lt;/script&gt;
 &lt;script src="features/docs-layout/docs-layout.js"&gt;&lt;/script&gt;
-&lt;script src="features/navigation-progress/navigation-progress.js"&gt;&lt;/script&gt;</code></pre>
-<p>Sol menü sayfalar arasında sabit bir bilgi mimarisi sunar. Sağ menü, aktif sayfadaki <code>h2</code> ve <code>h3</code> başlıklarından otomatik oluşturulur. <code>navigation-progress</code> ek HTML gerektirmeden normal bağlantı geçişlerini izler.</p>
+&lt;script src="features/search/search.js"&gt;&lt;/script&gt;</code></pre>
+<p><code>copy-code</code>, <code>code-highlight</code> çıktısına buton eklediği için ondan sonra yüklenmelidir. <code>docs-layout</code>, çok sayfalı kabuk için <code>sticky-block</code> CSS değişkenlerini kullanır. Hazır paketlerde bu sıra <code>feature-packages/core.css</code>, <code>feature-packages/full.css</code>, <code>feature-packages/core.js</code> ve <code>feature-packages/full.js</code> içinde korunur.</p>
+</section>
+<section id="core-paket-kurulumu">
+<h2 id="core-paket-kurulumu-baslik">Core Paket Kurulumu</h2>
+<pre><code class="language-html">&lt;link rel="stylesheet" href="feature-packages/core.css"&gt;
+
+&lt;script src="feature-packages/core.js"&gt;&lt;/script&gt;</code></pre>
+<p><code>core</code>, çok sayfalı doküman kabuğunu çalıştırmak için gereken hafif pakettir. Tema, üst bar, sol menü, sayfa içi menü ve sayfa geçiş göstergesini birlikte yükler; kod renklendirme, kopyalama, arama ve okuma araçlarını içermez.</p>
+</section>
+<section id="full-paket-kurulumu">
+<h2 id="full-paket-kurulumu-baslik">Full Paket Kurulumu</h2>
+<pre><code class="language-html">&lt;link rel="stylesheet" href="feature-packages/full.css"&gt;
+
+&lt;script src="feature-packages/full.js"&gt;&lt;/script&gt;</code></pre>
+<p><code>full</code>, template içindeki tüm ortak feature'ları tek girişten yükler. Kod blokları, kopyalama, kopyalanabilir tablolar, code tabs, arama, scroll-top ve okuma ilerlemesi gereken dokümanlarda kullanın. Daha küçük çıktı istiyorsanız <code>core</code> veya özel paket sırası ile tekil feature dosyalarını seçin.</p>
 </section>
             <nav class="docs-pagination" aria-label="Sayfalar">
                 <a class="docs-page-link docs-page-previous" href="configuration.html"><span>Önceki</span><strong>Tema ve Yapılandırma</strong></a>
-                <a class="docs-page-link docs-page-next" href="changelog.html"><span>Sonraki</span><strong>Değişiklikler</strong></a>
-            </nav>
+                <a class="docs-page-link docs-page-next" href="changelog.html"><span>Sonraki</span><strong>Değişiklikler</strong></a></nav>
         </article>
     </main>
     <aside class="docs-toc" aria-label="Bu sayfada">
@@ -113,18 +178,10 @@
     </div>
 </div>
 <button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
-<script src="../features/theme/theme.js"></script>
-<script src="../features/code-highlight/code-highlight.js"></script>
-<script src="../features/copy-code/copy-code.js"></script>
-<script src="../features/code-tabs/code-tabs.js"></script>
-<script src="../features/docs-layout/docs-layout.js"></script>
 <script>
-window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Feature seçimi, kurulum ve yeni bir dokümanı ayağa kaldırmak için gereken minimum adımlar.","keywords":"Temel yaklaşım s-overview s-install s-packages s-checklist","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Kod Özellikleri","text":"Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.","keywords":"Teknik örnekler s-code s-copy-code s-code-tabs","url":"code-features.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Uyarlama s-theme s-config","url":"configuration.html","sectionType":"Sayfa"}] };
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Document Template, hazır paketler ve tekil feature'larla doküman sitenizi hızlıca kurmanızı sağlar.","keywords":"Temel yaklaşım s-overview s-feature-summary s-install","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Kod Özellikleri","text":"Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.","keywords":"Teknik örnekler s-code s-copy-code s-code-tabs","url":"code-features.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Uyarlama s-theme s-config","url":"configuration.html","sectionType":"Sayfa"}] };
 window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
 </script>
-<script src="../features/search/search.js"></script>
-<script src="../features/scroll-top/scroll-top.js"></script>
-<script src="../features/reading-progress/reading-progress.js"></script>
-<script src="../features/navigation-progress/navigation-progress.js"></script>
+<script src="../feature-packages/full.js"></script>
 </body>
 </html>

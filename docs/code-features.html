@@ -5,16 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kod Özellikleri — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
-<link rel="stylesheet" href="../features/base/base.css">
-<link rel="stylesheet" href="../features/theme/theme.css">
-<link rel="stylesheet" href="../features/docs-layout/docs-layout.css">
-<link rel="stylesheet" href="../features/code-highlight/code-highlight.css">
-<link rel="stylesheet" href="../features/copy-code/copy-code.css">
-<link rel="stylesheet" href="../features/code-tabs/code-tabs.css">
-<link rel="stylesheet" href="../features/search/search.css">
-<link rel="stylesheet" href="../features/scroll-top/scroll-top.css">
-<link rel="stylesheet" href="../features/reading-progress/reading-progress.css">
-<link rel="stylesheet" href="../features/navigation-progress/navigation-progress.css">
+<link rel="stylesheet" href="../feature-packages/full.css">
 </head>
 <body class="docs-page">
 <a class="skip-link" href="#main-content">İçeriğe atla</a>
@@ -25,9 +16,8 @@
         <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
         <nav class="docs-top-links" aria-label="Üst navigasyon">
             <a href="getting-started.html">Rehber</a>
-            <a href="reference.html">Feature API</a>
-            <a href="changelog.html">Değişiklikler</a>
-        <a href="https://erdemozkara.com/">Portfolyo</a></nav>
+            <a href="reference.html">Referans</a>
+            <a href="changelog.html">Değişiklikler</a></nav>
         <div class="docs-top-actions">
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
             <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
@@ -37,24 +27,32 @@
 <div class="docs-overlay" data-docs-overlay></div>
 <div class="docs-shell">
     <aside class="docs-sidebar" data-docs-sidebar>
-        <div class="docs-sidebar-inner">
+        <div class="docs-sidebar-inner sticky-block-container">
             
 <div class="docs-nav-group">
     <div class="docs-nav-label">Başlangıç</div>
     <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
-    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
 </div>
 <div class="docs-nav-group">
     <div class="docs-nav-label">Feature'lar</div>
+    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
     <a class="docs-nav-link active" href="code-features.html">Kod Özellikleri</a>
     <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
     <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature Paketleri</div>
+    <a class="docs-nav-link" href="reference.html#hazir-paketler">Hazır Paketler</a>
 </div>
 <div class="docs-nav-group">
     <div class="docs-nav-label">Referans</div>
     <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
     <a class="docs-nav-link" href="changelog.html">Değişiklikler</a>
     <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+</div>
+<div class="docs-sidebar-footer sticky-block-bottom">
+    <div class="docs-nav-label">Yazar</div>
+    <a class="docs-nav-link" href="https://erdemozkara.com/">erdemozkara.com</a>
 </div>
         </div>
     </aside>
@@ -96,6 +94,33 @@
 <section id="s-code-tabs">
             <h2 id="h-code-tabs">Code Tabs</h2>
             <p>Farklı provider, istemci veya yaklaşım örneklerini aynı alanda göstermek için kullanılır. Yerel sekmeler yalnızca kendi panelini; global seçim ise aynı group değerindeki tüm panelleri değiştirir.</p>
+            <h3 id="h-code-tabs-local">Yerel sekmeler</h3>
+            <p>Yalnızca kendi panelini değiştiren basit kullanım için <code>data-code-tabs</code>, <code>data-code-tab</code> ve <code>data-code-panel</code> yeterlidir.</p>
+            <div class="code-tabs" data-code-tabs data-code-tabs-default="rest">
+                <div class="code-tabs-list" data-code-tabs-list>
+                    <button class="code-tab" type="button" data-code-tab data-code-option="rest">REST API</button>
+                    <button class="code-tab" type="button" data-code-tab data-code-option="dotnet">.NET Client</button>
+                </div>
+                <div class="code-tab-panel" data-code-panel data-code-option="rest">
+                    <pre><code class="language-bash">curl https://api.example.com/items</code></pre>
+                </div>
+                <div class="code-tab-panel" data-code-panel data-code-option="dotnet">
+                    <pre><code class="language-csharp">await client.GetAsync("/items");</code></pre>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;link rel="stylesheet" href="features/code-tabs/code-tabs.css"&gt;
+&lt;script src="features/code-tabs/code-tabs.js"&gt;&lt;/script&gt;
+
+&lt;div class="code-tabs" data-code-tabs data-code-tabs-default="rest"&gt;
+  &lt;div class="code-tabs-list" data-code-tabs-list&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="rest"&gt;REST API&lt;/button&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="dotnet"&gt;.NET Client&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="rest"&gt;...&lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="dotnet"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <h3 id="h-code-tabs-global">Bölüm içi global seçim</h3>
+            <p>Aynı sayfada birden fazla panel aynı tercihle değişecekse, global kontrol ve paneller aynı group değerini kullanır.</p>
             <div class="code-tabs-global" data-code-tabs-global="guide-client">
                 <div class="code-tabs-global-copy">
                     <span class="code-tabs-global-label">Kod örneği tercihi</span>
@@ -118,13 +143,209 @@
                     <pre><code class="language-csharp">await client.GetAsync("/items");</code></pre>
                 </div>
             </div>
-            <div class="callout callout-warning"><b>Yerleşim standardı:</b> Global seçim kontrolü ilgili bölümün içinde, ilk sekmeli örnekten hemen önce bulunur. <code>.header-actions</code> içine yerleştirilmez; bu alan yalnızca arama ve tema gibi sayfa aksiyonları içindir.</div>
+            <pre><code class="language-html">&lt;link rel="stylesheet" href="features/code-tabs/code-tabs.css"&gt;
+&lt;script src="features/code-tabs/code-tabs.js"&gt;&lt;/script&gt;
+
+&lt;div class="code-tabs-global" data-code-tabs-global="client"&gt;
+  &lt;div class="code-tabs-global-copy"&gt;
+    &lt;span class="code-tabs-global-label"&gt;Kod örneği tercihi&lt;/span&gt;
+    &lt;span class="code-tabs-global-description"&gt;Bu gruptaki örnekleri birlikte değiştirir.&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="code-tabs-global-options" role="group" aria-label="Kod örneği tercihi"&gt;
+    &lt;button type="button" data-code-option="rest"&gt;REST API&lt;/button&gt;
+    &lt;button type="button" data-code-option="dotnet"&gt;.NET Client&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="code-tabs" data-code-tabs data-code-tabs-group="client" data-code-tabs-default="rest"&gt;
+  &lt;div class="code-tabs-list" data-code-tabs-list&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="rest"&gt;REST API&lt;/button&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="dotnet"&gt;.NET Client&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="rest"&gt;...&lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="dotnet"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <h3 id="h-code-tabs-header">Header global seçim</h3>
+            <p>Sayfa boyunca görünür kalması gereken tercihlerde aynı global kontrol header içinde kompakt varyantla gösterilebilir.</p>
+            <div class="demo-output">
+                <span class="demo-label">Header global seçim</span>
+                <div class="code-tabs-header-demo">
+                    <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
+                    <div class="docs-top-actions">
+                        <div class="code-tabs-global code-tabs-global-header" data-code-tabs-global="guide-client" aria-label="Kod örneği tercihi">
+                            <div class="code-tabs-global-options" role="group" aria-label="Kod örneği tercihi">
+                                <button type="button" data-code-option="rest">REST</button>
+                                <button type="button" data-code-option="dotnet">.NET</button>
+                            </div>
+                        </div>
+                        <button class="search-trigger" type="button" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+                        <button class="theme-toggle" type="button" aria-label="Tema değiştir"><span class="theme-toggle-label">Tema değiştir</span></button>
+                    </div>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;link rel="stylesheet" href="features/code-tabs/code-tabs.css"&gt;
+&lt;script src="features/code-tabs/code-tabs.js"&gt;&lt;/script&gt;
+
+&lt;header class="docs-topbar"&gt;
+  &lt;div class="docs-topbar-inner"&gt;
+    &lt;a class="docs-brand" href="index.html"&gt;Document Template&lt;/a&gt;
+    &lt;div class="docs-top-actions"&gt;
+      &lt;div class="code-tabs-global code-tabs-global-header" data-code-tabs-global="client" aria-label="Kod örneği tercihi"&gt;
+        &lt;div class="code-tabs-global-options" role="group" aria-label="Kod örneği tercihi"&gt;
+          &lt;button type="button" data-code-option="rest"&gt;REST&lt;/button&gt;
+          &lt;button type="button" data-code-option="dotnet"&gt;.NET&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;div class="code-tabs-global" data-code-tabs-global="client"&gt;
+  &lt;button type="button" data-code-option="rest"&gt;REST API&lt;/button&gt;
+  &lt;button type="button" data-code-option="dotnet"&gt;.NET Client&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="code-tabs" data-code-tabs data-code-tabs-group="client" data-code-tabs-default="rest"&gt;
+  &lt;div class="code-tabs-list" data-code-tabs-list&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="rest"&gt;REST API&lt;/button&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="dotnet"&gt;.NET Client&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="rest"&gt;...&lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="dotnet"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <div class="callout callout-warning"><b>Yerleşim standardı:</b> Yerel sekmeler panel içinde kalır. Bölüm içi global seçim ilgili örnek grubunun hemen önünde durur. Header varyantı yalnızca sayfa boyunca görünür kalması gereken tercihler için kullanılır.</div>
             <div class="callout callout-info"><b>Domain-free kuralı:</b> Feature REST, .NET, Redis veya başka bir teknoloji adı bilmez; eşleşmeyi yalnızca <code>data-code-option</code> ve <code>data-code-tabs-group</code> değerleri üzerinden yapar.</div>
+        </section>
+
+<section id="s-copy-table">
+            <h2 id="h-copy-table">Copy Table</h2>
+            <p><code>copy-table</code> feature'ı key/value satırlarında değeri tek tıkla kopyalanabilir hale getirir. Tek başına kullanılabilir; <code>code-tabs</code> panelinin içine yerleştirildiğinde yerel ve global seçimlerle birlikte çalışır.</p>
+            <h3 id="h-copy-table-standalone">Bağımsız tablo</h3>
+            <div class="copy-table" data-copy-table>
+                <table>
+                    <thead>
+                        <tr><th>Key</th><th>Value</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="copy-table-key"><code>Service.Endpoint</code></td>
+                            <td data-copy-value="https://api.example.local/v1">https://api.example.local/v1</td>
+                        </tr>
+                        <tr>
+                            <td class="copy-table-key"><code>Service.TimeoutSeconds</code></td>
+                            <td data-copy-value>30</td>
+                        </tr>
+                        <tr>
+                            <td class="copy-table-key"><code>Feature.Enabled</code></td>
+                            <td data-copy-value>true</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pre><code class="language-html">&lt;link rel="stylesheet" href="features/copy-table/copy-table.css"&gt;
+&lt;script src="features/copy-table/copy-table.js"&gt;&lt;/script&gt;
+
+&lt;div class="copy-table" data-copy-table&gt;
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td class="copy-table-key"&gt;&lt;code&gt;Service.Endpoint&lt;/code&gt;&lt;/td&gt;
+        &lt;td data-copy-value="https://api.example.local/v1"&gt;https://api.example.local/v1&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+            <h3 id="h-copy-table-tabs">Global seçimle kullanım</h3>
+            <div class="code-tabs-global" data-code-tabs-global="copy-table-env">
+                <div class="code-tabs-global-copy">
+                    <span class="code-tabs-global-label">Ortam tercihi</span>
+                    <span class="code-tabs-global-description">Aynı gruptaki kod ve tablo örneklerini birlikte değiştirir.</span>
+                </div>
+                <div class="code-tabs-global-options" role="group" aria-label="Ortam tercihi">
+                    <button type="button" data-code-option="local">Lokal</button>
+                    <button type="button" data-code-option="dev">Dev</button>
+                    <button type="button" data-code-option="production">Production</button>
+                </div>
+            </div>
+            <div class="code-tabs" data-code-tabs data-code-tabs-group="copy-table-env" data-code-tabs-default="local">
+                <div class="code-tabs-list" data-code-tabs-list>
+                    <button class="code-tab" type="button" data-code-tab data-code-option="local">Lokal</button>
+                    <button class="code-tab" type="button" data-code-tab data-code-option="dev">Dev</button>
+                    <button class="code-tab" type="button" data-code-tab data-code-option="production">Production</button>
+                </div>
+                <div class="code-tab-panel" data-code-panel data-code-option="local">
+                    <div class="copy-table" data-copy-table>
+                        <table>
+                            <thead><tr><th>Key</th><th>Value</th></tr></thead>
+                            <tbody>
+                                <tr><td class="copy-table-key"><code>App.Environment</code></td><td data-copy-value>Local</td></tr>
+                                <tr><td class="copy-table-key"><code>App.BaseUrl</code></td><td data-copy-value="https://localhost:7043">https://localhost:7043</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="code-tab-panel" data-code-panel data-code-option="dev">
+                    <div class="copy-table" data-copy-table>
+                        <table>
+                            <thead><tr><th>Key</th><th>Value</th></tr></thead>
+                            <tbody>
+                                <tr><td class="copy-table-key"><code>App.Environment</code></td><td data-copy-value>Development</td></tr>
+                                <tr><td class="copy-table-key"><code>App.BaseUrl</code></td><td data-copy-value="https://dev.example.com">https://dev.example.com</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="code-tab-panel" data-code-panel data-code-option="production">
+                    <div class="copy-table" data-copy-table>
+                        <table>
+                            <thead><tr><th>Key</th><th>Value</th></tr></thead>
+                            <tbody>
+                                <tr><td class="copy-table-key"><code>App.Environment</code></td><td data-copy-value>Production</td></tr>
+                                <tr><td class="copy-table-key"><code>App.BaseUrl</code></td><td data-copy-value="https://example.com">https://example.com</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;link rel="stylesheet" href="features/code-tabs/code-tabs.css"&gt;
+&lt;link rel="stylesheet" href="features/copy-table/copy-table.css"&gt;
+&lt;script src="features/code-tabs/code-tabs.js"&gt;&lt;/script&gt;
+&lt;script src="features/copy-table/copy-table.js"&gt;&lt;/script&gt;
+
+&lt;div class="code-tabs-global" data-code-tabs-global="environment"&gt;
+  &lt;button type="button" data-code-option="local"&gt;Lokal&lt;/button&gt;
+  &lt;button type="button" data-code-option="dev"&gt;Dev&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="code-tabs" data-code-tabs data-code-tabs-group="environment" data-code-tabs-default="local"&gt;
+  &lt;div class="code-tabs-list" data-code-tabs-list&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="local"&gt;Lokal&lt;/button&gt;
+    &lt;button class="code-tab" type="button" data-code-tab data-code-option="dev"&gt;Dev&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="local"&gt;
+    &lt;div class="copy-table" data-copy-table&gt;
+      &lt;table&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;&lt;td class="copy-table-key"&gt;&lt;code&gt;App.BaseUrl&lt;/code&gt;&lt;/td&gt;&lt;td data-copy-value&gt;https://localhost:7043&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="code-tab-panel" data-code-panel data-code-option="dev"&gt;
+    &lt;div class="copy-table" data-copy-table&gt;
+      &lt;table&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;&lt;td class="copy-table-key"&gt;&lt;code&gt;App.BaseUrl&lt;/code&gt;&lt;/td&gt;&lt;td data-copy-value&gt;https://dev.example.com&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <div class="callout callout-info"><b>Seçim entegrasyonu:</b> <code>copy-table</code> kendi içinde ortam adı bilmez. Lokal, Dev veya Production gibi seçimler <code>code-tabs</code> tarafından yönetilir; aktif paneldeki tablo normal şekilde kopyalama davranışını sürdürür.</div>
         </section>
             <nav class="docs-pagination" aria-label="Sayfalar">
                 <a class="docs-page-link docs-page-previous" href="document-components.html"><span>Önceki</span><strong>Doküman Bileşenleri</strong></a>
-                <a class="docs-page-link docs-page-next" href="navigation.html"><span>Sonraki</span><strong>Navigasyon ve Okuma</strong></a>
-            </nav>
+                <a class="docs-page-link docs-page-next" href="navigation.html"><span>Sonraki</span><strong>Navigasyon ve Okuma</strong></a></nav>
         </article>
     </main>
     <aside class="docs-toc" aria-label="Bu sayfada">
@@ -141,18 +362,10 @@
     </div>
 </div>
 <button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
-<script src="../features/theme/theme.js"></script>
-<script src="../features/code-highlight/code-highlight.js"></script>
-<script src="../features/copy-code/copy-code.js"></script>
-<script src="../features/code-tabs/code-tabs.js"></script>
-<script src="../features/docs-layout/docs-layout.js"></script>
 <script>
-window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Feature seçimi, kurulum ve yeni bir dokümanı ayağa kaldırmak için gereken minimum adımlar.","keywords":"Temel yaklaşım s-overview s-install s-packages s-checklist","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Uyarlama s-theme s-config","url":"configuration.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu ve bağımsız feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Hızlı başvuru ","url":"reference.html","sectionType":"Sayfa"}] };
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title":"Başlangıç","text":"Document Template, hazır paketler ve tekil feature'larla doküman sitenizi hızlıca kurmanızı sağlar.","keywords":"Temel yaklaşım s-overview s-feature-summary s-install","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"İçerik sistemi s-base s-document-components","url":"document-components.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Uyarlama s-theme s-config","url":"configuration.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu, bağımsız feature'lar ve hazır feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Hızlı başvuru ","url":"reference.html","sectionType":"Sayfa"}] };
 window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
 </script>
-<script src="../features/search/search.js"></script>
-<script src="../features/scroll-top/scroll-top.js"></script>
-<script src="../features/reading-progress/reading-progress.js"></script>
-<script src="../features/navigation-progress/navigation-progress.js"></script>
+<script src="../feature-packages/full.js"></script>
 </body>
 </html>

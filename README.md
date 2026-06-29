@@ -22,25 +22,27 @@ handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
 
 ## Baslangic
 
-Repoyu fork'layin veya indirin. Template'in kullandigi tum ortak CSS ve JavaScript
-dosyalari `features/` klasorunde bulunur; ek bir paket veya uzak kaynak gerekmez.
+Repoyu fork'layin veya indirin. Template'in kullandigi tekil CSS ve JavaScript
+feature dosyalari `features/` klasorunde bulunur. Birden fazla feature'i hazir
+giris noktasindan yukleyen paketler `feature-packages/` klasorundedir.
 
 ```html
-<link rel="stylesheet" href="features/base/base.css">
-<link rel="stylesheet" href="features/theme/theme.css">
-<link rel="stylesheet" href="features/docs-layout/docs-layout.css">
+<link rel="stylesheet" href="feature-packages/core.css">
 
-<script src="features/theme/theme.js"></script>
-<script src="features/docs-layout/docs-layout.js"></script>
+<script src="feature-packages/core.js"></script>
 ```
 
-Ihtiyaciniz olan diger feature dosyalarini ayni sekilde yerel `features/`
-klasorunden ekleyin. Dosya listesi ve bagimliliklar
-[`features/features.json`](features/features.json) manifestinde bulunur.
+Hazir paket yeterli degilse ihtiyaciniz olan feature dosyalarini yerel
+`features/` klasorunden tek tek ekleyin. Dosya listesi ve bagimliliklar
+[`features/features.json`](features/features.json) manifestinde bulunur. Hazir
+paket listesi [`feature-packages/packages.json`](feature-packages/packages.json)
+dosyasindadir.
 
 ## Feature kullanimi
 
 - `features/` altindaki `base` ve diger feature'lar bu repoda gelistirilir.
+- `feature-packages/` altindaki dosyalar feature degil, birden fazla feature'i
+  birlikte yukleyen kolaylik paketleridir.
 - Domain'e ozel icerik, renk veya davranis ortak feature'a eklenmez. Proje ihtiyaci ayri bir proje CSS dosyasinda tutulur.
 - Handbook ana icerigi statik ve semantik HTML olarak yazilir; Markdown parser veya runtime icerik uretimi kullanilmaz.
 - Kod orneklerinde okuyucuya yalnizca gercek JSON, XML veya kaynak kod gosterilir.
@@ -52,6 +54,8 @@ klasorunden ekleyin. Dosya listesi ve bagimliliklar
 ```text
 Oxara.DocumentTemplate/
   index.html
+  assets/
+    example-article-cover.svg
   docs/
     getting-started.html
     document-components.html
@@ -62,10 +66,12 @@ Oxara.DocumentTemplate/
     changelog.html
   features/
     base/
+    sticky-block/
     docs-layout/
     theme/
     code-highlight/
     copy-code/
+    copy-table/
     code-tabs/
     sidemenu/
     search/
@@ -73,11 +79,12 @@ Oxara.DocumentTemplate/
     reading-progress/
     navigation-progress/
     features.json
-  tools/
-    sync-features.ps1
-    update-document-metadata.ps1
-    validate-document.ps1
-    validate-handbook-suite.ps1
+  feature-packages/
+    core.css
+    core.js
+    full.css
+    full.js
+    packages.json
 ```
 
 ## Surum yonetimi
@@ -98,7 +105,7 @@ zorla tasinmaz. Duzeltmeler her zaman yeni bir patch surumuyle yayinlanir.
 ## Yeni dokuman
 
 1. Ihtiyac duyulan feature listesini belirleyin.
-2. Gerekli CSS ve JS dosyalarini yerel `features/` yollarindan ekleyin.
+2. Gerekli CSS ve JS dosyalarini yerel `features/` yollarindan ekleyin veya uygunsa `feature-packages/` altindaki `core` / `full` paketlerinden birini kullanin.
 3. Uzun icerigi konu bazli HTML sayfalarina bolun.
 4. Sol navigasyonu tum sayfalarda ayni bilgi mimarisiyle kullanin.
 5. Gerekli feature HTML iskeletlerini canli rehberden alin.

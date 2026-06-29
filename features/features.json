@@ -21,6 +21,23 @@
       ".content-figure"
     ]
   },
+  "sticky-block": {
+    "css": [
+      "features/sticky-block/sticky-block.css"
+    ],
+    "js": [],
+    "requires": [
+      "base"
+    ],
+    "provides": [
+      "bottom-pinned content blocks",
+      "sticky footer slots inside tall or scrollable containers"
+    ],
+    "html": [
+      ".sticky-block-container",
+      ".sticky-block-bottom"
+    ]
+  },
   "docs-layout": {
     "css": [
       "features/docs-layout/docs-layout.css"
@@ -29,7 +46,8 @@
       "features/docs-layout/docs-layout.js"
     ],
     "requires": [
-      "base"
+      "base",
+      "sticky-block"
     ],
     "provides": [
       "multi-page documentation shell",
@@ -44,7 +62,9 @@
       "[data-docs-sidebar]",
       "[data-docs-toc]",
       "[data-docs-nav-toggle]",
-      "[data-docs-overlay]"
+      "[data-docs-overlay]",
+      ".sticky-block-container",
+      ".sticky-block-bottom"
     ],
     "api": [
       "docsLayout.toggleNavigation()",
@@ -113,6 +133,29 @@
     ],
     "html": [
       "pre > code"
+    ]
+  },
+  "copy-table": {
+    "css": [
+      "features/copy-table/copy-table.css"
+    ],
+    "js": [
+      "features/copy-table/copy-table.js"
+    ],
+    "requires": [
+      "base"
+    ],
+    "provides": [
+      "copyable key/value tables",
+      "row-level clipboard actions",
+      "code-tabs compatible selectable table panels"
+    ],
+    "html": [
+      "[data-copy-table]",
+      "[data-copy-value]"
+    ],
+    "api": [
+      "copyTable.init(root)"
     ]
   },
   "sidemenu": {
@@ -228,7 +271,8 @@
       "[data-code-tabs]",
       "[data-code-tab][data-code-option]",
       "[data-code-panel][data-code-option]",
-      "[data-code-tabs-global]"
+      "[data-code-tabs-global]",
+      ".code-tabs-global-header"
     ],
     "api": [
       "codeTabs.init(root)",

@@ -1,0 +1,18 @@
+/* ============================================================
+   STICKY BLOCK - Reusable bottom-pinned content blocks
+   ============================================================ */
+
+.sticky-block-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--sticky-block-height, auto);
+    min-height: var(--sticky-block-min-height, 0);
+}
+
+.sticky-block-bottom {
+    position: sticky;
+    bottom: var(--sticky-block-bottom, 0);
+    z-index: var(--sticky-block-z-index, 1);
+    flex: 0 0 auto;
+    margin-top: auto;
+}
