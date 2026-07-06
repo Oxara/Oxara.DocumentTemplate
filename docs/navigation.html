@@ -19,6 +19,7 @@
             <a href="reference.html">Referans</a>
             <a href="changelog.html">Değişiklikler</a></nav>
         <div class="docs-top-actions">
+            <a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
             <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
         </div>
@@ -27,7 +28,7 @@
 <div class="docs-overlay" data-docs-overlay></div>
 <div class="docs-shell">
     <aside class="docs-sidebar" data-docs-sidebar>
-        <div class="docs-sidebar-inner sticky-block-container">
+        <div class="docs-sidebar-inner">
             
 <div class="docs-nav-group">
     <div class="docs-nav-label">Başlangıç</div>
@@ -50,11 +51,7 @@
     <a class="docs-nav-link" href="changelog.html">Değişiklikler</a>
     <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
 </div>
-<div class="docs-sidebar-footer sticky-block-bottom">
-    <div class="docs-nav-label">Yazar</div>
-    <a class="docs-nav-link" href="https://erdemozkara.com/">erdemozkara.com</a>
 </div>
-        </div>
     </aside>
     <main class="docs-main" id="main-content" tabindex="-1">
         <article class="docs-article">
@@ -96,6 +93,25 @@ window.SIDEMENU_CONFIG = {
                 <li>HTML iskeletinde <code>#sidenav</code>, <code>#sidenavOverlay</code>, <code>#sidenav-body</code> eksik olmamalıdır.</li>
                 <li>Grup etiketi kullanılıyorsa <code>groupSelector</code> ilgili <code>h2</code> içindeki elementi seçmelidir.</li>
             </ul>
+        </section>
+
+<section id="s-author-link">
+            <h2 id="h-author-link">Author Link</h2>
+            <p>Dokümanın yazar veya ana site bağlantısını header aksiyonları içinde kompakt biçimde gösterir. Link, arama ve tema kontrolleriyle aynı yükseklik ve yüzey dilini kullanır; kalabalık sol menülerde ek footer bloğu oluşturmaz.</p>
+            <h3 id="h-author-link-code">Kod</h3>
+            <script class="code-block language-html" type="text/plain">
+<a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
+            </script>
+            <h3 id="h-author-link-output">Çıktı</h3>
+            <div class="demo-output">
+                <span class="demo-label">Header aksiyon bağlantısı</span>
+                <div class="mini-actions">
+                    <a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
+                    <button class="search-trigger" type="button" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+                    <button class="theme-toggle" type="button" aria-label="Tema değiştir"><span class="theme-toggle-label">Tema değiştir</span></button>
+                </div>
+            </div>
+            <div class="callout callout-info"><b>Kullanım kararı:</b> Çok sayfalı dokümanlarda siteye dönüş veya yazar bağlantısı gerekiyorsa sidebar footer yerine header aksiyon alanında kullanın.</div>
         </section>
 
 <section id="s-search">

@@ -13,7 +13,7 @@
     ],
     "includes": [
       "base",
-      "sticky-block",
+      "author-link",
       "theme",
       "docs-layout",
       "navigation-progress"
@@ -37,7 +37,7 @@
     ],
     "includes": [
       "base",
-      "sticky-block",
+      "author-link",
       "theme",
       "docs-layout",
       "code-highlight",

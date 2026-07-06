@@ -38,6 +38,16 @@
 .release-demo-label { display: block; margin-bottom: 1rem; color: var(--text-dim); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .release-demo-stage { min-height: 100px; padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
 .release-demo-actions { display: flex; align-items: center; justify-content: flex-end; min-height: 56px; }
+.release-demo-header { display: flex; align-items: center; justify-content: flex-end; gap: .5rem; min-height: 56px; }
+.release-sidebar-author {
+    width: min(100%, 230px);
+    margin-left: auto;
+    padding-top: .85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    font-size: .78rem;
+}
+.release-sidebar-author strong { display: block; margin-bottom: .35rem; color: var(--text); font-size: .76rem; }
 .release-old-theme {
     padding: .42rem .8rem;
     color: var(--text-muted);
@@ -93,6 +103,7 @@
             <a href="reference.html">Referans</a>
             <a href="changelog.html">Değişiklikler</a></nav>
         <div class="docs-top-actions">
+            <a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
             <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
         </div>
@@ -101,7 +112,7 @@
 <div class="docs-overlay" data-docs-overlay></div>
 <div class="docs-shell">
     <aside class="docs-sidebar" data-docs-sidebar>
-        <div class="docs-sidebar-inner sticky-block-container">
+        <div class="docs-sidebar-inner">
             <div class="docs-nav-group">
                 <div class="docs-nav-label">Başlangıç</div>
                 <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
@@ -123,11 +134,7 @@
                 <a class="docs-nav-link active" href="changelog.html">Değişiklikler</a>
                 <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
             </div>
-<div class="docs-sidebar-footer sticky-block-bottom">
-    <div class="docs-nav-label">Yazar</div>
-    <a class="docs-nav-link" href="https://erdemozkara.com/">erdemozkara.com</a>
 </div>
-        </div>
     </aside>
     <main class="docs-main" id="main-content" tabindex="-1">
         <article class="docs-article">
@@ -137,6 +144,35 @@
                 <p class="docs-lead">Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.</p>
             </header>
             <div class="release-list">
+                <section id="v1-0-8">
+                    <div class="release-header"><h2>v1.0.8</h2><span class="release-date">7 Temmuz 2026</span></div>
+                    <p>Yazar ve ana site dönüş bağlantısı, kalabalık sol menüden çıkarılıp header aksiyonlarıyla aynı görsel dili kullanan bağımsız bir feature'a taşındı.</p>
+                    <ul class="release-changes">
+                        <li>Yeni <code>author-link</code> feature'ı eklendi; header içindeki <code>.author-link</code> bağlantısı arama ve tema kontrolleriyle aynı yükseklik, yüzey ve hover davranışını kullanır.</li>
+                        <li><code>sticky-block</code> feature'ı hazır paketlerden ve canlı referanslardan kaldırıldı; sidebar footer kullanımının yerine header tabanlı dönüş bağlantısı geçti.</li>
+                        <li><code>core</code> ve <code>full</code> paket içerikleri <code>author-link</code> ile güncellendi.</li>
+                        <li>Template giriş sayfası ve tüm doküman sayfaları aynı header standardını kullanacak şekilde hizalandı.</li>
+                    </ul>
+                    <div class="release-comparison">
+                        <div class="release-demo">
+                            <span class="release-demo-label">Önce</span>
+                            <div class="release-demo-stage">
+                                <div class="release-sidebar-author">
+                                    <strong>Yazar</strong>
+                                    erdemozkara.com
+                                </div>
+                            </div>
+                        </div>
+                        <div class="release-demo">
+                            <span class="release-demo-label">Sonra</span>
+                            <div class="release-demo-stage release-demo-header">
+                                <a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
+                                <button class="search-trigger" type="button" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+                                <button class="theme-toggle" type="button" aria-label="Tema değiştir"><span class="theme-toggle-label">Tema değiştir</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <section id="v1-0-7">
                     <div class="release-header"><h2>v1.0.7</h2><span class="release-date">30 Haziran 2026</span></div>
                     <p>Feature sistemi kopyalanabilir tablolar, global sekme seçimleri, sticky bloklar ve hazır paket girişleriyle genişletildi.</p>

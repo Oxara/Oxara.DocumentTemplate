@@ -12,6 +12,8 @@ Template'in varsayilan yapisi cok sayfalidir:
 - Her ana konu ayri bir HTML sayfasinda tutulur.
 - Sol menu sayfalar arasinda gezinmeyi saglar.
 - Sag menu yalnizca aktif sayfanin `h2` ve `h3` basliklarini gosterir.
+- Header aksiyon alaninda yazar veya ana site donus baglantisi icin `author-link`
+  feature'i kullanilir.
 - Ana icerik kolonu okunabilir bir genislikte tutulur.
 - Kutu, callout ve vurgu yuzeyleri yalnizca anlam tasidiklarinda kullanilir.
 - Giris sayfasindaki konu kartinin tamami baglantidir; kart icinde tekrar eden CTA metni kullanilmaz.
@@ -66,7 +68,7 @@ Oxara.DocumentTemplate/
     changelog.html
   features/
     base/
-    sticky-block/
+    author-link/
     docs-layout/
     theme/
     code-highlight/

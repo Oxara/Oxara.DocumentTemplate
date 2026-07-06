@@ -21,21 +21,20 @@
       ".content-figure"
     ]
   },
-  "sticky-block": {
+  "author-link": {
     "css": [
-      "features/sticky-block/sticky-block.css"
+      "features/author-link/author-link.css"
     ],
     "js": [],
     "requires": [
       "base"
     ],
     "provides": [
-      "bottom-pinned content blocks",
-      "sticky footer slots inside tall or scrollable containers"
+      "compact author link",
+      "site return link for document headers"
     ],
     "html": [
-      ".sticky-block-container",
-      ".sticky-block-bottom"
+      ".author-link"
     ]
   },
   "docs-layout": {
@@ -46,8 +45,7 @@
       "features/docs-layout/docs-layout.js"
     ],
     "requires": [
-      "base",
-      "sticky-block"
+      "base"
     ],
     "provides": [
       "multi-page documentation shell",
@@ -62,9 +60,7 @@
       "[data-docs-sidebar]",
       "[data-docs-toc]",
       "[data-docs-nav-toggle]",
-      "[data-docs-overlay]",
-      ".sticky-block-container",
-      ".sticky-block-bottom"
+      "[data-docs-overlay]"
     ],
     "api": [
       "docsLayout.toggleNavigation()",
