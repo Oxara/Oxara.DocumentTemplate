@@ -14,6 +14,9 @@ Template'in varsayilan yapisi cok sayfalidir:
 - Sag menu yalnizca aktif sayfanin `h2` ve `h3` basliklarini gosterir.
 - Header aksiyon alaninda yazar veya ana site donus baglantisi icin `author-link`
   feature'i kullanilir.
+- Header marka isaretinde text kisaltmasi yerine `assets/oxara-mark.svg`
+  uzerinden `oxara-brand-mark` kullanilir; favicon ve PNG logo varyantlari da
+  DocumentTemplate asset kaynagindan gelir.
 - Ana icerik kolonu okunabilir bir genislikte tutulur.
 - Kutu, callout ve vurgu yuzeyleri yalnizca anlam tasidiklarinda kullanilir.
 - Giris sayfasindaki konu kartinin tamami baglantidir; kart icinde tekrar eden CTA metni kullanilmaz.
@@ -29,10 +32,16 @@ feature dosyalari `features/` klasorunde bulunur. Birden fazla feature'i hazir
 giris noktasindan yukleyen paketler `feature-packages/` klasorundedir.
 
 ```html
+<script src="features/theme/theme-boot.js"></script>
 <link rel="stylesheet" href="feature-packages/core.css">
 
 <script src="feature-packages/core.js"></script>
 ```
+
+Tema kullanan sayfalarda `features/theme/theme-boot.js` CSS'ten once
+calismalidir. Bu kucuk boot parcasi yalnizca localStorage'daki gecerli `light`
+veya `dark` tercihini uygular; boylece dark modda beyaz flash, light modda siyah
+flash olusturmaz.
 
 Hazir paket yeterli degilse ihtiyaciniz olan feature dosyalarini yerel
 `features/` klasorunden tek tek ekleyin. Dosya listesi ve bagimliliklar

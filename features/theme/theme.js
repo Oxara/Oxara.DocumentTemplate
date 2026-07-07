@@ -14,10 +14,30 @@
 (function () {
     'use strict';
 
+    function isValidTheme(name) {
+        return name === 'light' || name === 'dark';
+    }
+
+    function getStoredTheme() {
+        try {
+            var stored = localStorage.getItem('theme');
+            return isValidTheme(stored) ? stored : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function storeTheme(name) {
+        try {
+            localStorage.setItem('theme', name);
+        } catch (error) {}
+    }
+
     /** Aktif temayı <html data-theme> ve localStorage'a yazar, UI'ı günceller. */
     function setTheme(name) {
+        if (!isValidTheme(name)) return;
         document.documentElement.setAttribute('data-theme', name);
-        localStorage.setItem('theme', name);
+        storeTheme(name);
         updateThemeToggleUI(name);
     }
 
@@ -48,7 +68,8 @@
     /* Sayfa yüklenirken kayıtlı temayı uygula (FOUC'u önlemek için
        mümkün olduğunca erken çalıştırılmalı). */
     (function init() {
-        var saved = localStorage.getItem('theme') || 'light';
+        var current = document.documentElement.getAttribute('data-theme');
+        var saved = getStoredTheme() || (isValidTheme(current) ? current : 'light');
         document.documentElement.setAttribute('data-theme', saved);
         /* DOM hazır olmayabilir; UI güncellemesini DOMContentLoaded'a ertele. */
         if (document.readyState === 'loading') {

@@ -2,6 +2,7 @@
 <html lang="tr" data-theme="light">
 <head>
 <meta charset="UTF-8">
+<script src="../features/theme/theme-boot.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Değişiklikler — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template sürüm geçmişi, değişiklik notları ve önce-sonra demoları.">
@@ -97,13 +98,13 @@
 <header class="docs-topbar">
     <div class="docs-topbar-inner">
         <button class="docs-menu-toggle" type="button" data-docs-nav-toggle aria-label="Doküman menüsünü aç"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
-        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
+        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark oxara-brand-mark" aria-hidden="true"></span><span>Document Template</span></a>
         <nav class="docs-top-links" aria-label="Üst navigasyon">
             <a href="getting-started.html">Rehber</a>
             <a href="reference.html">Referans</a>
             <a href="changelog.html">Değişiklikler</a></nav>
         <div class="docs-top-actions">
-            <a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
+            <a class="author-link" href="https://erdemozkara.com/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
             <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
         </div>
@@ -144,6 +145,16 @@
                 <p class="docs-lead">Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.</p>
             </header>
             <div class="release-list">
+                <section id="v1-0-9">
+                    <div class="release-header"><h2>v1.0.9</h2><span class="release-date">7 Temmuz 2026</span></div>
+                    <p>Tema tercihi ilk boyamadan önce uygulanacak şekilde ayrıştırıldı; light ve dark mod geçişlerinde yanlış tema flash'ı engellendi.</p>
+                    <ul class="release-changes">
+                        <li>Yeni <code>features/theme/theme-boot.js</code> dosyası eklendi; CSS yüklenmeden önce localStorage'daki geçerli <code>light</code> veya <code>dark</code> tercihini uygular.</li>
+                        <li><code>theme.js</code> localStorage okuma/yazma hatalarına ve geçersiz tema değerlerine karşı güvenli hale getirildi.</li>
+                        <li>Canlı örnek sayfaları ve feature referansı, tema boot dosyasını CSS'ten önce yükleyecek şekilde güncellendi.</li>
+                        <li>Header marka işareti için <code>assets/oxara-mark.svg</code> ve <code>.docs-brand-mark.oxara-brand-mark</code> standardı eklendi; kısaltma metinleri yerine tema rengi üzerinde beyaz Oxara mark kullanılır.</li>
+                    </ul>
+                </section>
                 <section id="v1-0-8">
                     <div class="release-header"><h2>v1.0.8</h2><span class="release-date">7 Temmuz 2026</span></div>
                     <p>Yazar ve ana site dönüş bağlantısı, kalabalık sol menüden çıkarılıp header aksiyonlarıyla aynı görsel dili kullanan bağımsız bir feature'a taşındı.</p>
@@ -166,7 +177,7 @@
                         <div class="release-demo">
                             <span class="release-demo-label">Sonra</span>
                             <div class="release-demo-stage release-demo-header">
-                                <a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
+                                <a class="author-link" href="https://erdemozkara.com/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
                                 <button class="search-trigger" type="button" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
                                 <button class="theme-toggle" type="button" aria-label="Tema değiştir"><span class="theme-toggle-label">Tema değiştir</span></button>
                             </div>

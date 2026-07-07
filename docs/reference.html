@@ -2,6 +2,7 @@
 <html lang="tr" data-theme="light">
 <head>
 <meta charset="UTF-8">
+<script src="../features/theme/theme-boot.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Feature Referansı — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
@@ -13,13 +14,13 @@
 <header class="docs-topbar">
     <div class="docs-topbar-inner">
         <button class="docs-menu-toggle" type="button" data-docs-nav-toggle aria-label="Doküman menüsünü aç"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
-        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark">O</span><span>Document Template</span></a>
+        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark oxara-brand-mark" aria-hidden="true"></span><span>Document Template</span></a>
         <nav class="docs-top-links" aria-label="Üst navigasyon">
             <a href="getting-started.html">Rehber</a>
             <a href="reference.html">Referans</a>
             <a href="changelog.html">Değişiklikler</a></nav>
         <div class="docs-top-actions">
-            <a class="author-link" href="/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
+            <a class="author-link" href="https://erdemozkara.com/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
             <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
             <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
         </div>
@@ -68,7 +69,7 @@
 <tbody>
 <tr><td><code>base</code></td><td>Token, tipografi ve içerik bileşenleri</td><td>Yok</td></tr>
 <tr><td><code>author-link</code></td><td>Header içinde kompakt yazar / ana site dönüş bağlantısı</td><td><code>base</code></td></tr>
-<tr><td><code>docs-layout</code></td><td>Üst bar, sol site menüsü, sağ sayfa içi menü</td><td><code>base</code></td></tr>
+<tr><td><code>docs-layout</code></td><td>Üst bar, Oxara marka işareti, sol site menüsü, sağ sayfa içi menü</td><td><code>base</code></td></tr>
 <tr><td><code>theme</code></td><td>Light/dark tema tercihi</td><td><code>base</code></td></tr>
 <tr><td><code>code-highlight</code></td><td>Kod renklendirme</td><td><code>base</code></td></tr>
 <tr><td><code>copy-code</code></td><td>Kod kopyalama</td><td><code>code-highlight</code></td></tr>
@@ -123,7 +124,8 @@
 <tr><td>Kod örnekleri</td><td><code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code></td><td><code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code></td></tr>
 <tr><td>Okuma araçları</td><td><code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code></td><td><code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code></td></tr>
 </tbody></table></div>
-<pre><code class="language-html">&lt;link rel="stylesheet" href="features/base/base.css"&gt;
+<pre><code class="language-html">&lt;script src="features/theme/theme-boot.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="features/base/base.css"&gt;
 &lt;link rel="stylesheet" href="features/author-link/author-link.css"&gt;
 &lt;link rel="stylesheet" href="features/theme/theme.css"&gt;
 &lt;link rel="stylesheet" href="features/docs-layout/docs-layout.css"&gt;
@@ -140,18 +142,20 @@
 &lt;script src="features/code-tabs/code-tabs.js"&gt;&lt;/script&gt;
 &lt;script src="features/docs-layout/docs-layout.js"&gt;&lt;/script&gt;
 &lt;script src="features/search/search.js"&gt;&lt;/script&gt;</code></pre>
-<p><code>copy-code</code>, <code>code-highlight</code> çıktısına buton eklediği için ondan sonra yüklenmelidir. <code>author-link</code>, header içindeki ana site dönüş bağlantısını stillendirir ve <code>docs-layout</code> ile birlikte kullanılabilir. Hazır paketlerde bu sıra <code>feature-packages/core.css</code>, <code>feature-packages/full.css</code>, <code>feature-packages/core.js</code> ve <code>feature-packages/full.js</code> içinde korunur.</p>
+<p><code>copy-code</code>, <code>code-highlight</code> çıktısına buton eklediği için ondan sonra yüklenmelidir. Tema kullanan sayfalarda <code>features/theme/theme-boot.js</code> CSS dosyalarından önce çalışır; yalnızca geçerli <code>light</code> veya <code>dark</code> tercihini uygular ve ilk boyamada yanlış tema flash'ını önler. <code>author-link</code>, header içindeki ana site dönüş bağlantısını stillendirir ve <code>docs-layout</code> ile birlikte kullanılabilir. Hazır paketlerde bu sıra <code>feature-packages/core.css</code>, <code>feature-packages/full.css</code>, <code>feature-packages/core.js</code> ve <code>feature-packages/full.js</code> içinde korunur.</p>
 </section>
 <section id="core-paket-kurulumu">
 <h2 id="core-paket-kurulumu-baslik">Core Paket Kurulumu</h2>
-<pre><code class="language-html">&lt;link rel="stylesheet" href="feature-packages/core.css"&gt;
+<pre><code class="language-html">&lt;script src="features/theme/theme-boot.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="feature-packages/core.css"&gt;
 
 &lt;script src="feature-packages/core.js"&gt;&lt;/script&gt;</code></pre>
 <p><code>core</code>, çok sayfalı doküman kabuğunu çalıştırmak için gereken hafif pakettir. Tema, üst bar, sol menü, sayfa içi menü ve sayfa geçiş göstergesini birlikte yükler; kod renklendirme, kopyalama, arama ve okuma araçlarını içermez.</p>
 </section>
 <section id="full-paket-kurulumu">
 <h2 id="full-paket-kurulumu-baslik">Full Paket Kurulumu</h2>
-<pre><code class="language-html">&lt;link rel="stylesheet" href="feature-packages/full.css"&gt;
+<pre><code class="language-html">&lt;script src="features/theme/theme-boot.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="feature-packages/full.css"&gt;
 
 &lt;script src="feature-packages/full.js"&gt;&lt;/script&gt;</code></pre>
 <p><code>full</code>, template içindeki tüm ortak feature'ları tek girişten yükler. Kod blokları, kopyalama, kopyalanabilir tablolar, code tabs, arama, scroll-top ve okuma ilerlemesi gereken dokümanlarda kullanın. Daha küçük çıktı istiyorsanız <code>core</code> veya özel paket sırası ile tekil feature dosyalarını seçin.</p>

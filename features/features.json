@@ -52,10 +52,19 @@
       "persistent site navigation",
       "automatic on-this-page navigation",
       "mobile navigation drawer",
-      "previous and next page navigation"
+      "previous and next page navigation",
+      "Oxara brand mark",
+      "standard favicon assets"
     ],
     "html": [
       ".docs-topbar",
+      ".docs-brand-mark.oxara-brand-mark",
+      "assets/oxara-mark.svg",
+      "assets/oxara-mark.png",
+      "assets/oxara-mark-96.png",
+      "assets/oxara-mark-192.png",
+      "favicon-48.png",
+      "apple-touch-icon.png",
       ".docs-shell",
       "[data-docs-sidebar]",
       "[data-docs-toc]",
@@ -78,6 +87,7 @@
       "base"
     ],
     "html": [
+      "features/theme/theme-boot.js",
       ".theme-toggle",
       ".theme-toggle-icon",
       ".theme-toggle-label"

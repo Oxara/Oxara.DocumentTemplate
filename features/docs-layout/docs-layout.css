@@ -60,6 +60,22 @@
     font-size: .82rem;
 }
 
+.docs-brand-mark.oxara-brand-mark {
+    position: relative;
+    overflow: hidden;
+    color: transparent;
+    background: var(--brand);
+}
+
+.docs-brand-mark.oxara-brand-mark::before {
+    content: "";
+    position: absolute;
+    inset: 14%;
+    background: #fff;
+    -webkit-mask: url("../../assets/oxara-mark.svg") center / contain no-repeat;
+    mask: url("../../assets/oxara-mark.svg") center / contain no-repeat;
+}
+
 .docs-top-links {
     display: flex;
     align-items: center;
