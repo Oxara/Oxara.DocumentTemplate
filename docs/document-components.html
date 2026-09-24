@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doküman Bileşenleri — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" href="../favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="../feature-packages/full.css">
 </head>
 <body class="docs-page">
@@ -274,6 +278,66 @@
                             <tr><td>CargoCompany</td><td>Dolu</td></tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <h3 id="h-resource-card-component">Çok hedefli kaynak kartı</h3>
+            <p>Bir ürünün kaynak deposu ile NuGet, Marketplace veya canlı demo adresi farklıysa <code>resource-card</code> kullanın. Kartın tamamını tek adrese bağlamayın; her hedefi açık adıyla ayrı bağlantı olarak sunun. Varsayılan görünüm sade metin bağlantılarıdır. Aksiyonların daha belirgin olması gerektiğinde yalnız bağlantı alanına <code>resource-card__links--buttons</code> varyantını uygulayın; başlık ve etiketleri butona dönüştürmeyin.</p>
+            <script class="code-block language-html" type="text/plain">
+<div class="resource-card-grid">
+  <article class="resource-card">
+    <span class="resource-card__meta">Dokümantasyon altyapısı</span>
+    <h4 class="resource-card__title">Oxara.DocumentTemplate</h4>
+    <p class="resource-card__description">Ortak dokümantasyon arayüzü ve feature sistemi.</p>
+    <nav class="resource-card__links" aria-label="Oxara.DocumentTemplate bağlantıları">
+      <a class="resource-card__link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub deposu</a>
+      <a class="resource-card__link" href="https://oxara.github.io/Oxara.DocumentTemplate/">Canlı demo</a>
+    </nav>
+  </article>
+  <article class="resource-card">
+    <span class="resource-card__meta">VS Code uzantısı</span>
+    <h4 class="resource-card__title">Local Change Guard</h4>
+    <p class="resource-card__description">Yerel ve commit edilebilir değişiklikleri ayırır.</p>
+    <nav class="resource-card__links resource-card__links--buttons" aria-label="Local Change Guard bağlantıları">
+      <a class="resource-card__action" href="https://github.com/Oxara/Oxara.VsCode.LocalChangeGuard">
+        <svg class="resource-card__action-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="5" r="2"></circle><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="12" r="2"></circle><path d="M8 5h3a3 3 0 0 1 3 3v1a3 3 0 0 0 3 3h-1"></path><path d="M6 7v10"></path></svg>
+        <span class="resource-card__action-label">GitHub</span>
+      </a>
+      <a class="resource-card__action resource-card__action--primary" href="https://marketplace.visualstudio.com/items?itemName=oxara.local-change-guard">
+        <svg class="resource-card__action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+        <span class="resource-card__action-label">Marketplace</span>
+      </a>
+    </nav>
+  </article>
+</div>
+            </script>
+            <div class="demo-output">
+                <span class="demo-label">Çok hedefli kaynak kartı çıktısı</span>
+                <div class="resource-card-grid">
+                    <article class="resource-card">
+                        <span class="resource-card__meta">Dokümantasyon altyapısı</span>
+                        <h4 class="resource-card__title">Oxara.DocumentTemplate</h4>
+                        <p class="resource-card__description">Ortak dokümantasyon arayüzü ve feature sistemi.</p>
+                        <nav class="resource-card__links" aria-label="Oxara.DocumentTemplate bağlantıları">
+                            <a class="resource-card__link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub deposu</a>
+                            <a class="resource-card__link" href="https://oxara.github.io/Oxara.DocumentTemplate/">Canlı demo</a>
+                        </nav>
+                    </article>
+                    <article class="resource-card">
+                        <span class="resource-card__meta">VS Code uzantısı</span>
+                        <h4 class="resource-card__title">Local Change Guard</h4>
+                        <p class="resource-card__description">Yerel ve commit edilebilir değişiklikleri ayırır.</p>
+                        <nav class="resource-card__links resource-card__links--buttons" aria-label="Local Change Guard bağlantıları">
+                            <a class="resource-card__action" href="https://github.com/Oxara/Oxara.VsCode.LocalChangeGuard">
+                                <svg class="resource-card__action-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="5" r="2"></circle><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="12" r="2"></circle><path d="M8 5h3a3 3 0 0 1 3 3v1a3 3 0 0 0 3 3h-1"></path><path d="M6 7v10"></path></svg>
+                                <span class="resource-card__action-label">GitHub</span>
+                            </a>
+                            <a class="resource-card__action resource-card__action--primary" href="https://marketplace.visualstudio.com/items?itemName=oxara.local-change-guard">
+                                <svg class="resource-card__action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+                                <span class="resource-card__action-label">Marketplace</span>
+                            </a>
+                        </nav>
+                    </article>
                 </div>
             </div>
 

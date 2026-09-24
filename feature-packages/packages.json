@@ -37,6 +37,7 @@
     ],
     "includes": [
       "base",
+      "resource-card",
       "author-link",
       "theme",
       "docs-layout",

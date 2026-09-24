@@ -33,11 +33,20 @@
         } catch (error) {}
     }
 
+    /** Tarayıcı chrome rengini merkezi UI tokenıyla eşitler; HTML renk taşımaz. */
+    function syncThemeColor() {
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (!meta) return;
+        var color = getComputedStyle(document.documentElement).getPropertyValue('--ui-primary').trim();
+        if (color) meta.setAttribute('content', color);
+    }
+
     /** Aktif temayı <html data-theme> ve localStorage'a yazar, UI'ı günceller. */
     function setTheme(name) {
         if (!isValidTheme(name)) return;
         document.documentElement.setAttribute('data-theme', name);
         storeTheme(name);
+        syncThemeColor();
         updateThemeToggleUI(name);
     }
 
@@ -71,6 +80,7 @@
         var current = document.documentElement.getAttribute('data-theme');
         var saved = getStoredTheme() || (isValidTheme(current) ? current : 'light');
         document.documentElement.setAttribute('data-theme', saved);
+        syncThemeColor();
         /* DOM hazır olmayabilir; UI güncellemesini DOMContentLoaded'a ertele. */
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function () { updateThemeToggleUI(saved); });

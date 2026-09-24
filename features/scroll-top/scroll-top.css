@@ -15,8 +15,8 @@
     bottom: 2rem;
     right: 2rem;
     z-index: 800;
-    background: var(--brand);
-    color: #fff;
+    background: var(--ui-primary);
+    color: var(--ui-primary-foreground);
     border: none;
     border-radius: 50%;
     width: 40px;

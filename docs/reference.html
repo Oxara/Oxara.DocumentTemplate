@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Feature Referansı — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" href="../favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="../feature-packages/full.css">
 </head>
 <body class="docs-page">
@@ -68,6 +72,7 @@
 <thead><tr><th>Feature</th><th>Amaç</th><th>Bağımlılık</th></tr></thead>
 <tbody>
 <tr><td><code>base</code></td><td>Token, tipografi ve içerik bileşenleri</td><td>Yok</td></tr>
+<tr><td><a href="document-components.html#h-resource-card-component"><code>resource-card</code></a></td><td>Depo, demo, paket ve mağaza hedeflerini açıkça ayıran çok hedefli kaynak kartları</td><td><code>base</code></td></tr>
 <tr><td><code>author-link</code></td><td>Header içinde kompakt yazar / ana site dönüş bağlantısı</td><td><code>base</code></td></tr>
 <tr><td><code>docs-layout</code></td><td>Üst bar, Oxara marka işareti, sol site menüsü, sağ sayfa içi menü</td><td><code>base</code></td></tr>
 <tr><td><code>theme</code></td><td>Light/dark tema tercihi</td><td><code>base</code></td></tr>
@@ -86,7 +91,7 @@
 <thead><tr><th>Paket</th><th>Amaç</th><th>İçerdiği feature'lar</th></tr></thead>
 <tbody>
 <tr><td><code>core</code></td><td>Hafif site kabuğu</td><td><code>base</code>, <code>author-link</code>, <code>theme</code>, <code>docs-layout</code>, <code>navigation-progress</code></td></tr>
-<tr><td><code>full</code></td><td>Tüm doküman feature seti</td><td><code>base</code>, <code>author-link</code>, <code>theme</code>, <code>docs-layout</code>, <code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code>, <code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code>, <code>navigation-progress</code></td></tr>
+<tr><td><code>full</code></td><td>Tüm doküman feature seti</td><td><code>base</code>, <code>resource-card</code>, <code>author-link</code>, <code>theme</code>, <code>docs-layout</code>, <code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code>, <code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code>, <code>navigation-progress</code></td></tr>
 </tbody></table></div>
 </section>
 <section id="custom-feature-secimi">
@@ -99,6 +104,7 @@
         </thead>
         <tbody>
             <tr><td>Sadece tema</td><td><code>base</code> + <code>theme</code></td></tr>
+            <tr><td>Çok hedefli ürün / kaynak kartı</td><td><code>base</code> + <code>resource-card</code></td></tr>
             <tr><td>Kod blokları</td><td><code>base</code> + <code>code-highlight</code></td></tr>
             <tr><td>Kod blokları + copy-code</td><td><code>base</code> + <code>code-highlight</code> + <code>copy-code</code></td></tr>
             <tr><td>Kopyalanabilir key/value tablo</td><td><code>base</code> + <code>copy-table</code></td></tr>
@@ -119,13 +125,14 @@
 <div class="table-wrapper"><table>
 <thead><tr><th>Katman</th><th>CSS sırası</th><th>JS sırası</th></tr></thead>
 <tbody>
-<tr><td>Temel zemin</td><td><code>base</code>, <code>author-link</code></td><td>Yok</td></tr>
+<tr><td>Temel zemin</td><td><code>base</code>, <code>resource-card</code>, <code>author-link</code></td><td>Yok</td></tr>
 <tr><td>Doküman kabuğu</td><td><code>theme</code>, <code>docs-layout</code>, <code>navigation-progress</code></td><td><code>theme</code>, <code>docs-layout</code>, <code>navigation-progress</code></td></tr>
 <tr><td>Kod örnekleri</td><td><code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code></td><td><code>code-highlight</code>, <code>copy-code</code>, <code>copy-table</code>, <code>code-tabs</code></td></tr>
 <tr><td>Okuma araçları</td><td><code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code></td><td><code>sidemenu</code>, <code>search</code>, <code>scroll-top</code>, <code>reading-progress</code></td></tr>
 </tbody></table></div>
 <pre><code class="language-html">&lt;script src="features/theme/theme-boot.js"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="features/base/base.css"&gt;
+&lt;link rel="stylesheet" href="features/resource-card/resource-card.css"&gt;
 &lt;link rel="stylesheet" href="features/author-link/author-link.css"&gt;
 &lt;link rel="stylesheet" href="features/theme/theme.css"&gt;
 &lt;link rel="stylesheet" href="features/docs-layout/docs-layout.css"&gt;
@@ -142,7 +149,7 @@
 &lt;script src="features/code-tabs/code-tabs.js"&gt;&lt;/script&gt;
 &lt;script src="features/docs-layout/docs-layout.js"&gt;&lt;/script&gt;
 &lt;script src="features/search/search.js"&gt;&lt;/script&gt;</code></pre>
-<p><code>copy-code</code>, <code>code-highlight</code> çıktısına buton eklediği için ondan sonra yüklenmelidir. Tema kullanan sayfalarda <code>features/theme/theme-boot.js</code> CSS dosyalarından önce çalışır; yalnızca geçerli <code>light</code> veya <code>dark</code> tercihini uygular ve ilk boyamada yanlış tema flash'ını önler. <code>author-link</code>, header içindeki ana site dönüş bağlantısını stillendirir ve <code>docs-layout</code> ile birlikte kullanılabilir. Hazır paketlerde bu sıra <code>feature-packages/core.css</code>, <code>feature-packages/full.css</code>, <code>feature-packages/core.js</code> ve <code>feature-packages/full.js</code> içinde korunur.</p>
+<p><code>copy-code</code>, <code>code-highlight</code> çıktısına buton eklediği için ondan sonra yüklenmelidir. <code>resource-card</code>, ortak tokenları kullandığı için <code>base</code> sonrasında yüklenir. Tema kullanan sayfalarda <code>features/theme/theme-boot.js</code> CSS dosyalarından önce çalışır; yalnızca geçerli <code>light</code> veya <code>dark</code> tercihini uygular ve ilk boyamada yanlış tema flash'ını önler. <code>author-link</code>, header içindeki ana site dönüş bağlantısını stillendirir ve <code>docs-layout</code> ile birlikte kullanılabilir. Hazır paketlerde bu sıra <code>feature-packages/core.css</code>, <code>feature-packages/full.css</code>, <code>feature-packages/core.js</code> ve <code>feature-packages/full.js</code> içinde korunur.</p>
 </section>
 <section id="core-paket-kurulumu">
 <h2 id="core-paket-kurulumu-baslik">Core Paket Kurulumu</h2>
@@ -158,7 +165,7 @@
 &lt;link rel="stylesheet" href="feature-packages/full.css"&gt;
 
 &lt;script src="feature-packages/full.js"&gt;&lt;/script&gt;</code></pre>
-<p><code>full</code>, template içindeki tüm ortak feature'ları tek girişten yükler. Kod blokları, kopyalama, kopyalanabilir tablolar, code tabs, arama, scroll-top ve okuma ilerlemesi gereken dokümanlarda kullanın. Daha küçük çıktı istiyorsanız <code>core</code> veya özel paket sırası ile tekil feature dosyalarını seçin.</p>
+<p><code>full</code>, template içindeki tüm ortak feature'ları tek girişten yükler. Kaynak kartları, kod blokları, kopyalama, kopyalanabilir tablolar, code tabs, arama, scroll-top ve okuma ilerlemesi gereken dokümanlarda kullanın. Daha küçük çıktı istiyorsanız <code>core</code> veya özel paket sırası ile tekil feature dosyalarını seçin.</p>
 </section>
             <nav class="docs-pagination" aria-label="Sayfalar">
                 <a class="docs-page-link docs-page-previous" href="configuration.html"><span>Önceki</span><strong>Tema ve Yapılandırma</strong></a>

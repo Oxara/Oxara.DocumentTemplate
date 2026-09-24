@@ -21,6 +21,26 @@
       ".content-figure"
     ]
   },
+  "resource-card": {
+    "css": [
+      "features/resource-card/resource-card.css"
+    ],
+    "js": [],
+    "requires": [
+      "base"
+    ],
+    "provides": [
+      "multi-destination resource cards",
+      "explicit repository and distribution links",
+      "optional split-color icon actions"
+    ],
+    "html": [
+      ".resource-card-grid",
+      ".resource-card",
+      ".resource-card__links",
+      ".resource-card__action"
+    ]
+  },
   "author-link": {
     "css": [
       "features/author-link/author-link.css"
@@ -60,9 +80,12 @@
       ".docs-topbar",
       ".docs-brand-mark.oxara-brand-mark",
       "assets/oxara-mark.svg",
+      "assets/oxara-mark-on-dark.svg",
       "assets/oxara-mark.png",
       "assets/oxara-mark-96.png",
       "assets/oxara-mark-192.png",
+      "assets/favicon.svg",
+      "assets/favicon.ico",
       "favicon-48.png",
       "apple-touch-icon.png",
       ".docs-shell",

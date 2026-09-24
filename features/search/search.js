@@ -263,7 +263,7 @@
         setTimeout(function () {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             target.style.transition = 'background 0.3s';
-            target.style.background = 'var(--brand-bg, rgba(81,43,212,0.1))';
+            target.style.background = 'var(--brand-subtle)';
             setTimeout(function () { target.style.background = ''; }, 1500);
         }, 150);
     }

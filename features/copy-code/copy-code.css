@@ -31,9 +31,9 @@ pre:hover .code-copy-button,
 }
 
 .code-copy-button:hover {
-    background: var(--brand);
-    color: #fff;
-    border-color: var(--brand);
+    background: var(--ui-primary);
+    color: var(--ui-primary-foreground);
+    border-color: var(--ui-primary);
 }
 
 .code-copy-button.is-copied {

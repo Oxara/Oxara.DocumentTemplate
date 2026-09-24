@@ -1,26 +1,35 @@
 # Oxara Document Template
 
-Handbook, guide ve teknik makalelerde kullanilan ortak, domain-free dokuman arayuzu.
+Handbook, guide ve teknik makalelerde kullanılan ortak, domain-free doküman arayüzü.
 
 Demo ve canli dokumantasyon: <https://oxara.github.io/Oxara.DocumentTemplate/>
 
-## Tasarim yaklasimi
+## Tasarım yaklaşımı
 
-Template'in varsayilan yapisi cok sayfalidir:
+Template'in varsayılan yapısı çok sayfalıdır:
 
-- `index.html` kisa bir karsilama ve konu secim sayfasidir.
+- `index.html` kısa bir karşılama ve konu seçim sayfasıdır.
 - Her ana konu ayri bir HTML sayfasinda tutulur.
 - Sol menu sayfalar arasinda gezinmeyi saglar.
 - Sag menu yalnizca aktif sayfanin `h2` ve `h3` basliklarini gosterir.
 - Header aksiyon alaninda yazar veya ana site donus baglantisi icin `author-link`
   feature'i kullanilir.
-- Header marka isaretinde text kisaltmasi yerine `assets/oxara-mark.svg`
-  uzerinden `oxara-brand-mark` kullanilir; favicon ve PNG logo varyantlari da
-  DocumentTemplate asset kaynagindan gelir.
+- Header marka işaretinde metin kısaltması yerine açık ve koyu yüzeylere uygun
+  gerçek iki renkli Oxara SVG çıktıları kullanılır; favicon ve PNG logo
+  varyantları da aynı normatif Brand exportundan gelir. Kaynak ve yetkilendirme
+  bilgisi [`docs/BRAND-ASSETS.md`](docs/BRAND-ASSETS.md) dosyasındadır.
 - Ana icerik kolonu okunabilir bir genislikte tutulur.
 - Kutu, callout ve vurgu yuzeyleri yalnizca anlam tasidiklarinda kullanilir.
 - Giris sayfasindaki konu kartinin tamami baglantidir; kart icinde tekrar eden CTA metni kullanilmaz.
 - Konu kartlari icerige gore boyutlanir; sabit veya minimum kart yuksekligi verilmez.
+- Bir kaynak kartında depo, demo, paket veya mağaza gibi birden fazla hedef varsa
+  kartın tamamı tek hedefe bağlanmaz; `resource-card` içindeki hedefler
+  ayrı ve açık bağlantılar olarak gösterilir.
+- Marka ve token değişiklikleri layout veya component yeniden tasarımı için yetki
+  vermez. Başlıkları pill, badge veya buton görünümüne çevirmek, dekoratif gradient
+  veya glow eklemek ve mevcut listeleri kartlaştırmak varsayılan olarak reddedilir.
+  Ayrıntılı red kriterleri [`docs/DESIGN-GUARDRAILS.md`](docs/DESIGN-GUARDRAILS.md)
+  dosyasındadır.
 
 Tek sayfalik makale veya kisa rehberlerde eski `sidemenu` feature'i kullanilabilir. Uzun
 handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
@@ -30,6 +39,15 @@ handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
 Repoyu fork'layin veya indirin. Template'in kullandigi tekil CSS ve JavaScript
 feature dosyalari `features/` klasorunde bulunur. Birden fazla feature'i hazir
 giris noktasindan yukleyen paketler `feature-packages/` klasorundedir.
+
+Brand kimliği ve canonical consumer assetleri tek kontrollü komutla yenilenir.
+Komut varsayılan olarak kardeş `Oxara.Brand` reposunu kullanır; farklı konum için
+`OXARA_BRAND_HOME` ayarlanabilir. `--check` yazma yapmadan drift denetler:
+
+```powershell
+node scripts/sync-brand-consumer.mjs
+node scripts/sync-brand-consumer.mjs --check
+```
 
 ```html
 <script src="features/theme/theme-boot.js"></script>
@@ -77,6 +95,7 @@ Oxara.DocumentTemplate/
     changelog.html
   features/
     base/
+    resource-card/
     author-link/
     docs-layout/
     theme/

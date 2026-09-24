@@ -54,26 +54,22 @@
     place-items: center;
     width: 28px;
     height: 28px;
-    color: #fff;
-    background: var(--brand);
+    color: var(--ui-primary-foreground);
+    background: var(--identity-accent);
     border-radius: 8px;
     font-size: .82rem;
 }
 
 .docs-brand-mark.oxara-brand-mark {
-    position: relative;
-    overflow: hidden;
+    width: 28px;
+    height: 19px;
     color: transparent;
-    background: var(--brand);
+    background: url("../../assets/oxara-mark.svg") center / contain no-repeat;
+    border-radius: 0;
 }
 
-.docs-brand-mark.oxara-brand-mark::before {
-    content: "";
-    position: absolute;
-    inset: 14%;
-    background: #fff;
-    -webkit-mask: url("../../assets/oxara-mark.svg") center / contain no-repeat;
-    mask: url("../../assets/oxara-mark.svg") center / contain no-repeat;
+[data-theme="dark"] .docs-brand-mark.oxara-brand-mark {
+    background-image: url("../../assets/oxara-mark-on-dark.svg");
 }
 
 .docs-top-links {
@@ -441,7 +437,7 @@
     text-decoration: none;
 }
 
-.docs-primary-action { color: #fff; background: var(--brand); }
+.docs-primary-action { color: var(--ui-primary-foreground); background: var(--ui-primary); }
 .docs-secondary-action { color: var(--text); border: 1px solid var(--border); }
 .docs-secondary-action:hover { background: var(--surface); }
 

@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Değişiklikler — Oxara Document Template</title>
 <meta name="description" content="Oxara Document Template sürüm geçmişi, değişiklik notları ve önce-sonra demoları.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" href="../favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="../feature-packages/full.css">
 <style>
 .release-list { display: grid; gap: 4rem; }
@@ -31,7 +35,7 @@
     left: 0;
     width: 5px;
     height: 5px;
-    background: var(--brand);
+    background: var(--ui-indicator);
     border-radius: 50%;
 }
 .release-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
@@ -71,12 +75,12 @@
     position: absolute;
     inset: auto 16% 0 0;
     height: 3px;
-    background: var(--brand);
+    background: var(--ui-indicator);
     transform-origin: left center;
     animation: release-progress 2.8s ease-in-out infinite;
 }
 .release-progress-stage span { color: var(--text-muted); font-size: .82rem; }
-.release-note { padding: 1rem 1.1rem; color: var(--text-muted); background: var(--surface); border-left: 3px solid var(--brand); font-size: .86rem; line-height: 1.65; }
+.release-note { padding: 1rem 1.1rem; color: var(--text-muted); background: var(--surface); border-left: 3px solid var(--border-strong); font-size: .86rem; line-height: 1.65; }
 @keyframes release-progress {
     0% { transform: scaleX(.08); }
     65% { transform: scaleX(.82); }
@@ -145,6 +149,22 @@
                 <p class="docs-lead">Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.</p>
             </header>
             <div class="release-list">
+                <section id="unreleased">
+                    <div class="release-header"><h2>Yayımlanmamış</h2><span class="release-date">Sonraki sürüm</span></div>
+                    <p>Henüz yayımlanmamış değişiklik bulunmuyor.</p>
+                </section>
+                <section id="v1-1-0">
+                    <div class="release-header"><h2>v1.1.0</h2><span class="release-date">24 Eylül 2026</span></div>
+                    <p>DocumentTemplate kimliği ve semantik arayüz rolleri normatif Oxara Brand sözleşmesine bağlandı.</p>
+                    <ul class="release-changes">
+                        <li>Header işareti, açık ve koyu yüzeyler için gerçek iki renkli Brand SVG çıktılarıyla güncellendi; CSS mask recolor kaldırıldı.</li>
+                        <li>Favicon, Apple touch ve 96/192/512 piksel uygulama ikonları normatif Brand exportlarından yenilendi.</li>
+                        <li>Identity accent, birincil eylem, bağlantı, focus ve ilerleme rolleri ayrı semantik tokenlara taşındı; <code>--brand*</code> yalnız geçici geriye uyumluluk aliası olarak korundu.</li>
+                        <li>Birincil CTA iki temada ve hover durumunda canonical <code>#19C7B5</code> yüzeyi ile beyaz foreground kullanır; bilinen kontrast istisnası Brand evidence içinde açık tutulur.</li>
+                        <li>Pilot sırasında renklendirilen sayfa gradientleri ve ilerleme glow'u kaldırıldı; mevcut layout, başlık hiyerarşisi ve component tipleri korunmuştur.</li>
+                        <li>Depo, demo, paket ve mağaza hedeflerini ayrı bağlantılarla sunan tekrar kullanılabilir <code>resource-card</code> feature'ı eklendi; ikonlu buton varyantı opt-in tutuldu ve yalnız <code>full</code> hazır paketine dahil edildi.</li>
+                    </ul>
+                </section>
                 <section id="v1-0-9">
                     <div class="release-header"><h2>v1.0.9</h2><span class="release-date">7 Temmuz 2026</span></div>
                     <p>Tema tercihi ilk boyamadan önce uygulanacak şekilde ayrıştırıldı; light ve dark mod geçişlerinde yanlış tema flash'ı engellendi.</p>
