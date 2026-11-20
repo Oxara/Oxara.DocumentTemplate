@@ -16,6 +16,7 @@
       "author-link",
       "theme",
       "docs-layout",
+      "document-hero",
       "navigation-progress"
     ],
     "html": [],
@@ -49,7 +50,9 @@
       "search",
       "scroll-top",
       "reading-progress",
-      "navigation-progress"
+      "navigation-progress",
+      "document-hero",
+      "illustrated-card"
     ],
     "html": [],
     "api": [

@@ -1,0 +1,15 @@
+import path from 'node:path';
+import {readJson,writeJson,audit,quality,finalize} from './lib.mjs';
+const args=process.argv.slice(2),stage=args[0];
+const option=name=>{const i=args.indexOf(name);return i<0?null:args[i+1];};
+const configPath=option('--config');
+if(!['audit','quality','finalize'].includes(stage)||!configPath)throw Error('Usage: node tools/release-checks/cli.mjs audit|quality|finalize --config <absolute-or-relative-config.json>');
+const configFile=path.resolve(configPath),root=path.resolve(path.dirname(configFile),(await readJson(configFile)).projectRoot||'.'),config=await readJson(configFile);
+const reports=path.resolve(root,config.reports);
+let result;
+if(stage==='audit')result=await audit(config,root);
+else if(stage==='quality')result=await quality(config,root,await readJson(path.join(reports,'audit.json')));
+else result=await finalize(config,root,await readJson(path.join(reports,'audit.json')),await readJson(path.join(reports,'quality.json')));
+await writeJson(path.join(reports,stage+'.json'),result);
+console.log(JSON.stringify({stage,status:result.status,issues:result.issues,artifactDigest:result.artifactDigest,counts:result.counts},null,2));
+if(result.status==='failed')process.exitCode=1;

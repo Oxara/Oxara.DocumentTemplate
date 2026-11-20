@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Oxara OX mark — Oxara.DocumentTemplate, light surface">
-  <g id="o-left" fill="#17202B"><path d="M290 140h-70c-66.274 0-120 53.726-120 120v70h120v-50c0-11.046 8.954-20 20-20h50z"/><path d="M100 350v70c0 66.274 53.726 120 120 120h70V420h-50c-11.046 0-20-8.954-20-20v-50z"/></g>
+  <g id="o-left" fill="#173344"><path d="M290 140h-70c-66.274 0-120 53.726-120 120v70h120v-50c0-11.046 8.954-20 20-20h50z"/><path d="M100 350v70c0 66.274 53.726 120 120 120h70V420h-50c-11.046 0-20-8.954-20-20v-50z"/></g>
   <g id="o-right" fill="#19C7B5"><path d="M310 140h70c66.274 0 120 53.726 120 120v70H380v-50c0-11.046-8.954-20-20-20h-50z"/><path d="M500 350v70c0 66.274-53.726 120-120 120h-70V420h50c11.046 0 20-8.954 20-20v-50z"/></g>
   <g id="x-left" fill="#19C7B5"><rect x="663" y="168" width="160" height="130" rx="36" transform="rotate(45 743 233)"/><rect x="663" y="383" width="160" height="130" rx="36" transform="rotate(-45 743 448)"/></g>
-  <g id="x-right" fill="#17202B"><rect x="878" y="168" width="160" height="130" rx="36" transform="rotate(-45 958 233)"/><rect x="878" y="383" width="160" height="130" rx="36" transform="rotate(45 958 448)"/></g>
+  <g id="x-right" fill="#173344"><rect x="878" y="168" width="160" height="130" rx="36" transform="rotate(-45 958 233)"/><rect x="878" y="383" width="160" height="130" rx="36" transform="rotate(45 958 448)"/></g>
 </svg>

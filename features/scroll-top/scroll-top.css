@@ -16,7 +16,7 @@
     right: 2rem;
     z-index: 800;
     background: var(--ui-primary);
-    color: var(--ui-primary-foreground);
+    color: var(--oxara-ink);
     border: none;
     border-radius: 50%;
     width: 40px;

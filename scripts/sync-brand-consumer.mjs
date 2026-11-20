@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { access, copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import {renderThemeColors} from './theme-colors.mjs';
 
 const consumerRoot = path.resolve(import.meta.dirname, '..');
 const brandRoot = path.resolve(process.env.OXARA_BRAND_HOME || path.join(consumerRoot, '..', 'Oxara.Brand'));
@@ -56,57 +57,11 @@ if (primaryContrast < 4.5 && !primaryException) {
   throw new Error(`Primary CTA contrast ${primaryContrast.toFixed(2)}:1 requires an exact Brand-approved exception.`);
 }
 
-const [red, green, blue] = theme.brand.slice(1).match(/../g).map(value => Number.parseInt(value, 16));
-const blocks = [
-  {
-    subtle: `.055`, border: `.18`, startAlpha: `.1`, endAlpha: `.08`,
-    startNeutral: `rgba(248, 249, 251, .95)`, endNeutral: `rgba(248, 249, 251, .95)`
-  },
-  {
-    subtle: `.1`, border: `.28`, startAlpha: `.18`, endAlpha: `.15`,
-    startNeutral: `rgba(22, 25, 33, .94)`, endNeutral: `rgba(22, 25, 33, .94)`
-  }
-].map(values => `    /* oxara-brand-sync:start */
-    --brand: ${theme.brand};
-    --brand-light: ${theme.brandLight};
-    --brand-subtle: rgba(${red}, ${green}, ${blue}, ${values.subtle});
-    --brand-border: rgba(${red}, ${green}, ${blue}, ${values.border});
-    --identity-accent: var(--brand);
-    --ui-primary: var(--brand);
-    --ui-primary-hover: var(--brand);
-    --ui-primary-foreground: ${theme.primaryForeground};
-    --ui-link: var(--brand);
-    --ui-link-hover: var(--brand-light);
-    --ui-focus: var(--brand);
-    --ui-indicator: var(--brand);
-    --page-start-gradient:
-        radial-gradient(ellipse at 50% 0%, rgba(${red}, ${green}, ${blue}, ${values.startAlpha}), transparent 62%),
-        linear-gradient(180deg, ${values.startNeutral}, transparent);
-    --page-end-gradient:
-        radial-gradient(ellipse at 50% 100%, rgba(${red}, ${green}, ${blue}, ${values.endAlpha}), transparent 64%),
-        linear-gradient(0deg, ${values.endNeutral}, transparent);
-    /* oxara-brand-sync:end */`);
-
-const basePath = path.join(consumerRoot, 'features', 'base', 'base.css');
-const originalBase = await readFile(basePath, 'utf8');
-let blockIndex = 0;
-let expectedBase = originalBase.replace(/    \/\* oxara-brand-sync:start \*\/[\s\S]*?    \/\* oxara-brand-sync:end \*\//g, () => blocks[blockIndex++]);
-if (blockIndex !== 2) throw new Error(`Expected two managed Brand token blocks, found ${blockIndex}.`);
-for (const inheritedDeclaration of [
-  '--svg-brand-bg: var(--brand-subtle);',
-  '--svg-brand-s: var(--identity-accent);'
-]) {
-  if ((expectedBase.match(new RegExp(inheritedDeclaration.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length !== 2) {
-    throw new Error(`Brand-derived SVG token must exist once per theme: ${inheritedDeclaration}`);
-  }
-}
-
 const changes = [];
-if (expectedBase !== originalBase) {
-  changes.push('features/base/base.css');
-  if (!checkOnly) await writeFile(basePath, expectedBase);
-}
-
+const themePath=path.join(consumerRoot,'features/base/theme-colors.css');
+const expectedTheme=await renderThemeColors(theme);
+let currentTheme='';try{currentTheme=await readFile(themePath,'utf8');}catch(error){if(error.code!=='ENOENT')throw error;}
+if(currentTheme!==expectedTheme){changes.push('features/base/theme-colors.css');if(!checkOnly)await writeFile(themePath,expectedTheme);}
 for (const output of manifest.outputs) {
   const source = path.join(exportRoot, output.path);
   const bytes = await readFile(source);
@@ -133,7 +88,6 @@ const provenanceUnchanged = evidence.brandComplianceProfile.contractSha256 === n
   && evidence.brandComplianceProfile.profileSha256 === nextProfileSha256
   && evidence.brandComplianceProfile.manifestSha256 === nextManifestSha256;
 const approvalPreserved = provenanceUnchanged && evidence.workflow?.userApproval === 'approved';
-const auditPreserved = provenanceUnchanged && evidence.workflow?.devkitAudit === 'passed';
 const changedTracked = execFileSync('git', ['diff', '--name-only', 'HEAD', '--'], { cwd: consumerRoot, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const changedUntracked = execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: consumerRoot, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const actualChangedFiles = new Set([...changedTracked, ...changedUntracked].map(file => file.replaceAll('\\', '/')));
@@ -143,8 +97,11 @@ for (const line of execFileSync('git', ['diff', '--name-status', 'HEAD', '--'], 
   const repoPath = (status.startsWith('R') ? paths.at(-1) : paths[0]).replaceAll('\\', '/');
   changeKinds.set(repoPath, status.startsWith('A') ? 'add' : status.startsWith('D') ? 'delete' : status.startsWith('R') ? 'rename' : 'modify');
 }
-if (!checkOnly) evidence.applicationBoundary.changedFiles = evidence.applicationBoundary.changedFiles.filter(file => actualChangedFiles.has(file));
-if (!checkOnly) evidence.workflow.devkitAudit = auditPreserved ? 'passed' : 'requested';
+if (!checkOnly) evidence.applicationBoundary.changedFiles = [...actualChangedFiles].sort();
+delete evidence.workflow.devkitAudit;
+evidence.$schema='../tools/release-checks/schemas/brand-evidence.schema.json';
+evidence.workflow.auditEngine='document-template-release-checks';
+evidence.workflow.legacyDevkitAudit='not-available';
 const contractRelativePath = evidence.brandComplianceProfile.contractPath;
 const profileRelativePath = evidence.brandComplianceProfile.profilePath;
 evidence.brandComplianceProfile.contractSha256 = nextContractSha256;
@@ -155,7 +112,7 @@ evidence.media.profileSha256 = evidence.brandComplianceProfile.profileSha256;
 evidence.media.manifestSha256 = evidence.brandComplianceProfile.manifestSha256;
 evidence.media.profileVersion = manifest.profileVersion;
 evidence.workflow.userApproval = approvalPreserved ? 'approved' : 'pending';
-evidence.workflow.rollout = approvalPreserved && evidence.workflow.devkitAudit === 'passed' ? 'ready' : 'blocked';
+evidence.workflow.rollout = 'awaiting-owner-review';
 evidence.riskReview.humanAestheticReview = approvalPreserved
   ? { status: 'approved', evidence: 'User confirmed satisfaction with the current coordinated Brand outputs on 2026-09-24; later revisions are separate changes.' }
   : { status: 'pending', evidence: 'Awaiting user review of the current Brand provenance.' };

@@ -11,6 +11,8 @@
 <link rel="icon" href="./favicon-48.png" type="image/png" sizes="48x48">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="./feature-packages/core.css">
+<link rel="stylesheet" href="./features/resource-card/resource-card.css">
+<link rel="stylesheet" href="./features/illustrated-card/illustrated-card.css">
 </head>
 <body class="docs-home-page">
 <a class="skip-link" href="#main-content">İçeriğe atla</a>
@@ -25,15 +27,15 @@
     </div>
 </header>
 <main class="docs-home" id="main-content" tabindex="-1">
-    <section class="docs-home-hero">
+<section class="docs-home-hero" data-document-hero aria-labelledby="template-hero-title"><div class="document-hero-copy">
         <p class="docs-eyebrow">Domain-free dokümantasyon altyapısı</p>
-        <h1>Teknik içeriğe<br>nefes aldıran template.</h1>
+        <h1 id="template-hero-title">Teknik içeriğe<br>nefes aldıran template.</h1>
         <p>Handbook, guide ve teknik makaleleri çok sayfalı, okunabilir ve tekrar kullanılabilir bir yapıda yayınlayın.</p>
         <div class="docs-home-actions">
             <a class="docs-primary-action" href="docs/getting-started.html">Başlangıç rehberi</a>
             <a class="docs-secondary-action" href="docs/reference.html">Feature referansı</a>
         </div>
-    </section>
+    </div><svg class="document-hero-edge" viewBox="0 0 1600 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 48 C310 77 470 16 760 32 S1230 67 1600 5 V70 H0Z"/></svg></section>
     <section class="docs-home-section" aria-labelledby="topics-title">
         <div class="docs-home-section-heading"><p class="docs-eyebrow">Konu başlıkları</p><h2 id="topics-title">İhtiyacınız olan yerden başlayın</h2></div>
         <div class="docs-home-grid">
@@ -68,6 +70,7 @@
     <span>Çok sayfalı doküman kabuğu ve bağımsız feature paketleri için dosya, bağımlılık ve yükleme özeti.</span>
 </a></div>
     </section>
+<section class="docs-home-section" aria-labelledby="visual-components-title"><div class="docs-home-section-heading"><p class="docs-eyebrow">Görsel sunum</p><h2 id="visual-components-title">Hero ve kaynak kartları</h2></div><div class="resource-card-grid"><article class="resource-card illustrated-card has-growth"><a class="card-link" href="docs/illustrated-presentation.html#hero" aria-labelledby="hero-example-title hero-example-action"><p class="resource-meta">Ortak sunum bileşeni</p><h3 id="hero-example-title">Görselli hero</h3><p class="card-description">Arka plan, dekoratif prop, okunabilir metin ve doğal içerik kenarı.</p><span class="card-action" id="hero-example-action">Örneği incele →</span></a></article><article class="resource-card illustrated-card has-growth"><a class="card-link" href="docs/illustrated-presentation.html#cards" aria-labelledby="card-example-title card-example-action"><p class="resource-meta">Ortak sunum bileşeni</p><h3 id="card-example-title">Görselli kaynak kartı</h3><p class="card-description">Gerçek bağlantılar, bağımsız artwork ve odak/hover etkileşimi.</p><span class="card-action" id="card-example-action">Örneği incele →</span></a></article></div></section>
     <section class="docs-home-principles">
         <div><strong>Kısa sayfalar</strong><span>Konular tek bir uzun akışta üst üste yığılmaz.</span></div>
         <div><strong>Sakin yüzeyler</strong><span>Kutular yalnızca anlam taşıdığında kullanılır.</span></div>

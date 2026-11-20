@@ -35,7 +35,7 @@
 }
 
 .search-trigger:focus-visible {
-    outline: 2px solid var(--brand);
+    outline: 2px solid var(--ui-focus);
     outline-offset: 3px;
 }
 
@@ -72,7 +72,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--overlay);
     backdrop-filter: blur(4px);
     z-index: 2000;
     opacity: 0;
@@ -169,7 +169,7 @@
 .search-result-title {
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--brand);
+    color: var(--ui-link);
     margin-bottom: 0.25rem;
 }
 
@@ -192,15 +192,15 @@
 }
 
 .search-result-content mark {
-    background: #fbbf24;
-    color: #1a1a2e;
+    background: var(--search-match-bg);
+    color: var(--search-match-text);
     padding: 0 2px;
     border-radius: 3px;
 }
 
 [data-theme="dark"] .search-result-content mark {
-    background: #f59e0b;
-    color: #0f0f1a;
+    background: var(--search-match-active-bg);
+    color: var(--search-match-text);
 }
 
 .search-no-results {

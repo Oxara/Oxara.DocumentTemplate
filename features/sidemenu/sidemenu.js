@@ -47,13 +47,18 @@
 
     /* ── Aç/kapat ── */
     function toggleSidenav() {
-        document.getElementById('sidenav').classList.toggle('open');
-        document.getElementById('sidenavOverlay').classList.toggle('show');
+        var panel = document.getElementById('sidenav');
+        var overlay = document.getElementById('sidenavOverlay');
+        if (!panel || !overlay) return;
+        panel.classList.toggle('open');
+        overlay.classList.toggle('show');
     }
 
     function closeSidenav() {
-        document.getElementById('sidenav').classList.remove('open');
-        document.getElementById('sidenavOverlay').classList.remove('show');
+        var panel = document.getElementById('sidenav');
+        var overlay = document.getElementById('sidenavOverlay');
+        if (panel) panel.classList.remove('open');
+        if (overlay) overlay.classList.remove('show');
     }
 
     sidemenu.toggleSidenav = toggleSidenav;

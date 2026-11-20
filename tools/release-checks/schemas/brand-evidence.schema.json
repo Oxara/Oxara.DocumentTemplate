@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Consumer Brand provenance evidence",
+  "type": "object",
+  "required": ["schemaVersion", "applicationBoundary", "brandComplianceProfile", "workflow"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "applicationBoundary": {"type": "object", "required": ["targetProduct", "changedFiles"]},
+    "brandComplianceProfile": {"type": "object", "required": ["contractSha256", "profileSha256", "manifestSha256", "provenanceStatus"]},
+    "workflow": {"type": "object", "required": ["auditEngine", "legacyDevkitAudit", "userApproval"], "properties": {"auditEngine": {"const": "document-template-release-checks"}, "legacyDevkitAudit": {"const": "not-available"}}}
+  }
+}

@@ -12,7 +12,9 @@
       "skip-link accessibility",
       "optional section dividers",
       "slogan banner",
-      "content figures"
+      "content figures",
+      "subtle page-edge indicator with forced-colours fallback",
+      "Brand-derived semantic theme colors and light/dark contrast roles"
     ],
     "html": [
       ".skip-link",
@@ -308,5 +310,78 @@
       "codeTabs.select(panel, option)",
       "codeTabs.selectAll(group, option)"
     ]
+  },
+  "document-hero": {
+    "css": [
+      "features/document-hero/document-hero.css"
+    ],
+    "js": [
+      "features/document-hero/document-hero.js"
+    ],
+    "requires": [
+      "base",
+      "docs-layout"
+    ],
+    "provides": [
+      "optional illustrated landing hero",
+      "consumer background/prop/growth slots",
+      "responsive layout and theme edge",
+      "reduced-motion/offscreen/hidden suspension"
+    ],
+    "html": [
+      "[data-document-hero]",
+      ".document-hero-art",
+      ".document-hero-copy",
+      ".document-hero-book",
+      ".document-hero-edge"
+    ],
+    "api": [
+      "documentHero.init(root?)",
+      "documentHero.destroy(root?)"
+    ],
+    "assets": [
+      "assets/presentation/atlas-painted-v1.webp",
+      "assets/presentation/book-painted-v1.webp"
+    ],
+    "defaults": {
+      "background": "assets/presentation/atlas-painted-v1.webp",
+      "prop": "assets/presentation/book-painted-v1.webp",
+      "override": "optional .document-hero-art and .document-hero-book slots",
+      "textOnly": "data-hero-layout=\"text\""
+    }
+  },
+  "illustrated-card": {
+    "css": [
+      "features/illustrated-card/illustrated-card.css"
+    ],
+    "js": [],
+    "requires": [
+      "base",
+      "resource-card"
+    ],
+    "provides": [
+      "optional illustrated resource-card variant",
+      "consumer background/prop/growth slots",
+      "semantic primary/source links and responsive focus/hover"
+    ],
+    "html": [
+      ".resource-card.illustrated-card",
+      ".card-backdrop",
+      ".card-growth",
+      ".card-link",
+      ".card-source"
+    ],
+    "api": [],
+    "assets": [
+      "assets/presentation/atlas-painted-v1.webp",
+      "assets/presentation/book-painted-v1.webp",
+      "assets/presentation/growth-leaves-v2.webp"
+    ],
+    "defaults": {
+      "background": "assets/presentation/atlas-painted-v1.webp",
+      "prop": "assets/presentation/book-painted-v1.webp",
+      "growth": "assets/presentation/growth-leaves-v2.webp",
+      "override": "optional .card-backdrop, .resource-art, .card-growth slots"
+    }
   }
 }

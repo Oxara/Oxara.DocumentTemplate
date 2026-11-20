@@ -36,6 +36,10 @@ handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
 
 ## Baslangic
 
+Yayın adayı için sürdürülen, AIO uyumlu `audit`, `quality`, `finalize` komutları
+[Static web release checks](tools/release-checks/README.md) altında bulunur.
+Bu araç eski DevKit çalışmış gibi rapor üretmez ve hiçbir Git/yayın işlemi yapmaz.
+
 Repoyu fork'layin veya indirin. Template'in kullandigi tekil CSS ve JavaScript
 feature dosyalari `features/` klasorunde bulunur. Birden fazla feature'i hazir
 giris noktasindan yukleyen paketler `feature-packages/` klasorundedir.
@@ -66,6 +70,9 @@ Hazir paket yeterli degilse ihtiyaciniz olan feature dosyalarini yerel
 [`features/features.json`](features/features.json) manifestinde bulunur. Hazir
 paket listesi [`feature-packages/packages.json`](feature-packages/packages.json)
 dosyasindadir.
+
+Opsiyonel görsel açılışların sınırları ve ortak scrollbar/tema davranışı için
+[Illustrated consumer integration](docs/ILLUSTRATED-CONSUMER-INTEGRATION.md) belgesine bakın.
 
 ## Feature kullanimi
 
@@ -145,3 +152,26 @@ zorla tasinmaz. Duzeltmeler her zaman yeni bir patch surumuyle yayinlanir.
 ## Lisans
 
 MIT
+
+### Generated behavior entries
+
+`node scripts/build-behavior-packages.mjs` generates `feature-packages/core.js`
+and `full.js` from `scripts/behavior-packages.mjs`. Use `--check` to reject drift,
+and `node --test scripts/behavior-packages.test.mjs` for lifecycle regressions.
+Downloads start together; ordered classic-script evaluation retains feature
+initialization order. Both entries share a per-document in-flight registry.
+Consumer copies belong in the Brand shared-file drift contract.
+
+## Tema uyumu
+
+Ink/Graphite semantik sistemi ve14bileşen kapsamı: [THEME-COMPATIBILITY](docs/THEME-COMPATIBILITY.md). [Canlı tema önizlemesi](docs/theme-preview.html). Theme kaynağını değiştirdikten sonra `node scripts/sync-brand-consumer.mjs`, `npm test` ve `node scripts/sync-brand-consumer.mjs --check` çalıştırılır.
+
+### Illustrated presentation implementation
+
+Fixed painterly 2D defaults replace the initial vector demo following the user’s explicit generate-and-use instruction. Follow the [visual constraints](docs/ILLUSTRATED-VISUAL-STANDARD.md).
+
+The landing uses registered document-hero; [live defaults and API](docs/illustrated-presentation.html). Omit custom art/prop slots to use fixed assets/presentation/atlas-painted-v1.webp and book-painted-v1.webp. Supply slots to override them; no topic-specific generation is required. document-hero is in core/full; illustrated-card is in full or imported with resource-card. Personal artwork/catalog/biography remain consumer-owned.
+
+For a custom feature copy, include its `assets` and `requires` manifest entries along with CSS/JS. All default illustrations are fixed painterly WebP assets maintained in this repository. The normal landing intentionally supplies no custom image slots, proving the fallback contract rather than a consumer-specific mockup.
+
+Görsel üretim kuralları, katman promptları ve meyvesiz dal/yaprak düzeltmesi: [ILLUSTRATION-GENERATION.md](docs/ILLUSTRATION-GENERATION.md). Canlı Görselli Sunum sayfasında da bulunur.

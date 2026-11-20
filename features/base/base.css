@@ -1,143 +1,12 @@
+@import url('./theme-colors.css');
+@import url('./page-scrollbar.css');
+
 /* ============================================================
    BASE.CSS — Design tokens, reset, typography, layout
    Bağımlılık: Yok. Her sayfada ilk yüklenmeli.
    ============================================================ */
 
-/* ── Design tokens ── */
-:root, [data-theme="light"] {
-    --bg: #fff;
-    --surface: #f8f9fb;
-    --surface-2: #f0f2f5;
-    --border: #e2e5ea;
-    --table-column-border: rgba(226, 229, 234, .55);
-    --text: #1b1f26;
-    --text-muted: #5a6270;
-    --text-dim: #8c95a4;
-    /* oxara-brand-sync:start */
-    --brand: #19C7B5;
-    --brand-light: #47D3C3;
-    --brand-subtle: rgba(25, 199, 181, .055);
-    --brand-border: rgba(25, 199, 181, .18);
-    --identity-accent: var(--brand);
-    --ui-primary: var(--brand);
-    --ui-primary-hover: var(--brand);
-    --ui-primary-foreground: #FFFFFF;
-    --ui-link: var(--brand);
-    --ui-link-hover: var(--brand-light);
-    --ui-focus: var(--brand);
-    --ui-indicator: var(--brand);
-    --page-start-gradient:
-        radial-gradient(ellipse at 50% 0%, rgba(25, 199, 181, .1), transparent 62%),
-        linear-gradient(180deg, rgba(248, 249, 251, .95), transparent);
-    --page-end-gradient:
-        radial-gradient(ellipse at 50% 100%, rgba(25, 199, 181, .08), transparent 64%),
-        linear-gradient(0deg, rgba(248, 249, 251, .95), transparent);
-    /* oxara-brand-sync:end */
-    --success: #0d9663;
-    --success-bg: #ecfdf5;
-    --warning: #c2680a;
-    --warning-bg: #fff8ed;
-    --error: #b33b3b;
-    --error-bg: #fef2f2;
-    --info: #4a6fa5;
-    --info-bg: #eff6ff;
-    --code-bg: #f6f8fb;
-    --code-surface: #ffffff;
-    --code-border: #d9e0ea;
-    --code-text: #263143;
-    --code-keyword: #7c3aed;
-    --code-string: #0b7a60;
-    --code-number: #b45309;
-    --code-punctuation: #6b7280;
-    --code-tag: #1d4ed8;
-    --code-attr: #b45309;
-    --code-comment: #7a8494;
-    --scrollbar-thumb: #c4cad4;
-    --scrollbar-thumb-hover: #aeb6c4;
-    --scrollbar-track: rgba(226, 229, 234, .45);
-    --shadow: 0 1px 3px rgba(0, 0, 0, .06);
-    --svg-box: #fff;
-    --svg-stroke: #e2e5ea;
-    --svg-text: #1b1f26;
-    --svg-muted: #5a6270;
-    --svg-line: #8c95a4;
-    --svg-brand-bg: var(--brand-subtle);
-    --svg-brand-s: var(--identity-accent);
-    --svg-ok-bg: #ecfdf5;
-    --svg-ok-s: #0d9663;
-    --svg-err-bg: #fef2f2;
-    --svg-err-s: #b33b3b;
-    --svg-warn-bg: #fff8ed;
-    --svg-warn-s: #c2680a;
-}
-
-[data-theme="dark"] {
-    --bg: #0f1117;
-    --surface: #161921;
-    --surface-2: #1c2028;
-    --border: #2a2f3a;
-    --table-column-border: rgba(42, 47, 58, .75);
-    --text: #e2e4e9;
-    --text-muted: #9ca3b4;
-    --text-dim: #6b7280;
-    /* oxara-brand-sync:start */
-    --brand: #19C7B5;
-    --brand-light: #47D3C3;
-    --brand-subtle: rgba(25, 199, 181, .1);
-    --brand-border: rgba(25, 199, 181, .28);
-    --identity-accent: var(--brand);
-    --ui-primary: var(--brand);
-    --ui-primary-hover: var(--brand);
-    --ui-primary-foreground: #FFFFFF;
-    --ui-link: var(--brand);
-    --ui-link-hover: var(--brand-light);
-    --ui-focus: var(--brand);
-    --ui-indicator: var(--brand);
-    --page-start-gradient:
-        radial-gradient(ellipse at 50% 0%, rgba(25, 199, 181, .18), transparent 62%),
-        linear-gradient(180deg, rgba(22, 25, 33, .94), transparent);
-    --page-end-gradient:
-        radial-gradient(ellipse at 50% 100%, rgba(25, 199, 181, .15), transparent 64%),
-        linear-gradient(0deg, rgba(22, 25, 33, .94), transparent);
-    /* oxara-brand-sync:end */
-    --success: #34d399;
-    --success-bg: rgba(52, 211, 153, .08);
-    --warning: #fb923c;
-    --warning-bg: rgba(251, 146, 60, .08);
-    --error: #f87171;
-    --error-bg: rgba(248, 113, 113, .08);
-    --info: #7c8fb8;
-    --info-bg: rgba(124, 143, 184, .08);
-    --code-bg: #0d1117;
-    --code-surface: #111827;
-    --code-border: #303746;
-    --code-text: #d7deea;
-    --code-keyword: #c4b5fd;
-    --code-string: #7dd3c7;
-    --code-number: #fbbf24;
-    --code-punctuation: #9ca3af;
-    --code-tag: #93c5fd;
-    --code-attr: #fcd34d;
-    --code-comment: #8b94a7;
-    --scrollbar-thumb: #3a414f;
-    --scrollbar-thumb-hover: #4b5566;
-    --scrollbar-track: rgba(42, 47, 58, .55);
-    --shadow: 0 1px 3px rgba(0, 0, 0, .3);
-    --svg-box: #1c2028;
-    --svg-stroke: #2a2f3a;
-    --svg-text: #e2e4e9;
-    --svg-muted: #9ca3b4;
-    --svg-line: #7c8fb8;
-    --svg-brand-bg: var(--brand-subtle);
-    --svg-brand-s: var(--identity-accent);
-    --svg-ok-bg: #0f2a1f;
-    --svg-ok-s: #34d399;
-    --svg-err-bg: #2a1a1a;
-    --svg-err-s: #f87171;
-    --svg-warn-bg: #2a2010;
-    --svg-warn-s: #fb923c;
-}
-
+/* Theme roles are generated from theme-tokens.json + Brand manifest. */
 /* ── Reset ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -171,12 +40,6 @@ body::after {
 }
 
 /* ── Scrollbars ── */
-html {
-    scrollbar-gutter: stable;
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-}
-body { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border: 3px solid var(--bg); border-radius: 999px; }
@@ -234,9 +97,9 @@ body { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scro
 .toc h2::before { display: none; }
 .toc ol { list-style: none; counter-reset: tc; }
 .toc li { counter-increment: tc; margin-bottom: .45rem; }
-.toc li::before { content: counter(tc)"."; color: var(--brand); font-weight: 600; margin-right: .5rem; }
+.toc li::before { content: counter(tc)"."; color: var(--ui-link); font-weight: 600; margin-right: .5rem; }
 .toc a { color: var(--text); text-decoration: none; transition: color .2s; }
-.toc a:hover { color: var(--brand); }
+.toc a:hover { color: var(--ui-link); }
 
 /* ── Sections & Typography ── */
 section { margin-bottom: 3.5rem; }
@@ -281,7 +144,9 @@ h3 {
 }
 h4 { font-size: 1rem; font-weight: 650; color: var(--text-muted); margin: 1.5rem 0 .6rem; }
 p { margin-bottom: 1rem; }
-a { color: var(--brand); }
+a { color: var(--ui-link); }
+a:hover { color: var(--ui-link-hover); }
+:focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 3px; }
 ul, ol { margin: .5rem 0 1rem 1.5rem; }
 li { margin-bottom: .4rem; }
 
@@ -308,7 +173,7 @@ code {
     border-radius: 4px;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: .82rem;
-    color: var(--brand);
+    color: var(--ui-link);
 }
 td > code:first-child { margin-left: -.4rem; }
 
@@ -355,7 +220,7 @@ td > code:first-child { margin-left: -.4rem; }
     font-weight: 750;
     line-height: 1.35;
 }
-.slogan-highlight { color: var(--brand); }
+.slogan-highlight { color: var(--ui-link); }
 .slogan-description {
     margin: .7rem 0 0;
     color: var(--text-muted);
@@ -429,10 +294,10 @@ td > code:first-child { margin-left: -.4rem; }
 
 /* ── Example details/accordion ── */
 details.example-details { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 1.2rem; box-shadow: var(--shadow); overflow: hidden; transition: border-color .2s; }
-details.example-details[open] { border-color: var(--brand); }
+details.example-details[open] { border-color: var(--ui-link); }
 details.example-details summary { display: flex; align-items: center; gap: .5rem; padding: .85rem 1.2rem; cursor: pointer; font-size: .92rem; background: var(--surface-2); border-bottom: 1px solid transparent; transition: background .2s; list-style: none; }
 details.example-details summary::-webkit-details-marker { display: none; }
-details.example-details summary::before { content: "\25B6"; font-size: .65rem; color: var(--brand); transition: transform .2s; flex-shrink: 0; }
+details.example-details summary::before { content: "\25B6"; font-size: .65rem; color: var(--ui-link); transition: transform .2s; flex-shrink: 0; }
 details.example-details[open] summary::before { transform: rotate(90deg); }
 details.example-details summary:hover { background: var(--border); }
 details.example-details[open] summary { border-bottom-color: var(--border); }

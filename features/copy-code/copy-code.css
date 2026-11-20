@@ -31,14 +31,14 @@ pre:hover .code-copy-button,
 }
 
 .code-copy-button:hover {
-    background: var(--ui-primary);
-    color: var(--ui-primary-foreground);
-    border-color: var(--ui-primary);
+    background: var(--surface-2);
+    color: var(--text);
+    border-color: var(--ui-focus);
 }
 
 .code-copy-button.is-copied {
     background: var(--success);
-    color: #fff;
+    color: var(--success-foreground);
     border-color: var(--success);
     opacity: 1;
 }

@@ -179,7 +179,7 @@
 
 .docs-eyebrow {
     margin-bottom: .8rem;
-    color: var(--brand);
+    color: var(--ui-link);
     font-size: .75rem;
     font-weight: 700;
     letter-spacing: .04em;
@@ -334,7 +334,7 @@
     font: inherit;
     font-size: .82rem;
 }
-.plain-button:hover { color: var(--brand); border-color: var(--brand); }
+.plain-button:hover { color: var(--ui-link); border-color: var(--ui-link); }
 .dependency-list { margin-left: 0; list-style: none; }
 .dependency-list li { position: relative; padding-left: 1rem; }
 .dependency-list li::before { content: ""; position: absolute; top: .72rem; left: 0; width: 5px; height: 5px; background: var(--brand); border-radius: 50%; }
@@ -387,7 +387,7 @@
 .docs-page-link span { color: var(--text-dim); font-size: .72rem; }
 .docs-page-link strong { font-size: .9rem; }
 .docs-page-next { text-align: right; }
-.docs-page-link:hover strong { color: var(--brand); }
+.docs-page-link:hover strong { color: var(--ui-link); }
 
 /* Landing */
 .docs-home {
@@ -475,7 +475,7 @@
 .docs-home-card strong { margin: .65rem 0 .55rem; font-size: 1.25rem; }
 .docs-home-card > span:not(.docs-home-card-label, .docs-home-card-action) { color: var(--text-muted); font-size: .88rem; line-height: 1.65; }
 .docs-home-card-action { display: none; }
-.docs-home-card:hover strong { color: var(--brand); }
+.docs-home-card:hover strong { color: var(--ui-link); }
 
 .docs-home-principles {
     display: grid;
@@ -493,7 +493,7 @@
     position: fixed;
     inset: var(--docs-topbar-height) 0 0;
     z-index: 699;
-    background: rgba(0, 0, 0, .35);
+    background: var(--overlay);
     opacity: 0;
     pointer-events: none;
     transition: opacity .2s;
@@ -564,3 +564,6 @@
     .docs-shell { display: block; width: 100%; }
     .docs-article { max-width: none; padding: 0; }
 }
+
+/* Semantic document rule, shared by every consumer. */
+[data-theme="dark"] .docs-article hr {border:0;border-top:1px solid var(--border);}

@@ -16,7 +16,7 @@
 .resource-card__action:hover { color: var(--text); background: var(--surface); border-color: var(--ui-primary); text-decoration: none; transform: translateY(-1px); }
 .resource-card__action--primary, .resource-card__action--primary:hover { color: var(--ui-primary-foreground); background: var(--ui-primary); border-color: var(--ui-primary); }
 .resource-card__action:focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 3px; }
-.resource-card__action-icon { box-sizing: content-box; width: 16px; height: 16px; flex: 0 0 16px; padding: 10px; color: var(--ui-primary-foreground); background: var(--ui-primary); fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.4; }
+.resource-card__action-icon { box-sizing: content-box; width: 16px; height: 16px; flex: 0 0 16px; padding: 10px; color: var(--oxara-ink); background: var(--ui-primary); fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.4; }
 .resource-card__action-label { display: inline-flex; padding: 0 .72rem; align-items: center; }
-.resource-card__action--primary .resource-card__action-icon { color: var(--ui-primary); background: var(--surface-2); }
+.resource-card__action--primary .resource-card__action-icon { color: var(--ui-link); background: var(--surface-2); }
 

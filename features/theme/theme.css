@@ -39,7 +39,7 @@
 }
 
 .theme-toggle:focus-visible {
-    outline: 2px solid var(--brand);
+    outline: 2px solid var(--ui-focus);
     outline-offset: 3px;
 }
 
@@ -48,13 +48,13 @@
     width: 17px;
     height: 17px;
     background: currentColor;
-    -webkit-mask: var(--theme-toggle-sun) center / contain no-repeat;
-    mask: var(--theme-toggle-sun) center / contain no-repeat;
+    -webkit-mask: var(--theme-toggle-moon) center / contain no-repeat;
+    mask: var(--theme-toggle-moon) center / contain no-repeat;
 }
 
 [data-theme="dark"] .theme-toggle::before {
-    -webkit-mask-image: var(--theme-toggle-moon);
-    mask-image: var(--theme-toggle-moon);
+    -webkit-mask-image: var(--theme-toggle-sun);
+    mask-image: var(--theme-toggle-sun);
 }
 
 [data-theme="dark"] .theme-toggle {

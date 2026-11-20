@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<script src="../features/theme/theme-boot.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Görselli Sunum — Oxara Document Template</title>
+<meta name="description" content="Oxara Document Template çok sayfalı dokümantasyon rehberi.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" href="../favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
+<link rel="stylesheet" href="../feature-packages/full.css">
+<style>#generation-rules pre,#generation-rules pre code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;}#generation-rules details{margin:1rem 0;}#generation-rules summary{cursor:pointer;font-weight:600;}</style>
+</head>
+<body class="docs-page">
+<a class="skip-link" href="#main-content">İçeriğe atla</a>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+<header class="docs-topbar">
+    <div class="docs-topbar-inner">
+        <button class="docs-menu-toggle" type="button" data-docs-nav-toggle aria-label="Doküman menüsünü aç"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        <a class="docs-brand" href="../index.html"><span class="docs-brand-mark oxara-brand-mark" aria-hidden="true"></span><span>Document Template</span></a>
+        <nav class="docs-top-links" aria-label="Üst navigasyon">
+            <a href="getting-started.html">Rehber</a>
+            <a href="reference.html">Referans</a>
+            <a href="changelog.html">Değişiklikler</a></nav>
+        <div class="docs-top-actions">
+            <a class="author-link" href="https://erdemozkara.com/" rel="author" aria-label="erdemozkara.com ana sayfasına dön">erdemozkara.com</a>
+            <button class="search-trigger" type="button" onclick="search.openSearch()" aria-label="Arama yap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><span>Ara</span><kbd>Ctrl+K</kbd></button>
+            <button class="theme-toggle" type="button" onclick="theme.toggleTheme()" aria-label="Koyu temaya geç"><span class="theme-toggle-label">Koyu tema</span></button>
+        </div>
+    </div>
+</header>
+<div class="docs-overlay" data-docs-overlay></div>
+<div class="docs-shell">
+    <aside class="docs-sidebar" data-docs-sidebar>
+        <div class="docs-sidebar-inner">
+            
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Başlangıç</div>
+    <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature'lar</div>
+    <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
+    <a class="docs-nav-link active" href="illustrated-presentation.html">Görselli Sunum</a>
+    <a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
+    <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
+    <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Feature Paketleri</div>
+    <a class="docs-nav-link" href="reference.html#hazir-paketler">Hazır Paketler</a>
+</div>
+<div class="docs-nav-group">
+    <div class="docs-nav-label">Referans</div>
+    <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
+    <a class="docs-nav-link" href="changelog.html">Değişiklikler</a>
+    <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
+</div>
+</div>
+    </aside>
+    <main class="docs-main" id="main-content" tabindex="-1">
+<article class="docs-article" id="article-content"><header class="docs-article-header"><p class="docs-eyebrow">Yeniden kullanılabilir sunum</p><h1>Görselli hero ve kartlar</h1><p>Aynı yapıyı farklı içerik ve çizimlerle kullanın. Bu sayfa canlı bileşen örneklerini ve minimum HTML sözleşmesini gösterir.</p></header><p><strong>Sabit 2D illüstrasyon seti.</strong> Özel görsel eklemediğinizde aynı boyalı arka plan, kapalı kitap ve hover yaprakları kullanılır. <a href="ILLUSTRATED-VISUAL-STANDARD.md">Görsel yönerge ve referanslar</a>.</p><section id="hero"><h2>Hero</h2><section class="docs-home-hero" data-document-hero aria-labelledby="presentation-title"><div class="document-hero-copy"><p class="docs-eyebrow">İsteğe bağlı giriş</p><h2 id="presentation-title">İçeriğinize açılan görsel bir kapı.</h2><p>Başlık, açıklama ve bağlantılar gerçek HTML olarak kalır. Arka plan ve kitap yalnızca dekorasyondur.</p><div class="docs-home-actions"><a class="docs-primary-action" href="#contract">Kullanım sözleşmesi</a></div></div><svg class="document-hero-edge" viewBox="0 0 1600 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 48 C310 77 470 16 760 32 S1230 67 1600 5 V70 H0Z"/></svg></section><p><code>document-hero</code> core/full paketlerinde hazırdır; yalnızca <code>data-document-hero</code> bulunan girişleri etkiler. Görsel verilmezse sabit atlas ve kitap varsayılanları kullanılır. Özel arka plan/growth/prop alanları bunları değiştirir; yalnız metin için data-hero-layout="text" kullanılabilir.</p></section><section id="cards"><h2>Görselli kaynak kartları</h2><div class="resource-card-grid"><article class="resource-card illustrated-card has-growth"><a class="card-link" href="#contract" aria-labelledby="demo-card-title demo-card-action"><p class="resource-meta">Ortak sunum bileşeni</p><h3 id="demo-card-title">Sabit varsayılan set</h3><p class="card-description">Özel görsel yoksa aynı sabit atlas ve kitap kullanılır; başlık, açıklama ve bağlantı size aittir.</p><span class="card-action" id="demo-card-action">Örneği incele →</span></a></article></div><p><code>illustrated-card</code>, <code>resource-card</code> üzerine isteğe bağlı varyanttır. Full pakette hazırdır; core kullanırken iki kart CSS'ini ayrıca ekleyin. Başka bir hedef için ikinci bağlantı kullanın; iç içe link üretmeyin.</p></section><section id="contract"><h2>Kullanım sözleşmesi</h2><p>Tekil feature kopyalarken manifestteki <code>css</code>, <code>js</code>, <code>requires</code> ve <code>assets</code> alanlarını birlikte taşıyın. <code>assets/presentation/</code> sabit varsayılan setidir; yeni konu için yeni görsel üretmek zorunlu değildir. Paketler bu kaynakları aynı bağıl yollarla kullanır.</p><pre><code class="language-html">&lt;section class=&quot;docs-home-hero&quot; data-document-hero&gt;
+  &lt;div class=&quot;document-hero-copy&quot;&gt;
+    &lt;h1 id="hero-title"&gt;Rehber başlığı&lt;/h1&gt;
+    &lt;p&gt;Açıklama metni&lt;/p&gt;
+    &lt;a class=&quot;docs-primary-action&quot; href=&quot;docs/start.html&quot;&gt;Başla&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre><p>Bu minimum örnek sabit görselleri kullanır. Özel kitap için <code>.document-hero-book</code> içine kendi dekoratif görselinizi ekleyin; özel arka plan için <code>.document-hero-art</code> alanını kullanın.</p><pre><code class="language-html">&lt;article class="resource-card illustrated-card"&gt;
+  &lt;a class="card-link" href="docs/start.html"&gt;
+    &lt;p class="resource-meta"&gt;Rehber&lt;/p&gt;
+    &lt;h3&gt;Konu başlığı&lt;/h3&gt;
+    &lt;p class="card-description"&gt;Kısa açıklama&lt;/p&gt;
+    &lt;span class="card-action"&gt;İncele →&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/article&gt;</code></pre><p>Sayfanın tek ana başlığını <code>h1</code>, sayfa içindeki örnekleri <code>h2</code> ile verin. Dekoratif görseller <code>alt=""</code> ve <code>aria-hidden="true"</code> kullanır. Gerçek içerik taşıyan görseller için uygun alternatif metin sağlayın.</p><p><code>--hero-bg</code>, <code>--hero-text</code>, <code>--hero-muted</code>, <code>--hero-scrim</code>, <code>--hero-scrim-mobile</code> ve <code>--hero-action-*</code> tüketici sunumunu ayarlar. Kartlar <code>--illustrated-card-*</code> rollerini kullanır; paylaşılan Brand tokenlarını sayfa içinde yeniden tanımlamayın.</p></section><section id="lifecycle"><h2>Davranış ve yaşam döngüsü</h2><p>Hero derinliği yalnız görünür, geniş ekranda ve hareket azaltma tercihi kapalıyken çalışır. Gizli sekmelerde, ekran dışında ve mobilde durur. <code>documentHero.init(root)</code> tekrar güvenle çağrılabilir; kaldırılan dinamik alanlar için <code>documentHero.destroy(root)</code> temizler. Bir sayfada birden fazla örnek desteklenir.</p><p>JavaScript kapalıyken de metin ve bağlantılar kullanılabilir. Artwork yüklenmezse zemin/scrim metni korur. Yeni çizim ve içerik tüketiciye aittir; kişisel manzara, maskot veya biyografi şablon varsayılanı değildir.</p></section><section id="generation-rules"><h2>Görsel üretim kuralları ve örnek promptlar</h2><p>Özel artwork isteğe bağlıdır; aynı sabit 2D set tekrar kullanılabilir. Aşağıdaki tarifler sonraki üretimlerde aynı aileyi korumak içindir. <a href="ILLUSTRATION-GENERATION.md">Kaynak rehber ve prompt seti</a>.</p><h3>Üretim kuralları</h3><ul><li>Boyalı, hafif fasetli 2D illüstrasyon; hacim ışık/gölge ve malzeme dokusuyla verilir. Flat vector/clipart, cartoon veya plastik3D yok.</li><li>Ink#0B1D29, Graphite#173344, Turquoise#19C7B5; muted zeytin/sage yaprak ve sınırlı kâğıt/ahşap/amber detayları. Büyük sarı/turuncu alan ve beyaz kontur yok. Brand nötr/companion kaynakları ile tema rolleri korunur.</li><li>Arka plan, kapalı kitap ve hover dal/yaprak ayrı dosyalardır. Arka plan opak; kitap ve dallar gerçek alpha transparan olmalıdır. Fake dama/renkli zemin şeffaflık sayılmaz.</li><li>Kitap kartta doğrudan karşıdan, düzgün dik cepheyle görünür; hero&#x27;da hafif CSS rotation yapılabilir. Masa çevresi görünen kırpık açık kitap kullanılmaz. Kitabın tamamı kadrajda kalır.</li><li>Hover katmanında yalnız dal ve yaprak vardır. Zeytin meyvesi, başka meyve, berry, tomurcuk veya yuvarlak süs yok.</li><li>Solda metin için sakin boş alan; kenarlarda doğal taşma/overscan. Başlık, metin ve butonlar HTML olarak kalır; görsel içine yazı/UI çizilmez.</li><li>Konuya özel alternatifler aynı görsel aileyi korur; aynı sayfa kıvrımı/kitap şablonu her kategoriye dayatılmaz. Kişisel manzara/mascot/masa/scene orchestration ortak template zorunluluğu değildir.</li><li>Mevcut onaylı artwork ve kontrol dilini referans al. Yeni CTA/animasyon tasarımı üretmek bu promptların kapsamı değildir.</li></ul><details><summary>Ortak stil eki</summary><pre><code class="language-plaintext">Sophisticated hand-painted, lightly faceted 2D editorial illustration. Rich painted paper/leather texture; volume from soft light and shadow. Deep Ink navy #0B1D29, Graphite #173344 and restrained Turquoise #19C7B5, muted sage/olive leaves and subtle cream/amber materials. Match the supplied approved reference family. No plastic3D, cartoon, flat vector, wireframe, clipart, text, lettering, logos or UI. Preserve quiet space for real HTML content.</code></pre></details><details><summary>Arka plan promptu</summary><pre><code class="language-plaintext">Create one fixed generic documentation hero/card BACKGROUND, landscape1536x1024 or wider. Use the shared painted 2D style. Quiet dark left60% with subtle brush texture for an HTML title. Along right/bottom, graceful overlapping broad cream-paper and teal-paper strata with gentle facets and restrained turquoise rim light; sparse muted sage accents. All shapes extend naturally beyond canvas edges. Opaque full-bleed navy. No book or foreground prop, no person, furniture, scenery, text, icons, frame or grid. Pair with a separate closed-book layer at right.</code></pre></details><details><summary>Kapalı kitap promptu</summary><pre><code class="language-plaintext">Create a single CLOSED documentation hardback, full isolated object on genuine transparent alpha background with clear padding. FRONT-ON, upright rectangular cover, same width at top/bottom; no tilt, rotation, isometric angle or foreshortening. Very thin left spine only. Use shared painted 2D style: navy textured cover, turquoise folded corner protectors, cream paper edge, tiny amber accent. A small embossed abstract stacked-paper emblem, no words/letters/numbers/logos. Entire book visible. No tabletop, scenery or opaque shadow rectangle. It will be front-on in cards and slightly rotated with CSS in hero.</code></pre></details><details><summary>Dal ve yaprak promptu</summary><pre><code class="language-plaintext">Create a sparse decorative BRANCH-AND-LEAF overlay, landscape1536x1024, genuine transparent alpha. Use shared painted 2D style. Fine natural twigs with narrow sage/olive/teal leaves entering from right/bottom; only rightmost30% and bottom15% occupied, left65% clear. Cool restrained turquoise rim and soft cream light. Branches extend beyond crop, no chopped stem ends inside canvas. ONLY branches and leaves: NO olives, fruit, berries, buds, round ornaments, pot, book, text, scenery or opaque rectangle. Clear room for separate book and HTML copy. Subtle hover layer, not a dense foliage wall.</code></pre></details><details><summary>Meyve kaldırma / düzeltme promptu</summary><pre><code class="language-plaintext">Precise edit: remove EVERY olive/fruit/berry/bud/round ornament. Leave ONLY branches and leaves. Preserve existing sparse right/bottom composition, leaf shapes, painted softly faceted 2D style, sage/teal/cream palette, lighting, clear left two-thirds, dimensions and genuine transparency. Repair former fruit spots seamlessly with empty transparency or a continuing fine twig. Do not add objects or rearrange the composition.</code></pre></details><h3>Üretim ve teslim kontrolü</h3><ol><li>Onaylı referansı stil girdisi olarak göster; kopyalanacak konu ile korunacak görsel dili ayır.</li><li>Her katmanı ayrı üret. Transparan istenenlerde aracın transparency seçeneğini etkinleştir; sonuçta alpha kanalını ve kenarları denetle.</li><li>Meyve/yazı/kadraj/perspektif hatası varsa hedefli edit uygula; maskeyi veya özgün PNG&#x27;yi kaybetme.</li><li>Orijinal çıktıyı ve kullanılan promptu sakla. WebP exportunda alpha&#x27;yı koru; yeni sürüm adı/hash ile ilişkilendir. Özel üretim yoksa aynı sabit seti kullan.</li><li>Hero + kart/focus/hover, açık/koyu tema,320–390px mobil, reduced-motion ve noJS görünümünü gerçek sayfada incele. Metin okunur, prop tam ve yatay taşma yok olmalı.</li><li>Teknik test, görsel karşılaştırma ve kullanıcı yaratıcı kabulünü ayrı kaydet. Üretim/entegrasyon commit/push/yayın izni değildir.</li></ol></section></article>
+    </main>
+    <aside class="docs-toc" aria-label="Bu sayfada">
+        <div class="docs-toc-inner">
+            <div class="docs-toc-title">Bu sayfada</div>
+            <nav data-docs-toc></nav>
+        </div>
+    </aside>
+</div>
+<div class="search-overlay" id="searchOverlay" onclick="search.closeSearchOnOverlay(event)">
+    <div class="search-modal" onclick="event.stopPropagation()">
+        <div class="search-input-wrapper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15" y2="15"></line></svg><input type="text" class="search-input" id="searchInput" placeholder="Bu sayfada ara..." autocomplete="off"><button class="search-close" type="button" onclick="search.closeSearch()" aria-label="Kapat">×</button></div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+<button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+<script>
+window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30, externalItems: [{"title": "Başlangıç", "text": "Document Template, hazır paketler ve tekil feature'larla doküman sitenizi hızlıca kurmanızı sağlar.", "keywords": "Temel yaklaşım s-overview s-feature-summary s-install", "url": "getting-started.html", "sectionType": "Sayfa"}, {"title": "Doküman Bileşenleri", "text": "Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.", "keywords": "İçerik sistemi s-base s-document-components", "url": "document-components.html", "sectionType": "Sayfa"}, {"title": "Kod Özellikleri", "text": "Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.", "keywords": "Teknik örnekler s-code s-copy-code s-code-tabs", "url": "code-features.html", "sectionType": "Sayfa"}, {"title": "Navigasyon ve Okuma", "text": "Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.", "keywords": "Doküman deneyimi s-sidemenu s-search s-scroll s-reading-progress", "url": "navigation.html", "sectionType": "Sayfa"}, {"title": "Tema ve Yapılandırma", "text": "Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.", "keywords": "Uyarlama s-theme s-config", "url": "configuration.html", "sectionType": "Sayfa"}, {"title": "Görselli Sunum", "text": "Ortak hero ve kaynak kartları; sabit varsayılanlar, özel görseller ve kullanım sözleşmesi.", "keywords": "hero prop artwork default cards lifecycle", "url": "illustrated-presentation.html", "sectionType": "Sayfa"}] };
+window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
+</script>
+<script src="../feature-packages/full.js"></script>
+</body>
+</html>
