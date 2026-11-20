@@ -5,7 +5,7 @@ bileşenleri. İçerik ve ürüne özel görseller tüketicide; ortak okuma, gez
 tema ve bileşen davranışları bu depoda yönetilir.
 
 [Canlı dokümantasyon](https://oxara.github.io/Oxara.DocumentTemplate/) ·
-[Sürüm 1.2.2](https://github.com/Oxara/Oxara.DocumentTemplate/releases/tag/v1.2.2) ·
+[Sürüm 1.2.3](https://github.com/Oxara/Oxara.DocumentTemplate/releases/tag/v1.2.3) ·
 [Değişiklikler](docs/changelog.html)
 
 ## Başlangıç
@@ -43,7 +43,9 @@ kontrolleri ihtiyaç duyulan feature veya paketle eklenebilir.
 
 Core ve full girişleri aynı kaynak dosyadan üretilir. İndirmeler birlikte
 başlar, klasik scriptler tanımlı sırayla çalışır; iki paket ortak in-flight
-kaydını paylaşır. Giriş dosyaları elle değiştirilmez:
+kaydını paylaşır. Tema, arama ve sidemenu düğmeleri kendi API'leri yüklenene
+kadar devre dışıdır; ilk tıklama henüz yüklenmemiş bir fonksiyonu çağıramaz.
+Giriş dosyaları elle değiştirilmez:
 
 ```powershell
 node scripts/build-behavior-packages.mjs

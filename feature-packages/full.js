@@ -4,6 +4,34 @@
     var entry=document.currentScript;
     var root=entry?new URL('../features/',entry.src):new URL('features/',window.location.href);
     var registry=window.documentTemplateScripts||(window.documentTemplateScripts=new Map());
+    var held=window.documentTemplatePendingControls||(window.documentTemplatePendingControls=new Map());
+    function holdControls(file,pending){
+        var api={'theme/theme.js':'theme','search/search.js':'search','sidemenu/sidemenu.js':'sidemenu'}[file];
+        if(!api)return;
+        var status='pending',buttons=[];
+        function scan(){
+            if(window[api])return;
+            document.querySelectorAll('button[onclick]').forEach(function(button){
+                if(!(new RegExp('\\b'+api+'\\s*\\.')).test(button.getAttribute('onclick')||'')||held.has(button))return;
+                held.set(button,{disabled:button.disabled,busy:button.getAttribute('aria-busy')});
+                buttons.push(button);button.disabled=true;
+                if(status==='pending')button.setAttribute('aria-busy','true');
+            });
+        }
+        function release(ready){
+            status=ready?'ready':'failed';
+            buttons.forEach(function(button){
+                var original=held.get(button);if(!original)return;
+                if(ready)button.disabled=original.disabled;
+                if(original.busy===null)button.removeAttribute('aria-busy');
+                else button.setAttribute('aria-busy',original.busy);
+                held.delete(button);
+            });
+        }
+        scan();
+        if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scan,{once:true});
+        pending.then(function(){release(true);},function(){release(false);});
+    }
     var promise;
     function load(){
         if(promise)return promise;
@@ -11,7 +39,7 @@
         // async=false preserves evaluation order and DOM-dependent initialization.
         promise=Promise.all(scripts.map(function(file){
             var src=new URL(file,root).href;
-            if(registry.has(src))return registry.get(src);
+            if(registry.has(src)){holdControls(file,registry.get(src));return registry.get(src);}
             if(Array.from(document.scripts).some(function(node){return node.src===src;}))return Promise.resolve();
             var pending=new Promise(function(resolve,reject){
                 var node=document.createElement('script');
@@ -20,7 +48,7 @@
                 node.onerror=function(){reject(new Error('Failed to load '+file));};
                 document.head.appendChild(node);
             });
-            registry.set(src,pending);return pending;
+            registry.set(src,pending);holdControls(file,pending);return pending;
         }));
         return promise;
     }
