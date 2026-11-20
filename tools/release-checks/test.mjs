@@ -18,6 +18,19 @@ async function fixture(t){
 }
 test('complete unchanged candidate finalizes only for owner approval',async t=>{const f=await fixture(t),a=await audit(f.config,f.root),q=await quality(f.config,f.root,a),r=await finalize(f.config,f.root,a,q);assert.equal(a.status,'passed');assert.equal(q.status,'passed');assert.equal(r.status,'ready-for-owner-approval');assert.equal(r.published,false);assert.equal(r.requiresOwnerApproval,true);});
 test('broken local destination is rejected',async t=>{const f=await fixture(t);await fs.writeFile(path.join(f.artifact,'index.html'),f.html.replace('href="/"','href="/missing/"'));const a=await audit(f.config,f.root);assert.ok(a.issues.some(i=>i.rule==='missing-local-link'));});
+
+test('Cloudflare mode audits final extensionless URLs while file mode stays strict',async t=>{
+ const f=await fixture(t);
+ await fs.writeFile(path.join(f.artifact,'note.html'),f.html.replaceAll('https://example.test/','https://example.test/note'));
+ await fs.appendFile(path.join(f.artifact,'sitemap.xml'),'<url><loc>https://example.test/note</loc></url>');
+ const before=await audit(f.config,f.root);
+ assert.ok(before.issues.some(i=>i.rule==='canonical-address'));
+ const hosted=await audit({...f.config,routingMode:'cloudflare-pages'},f.root);
+ assert.equal(hosted.status,'passed',JSON.stringify(hosted.issues));
+ await fs.writeFile(path.join(f.artifact,'note.html'),f.html.replaceAll('https://example.test/','https://example.test/note.html'));
+ const redirected=await audit({...f.config,routingMode:'cloudflare-pages'},f.root);
+ assert.ok(redirected.issues.some(i=>i.rule==='canonical-address'));
+});
 test('redirect cycle and active legacy link are rejected',async t=>{const f=await fixture(t);await fs.writeFile(path.join(f.artifact,'_redirects'),'/old/ /older/ 301\n/older/ /old/ 301');await fs.writeFile(path.join(f.artifact,'index.html'),f.html.replace('href="/"','href="/old/"'));const a=await audit(f.config,f.root);assert.ok(a.issues.some(i=>i.rule==='redirect-chain'));assert.ok(a.issues.some(i=>i.rule==='legacy-link'));});
 test('noindex page cannot appear in sitemap',async t=>{const f=await fixture(t);await fs.writeFile(path.join(f.artifact,'index.html'),f.html.replace('<title>','<meta name="robots" content="noindex"><title>'));const a=await audit(f.config,f.root);assert.ok(a.issues.some(i=>i.rule==='noncanonical-url'));});
 test('invalid structured data, robots block and CSS missing assets are rejected',async t=>{const f=await fixture(t);await fs.writeFile(path.join(f.artifact,'index.html'),f.html.replace('{"@type":"Person","name":"Example"}','{broken}'));await fs.writeFile(path.join(f.artifact,'robots.txt'),'User-agent: *\nDisallow: /');await fs.writeFile(path.join(f.artifact,'site.css'),'body{background:url("/lost.png")}');const a=await audit(f.config,f.root);for(const rule of ['json-ld','index-block','missing-css-asset'])assert.ok(a.issues.some(i=>i.rule===rule),rule);});

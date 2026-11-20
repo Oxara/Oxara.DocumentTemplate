@@ -40,3 +40,11 @@ protected content drift and incomplete/stale browser evidence.
 This is not a claim of exhaustive accessibility, SEO ranking, security or live
 hosting verification. Record accepted exceptions and unverified external state.
 Visual review, owner approval, commit and deployment are separate operations.
+
+## Hosting URL policy
+
+Default routing uses file URLs. Set `routingMode: "cloudflare-pages"` only for
+Cloudflare Pages consumers: canonical/OG/sitemap use the final extensionless
+address, while the auditor resolves it to the existing `.html` source file.
+The shared path policy lives in `scripts/public-route-addresses.mjs`. GitHub
+Pages consumers retain file URLs. This does not rename source documents.

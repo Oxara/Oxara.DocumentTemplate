@@ -1,177 +1,113 @@
-# Oxara Document Template
+# Oxara DocumentTemplate
 
-Handbook, guide ve teknik makalelerde kullanılan ortak, domain-free doküman arayüzü.
+El kitapları, rehberler ve teknik makaleler için statik HTML, CSS ve JavaScript
+bileşenleri. İçerik ve ürüne özel görseller tüketicide; ortak okuma, gezinme,
+tema ve bileşen davranışları bu depoda yönetilir.
 
-Demo ve canli dokumantasyon: <https://oxara.github.io/Oxara.DocumentTemplate/>
+[Canlı dokümantasyon](https://oxara.github.io/Oxara.DocumentTemplate/) ·
+[Sürüm 1.2.2](https://github.com/Oxara/Oxara.DocumentTemplate/releases/tag/v1.2.2) ·
+[Değişiklikler](docs/changelog.html)
 
-## Tasarım yaklaşımı
+## Başlangıç
 
-Template'in varsayılan yapısı çok sayfalıdır:
-
-- `index.html` kısa bir karşılama ve konu seçim sayfasıdır.
-- Her ana konu ayri bir HTML sayfasinda tutulur.
-- Sol menu sayfalar arasinda gezinmeyi saglar.
-- Sag menu yalnizca aktif sayfanin `h2` ve `h3` basliklarini gosterir.
-- Header aksiyon alaninda yazar veya ana site donus baglantisi icin `author-link`
-  feature'i kullanilir.
-- Header marka işaretinde metin kısaltması yerine açık ve koyu yüzeylere uygun
-  gerçek iki renkli Oxara SVG çıktıları kullanılır; favicon ve PNG logo
-  varyantları da aynı normatif Brand exportundan gelir. Kaynak ve yetkilendirme
-  bilgisi [`docs/BRAND-ASSETS.md`](docs/BRAND-ASSETS.md) dosyasındadır.
-- Ana icerik kolonu okunabilir bir genislikte tutulur.
-- Kutu, callout ve vurgu yuzeyleri yalnizca anlam tasidiklarinda kullanilir.
-- Giris sayfasindaki konu kartinin tamami baglantidir; kart icinde tekrar eden CTA metni kullanilmaz.
-- Konu kartlari icerige gore boyutlanir; sabit veya minimum kart yuksekligi verilmez.
-- Bir kaynak kartında depo, demo, paket veya mağaza gibi birden fazla hedef varsa
-  kartın tamamı tek hedefe bağlanmaz; `resource-card` içindeki hedefler
-  ayrı ve açık bağlantılar olarak gösterilir.
-- Marka ve token değişiklikleri layout veya component yeniden tasarımı için yetki
-  vermez. Başlıkları pill, badge veya buton görünümüne çevirmek, dekoratif gradient
-  veya glow eklemek ve mevcut listeleri kartlaştırmak varsayılan olarak reddedilir.
-  Ayrıntılı red kriterleri [`docs/DESIGN-GUARDRAILS.md`](docs/DESIGN-GUARDRAILS.md)
-  dosyasındadır.
-
-Tek sayfalik makale veya kisa rehberlerde eski `sidemenu` feature'i kullanilabilir. Uzun
-handbook'lar icin varsayilan tercih `docs-layout` olmalidir.
-
-## Baslangic
-
-Yayın adayı için sürdürülen, AIO uyumlu `audit`, `quality`, `finalize` komutları
-[Static web release checks](tools/release-checks/README.md) altında bulunur.
-Bu araç eski DevKit çalışmış gibi rapor üretmez ve hiçbir Git/yayın işlemi yapmaz.
-
-Repoyu fork'layin veya indirin. Template'in kullandigi tekil CSS ve JavaScript
-feature dosyalari `features/` klasorunde bulunur. Birden fazla feature'i hazir
-giris noktasindan yukleyen paketler `feature-packages/` klasorundedir.
-
-Brand kimliği ve canonical consumer assetleri tek kontrollü komutla yenilenir.
-Komut varsayılan olarak kardeş `Oxara.Brand` reposunu kullanır; farklı konum için
-`OXARA_BRAND_HOME` ayarlanabilir. `--check` yazma yapmadan drift denetler:
-
-```powershell
-node scripts/sync-brand-consumer.mjs
-node scripts/sync-brand-consumer.mjs --check
-```
+Repoyu indirin veya fork'layın; sayfalar statik bir HTTP sunucusuyla çalışır.
+Hazır paketi sayfanızın göreli yoluna göre yükleyin:
 
 ```html
 <script src="features/theme/theme-boot.js"></script>
 <link rel="stylesheet" href="feature-packages/core.css">
-
 <script src="feature-packages/core.js"></script>
 ```
 
-Tema kullanan sayfalarda `features/theme/theme-boot.js` CSS'ten once
-calismalidir. Bu kucuk boot parcasi yalnizca localStorage'daki gecerli `light`
-veya `dark` tercihini uygular; boylece dark modda beyaz flash, light modda siyah
-flash olusturmaz.
+`theme-boot.js` CSS'ten önce yüklenir; kayıtlı açık/koyu tercih ilk kareye uygulanır.
+Sayfa içeriği statik ve semantik HTML'dir; runtime Markdown dönüştürmesi gerekmez.
+Ayrıntılar: [başlangıç](docs/getting-started.html),
+[paketler ve feature referansı](docs/reference.html).
 
-Hazir paket yeterli degilse ihtiyaciniz olan feature dosyalarini yerel
-`features/` klasorunden tek tek ekleyin. Dosya listesi ve bagimliliklar
-[`features/features.json`](features/features.json) manifestinde bulunur. Hazir
-paket listesi [`feature-packages/packages.json`](feature-packages/packages.json)
-dosyasindadir.
+## Bileşenler ve kaynakları
 
-Opsiyonel görsel açılışların sınırları ve ortak scrollbar/tema davranışı için
-[Illustrated consumer integration](docs/ILLUSTRATED-CONSUMER-INTEGRATION.md) belgesine bakın.
+| Kaynak | Sorumluluk |
+| --- | --- |
+| `features/` ve `features/features.json` | Tekil bileşenler, bağımlılıklar ve varlık listesi |
+| `feature-packages/` | Core/full CSS ve üretilmiş davranış girişleri |
+| `scripts/behavior-packages.mjs` | Tek kaynaklı script sırası ve ortak yükleyici |
+| `features/base/theme-tokens.json` | Ortak semantik tema rolleri |
+| `assets/presentation/` | Sabit boyalı 2D hero/kart varsayılanları |
+| `docs/` | Canlı örnekler, kullanım ve tasarım sözleşmeleri |
+| `tools/release-checks/` | Statik web yayın denetim motoru |
 
-## Feature kullanimi
+Uzun belgelerde `docs-layout`, kısa tek sayfalarda isteğe bağlı `sidemenu`
+kullanılır. Sol menü sayfalar arasında, sağ menü aktif sayfanın başlıklarında
+gezinir. Arama, kod/tablo kopyalama, kod sekmeleri, okuma ilerlemesi ve tema
+kontrolleri ihtiyaç duyulan feature veya paketle eklenebilir.
 
-- `features/` altindaki `base` ve diger feature'lar bu repoda gelistirilir.
-- `feature-packages/` altindaki dosyalar feature degil, birden fazla feature'i
-  birlikte yukleyen kolaylik paketleridir.
-- Domain'e ozel icerik, renk veya davranis ortak feature'a eklenmez. Proje ihtiyaci ayri bir proje CSS dosyasinda tutulur.
-- Handbook ana icerigi statik ve semantik HTML olarak yazilir; Markdown parser veya runtime icerik uretimi kullanilmaz.
-- Kod orneklerinde okuyucuya yalnizca gercek JSON, XML veya kaynak kod gosterilir.
-  `script.code-block` gibi teknik kapsayicilar sadece Template feature kullanimini
-  anlatan orneklerde gorunur.
+Core ve full girişleri aynı kaynak dosyadan üretilir. İndirmeler birlikte
+başlar, klasik scriptler tanımlı sırayla çalışır; iki paket ortak in-flight
+kaydını paylaşır. Giriş dosyaları elle değiştirilmez:
 
-## Yapi
-
-```text
-Oxara.DocumentTemplate/
-  index.html
-  assets/
-    example-article-cover.svg
-  docs/
-    getting-started.html
-    document-components.html
-    code-features.html
-    navigation.html
-    configuration.html
-    reference.html
-    changelog.html
-  features/
-    base/
-    resource-card/
-    author-link/
-    docs-layout/
-    theme/
-    code-highlight/
-    copy-code/
-    copy-table/
-    code-tabs/
-    sidemenu/
-    search/
-    scroll-top/
-    reading-progress/
-    navigation-progress/
-    features.json
-  feature-packages/
-    core.css
-    core.js
-    full.css
-    full.js
-    packages.json
+```powershell
+node scripts/build-behavior-packages.mjs
+node scripts/build-behavior-packages.mjs --check
 ```
 
-## Surum yonetimi
+## Tasarım ve görselli sunum
 
-Kullaniciya donuk her degisiklik ayni commit veya pull request icinde
-[`docs/changelog.html`](docs/changelog.html) sayfasina eklenir.
+Okunabilir içerik, tutarlı bilgi yoğunluğu ve erişilebilir gezinme önceliklidir.
+Brand değişikliği düzeni yeniden tasarlama izni değildir. Başlıkları pill/badge
+veya butona dönüştürmeyin; dekorasyon için yeni panel ve kartlar eklemeyin.
+[Tasarım sınırları](docs/DESIGN-GUARDRAILS.md) normatif kaynaktır.
 
-Yeni surum yayinlanirken:
+Tek hedefli konu kartı tam yüzey bağlantı olabilir. Depo, demo, paket veya mağaza
+hedefleri farklıysa `resource-card` içinde ayrı ve açık bağlantılar kullanılır.
+İç içe link ve aynı hedef için tekrarlanan aksiyon satırları kullanılmaz.
 
-1. `Unreleased` maddeleri tarihli surum basligina tasinir.
-2. Degisiklik ve changelog birlikte commit edilir.
-3. Commit icin yeni bir annotated SemVer etiketi olusturulur.
-4. Etiket origin'e gonderilir ve ayni notlarla GitHub Release olusturulur.
+`document-hero` core/full paketlerinde, `illustrated-card` full paketindedir.
+Özel artwork verilmezse aynı sabit atlas, kapalı kitap ve meyvesiz dal/yaprak
+seti kullanılır. Konu başına veya çalışma anında görsel üretilmez.
+Özel arka plan/prop/growth slotları varsayılanları değiştirir; kişisel sahne,
+maskot, katalog veya biyografi ortak template'e taşınmaz.
 
-Yayinlanmis bir etiket silinmez, yeniden olusturulmaz veya baska bir commit'e
-zorla tasinmaz. Duzeltmeler her zaman yeni bir patch surumuyle yayinlanir.
+- [Canlı hero/kart örnekleri ve API](docs/illustrated-presentation.html)
+- [Görsel standart](docs/ILLUSTRATED-VISUAL-STANDARD.md)
+- [Kalıcı üretim kuralları ve promptlar](docs/ILLUSTRATION-GENERATION.md)
+- [Tüketici entegrasyonu](docs/ILLUSTRATED-CONSUMER-INTEGRATION.md)
+- [Tema uyumu](docs/THEME-COMPATIBILITY.md) ve [tema önizlemesi](docs/theme-preview.html)
 
-## Yeni dokuman
+Bir feature'ı tek başına kopyalarken manifestteki `requires` ve `assets`
+bağımlılıklarını da taşıyın. Ürüne özel metin, adres ve CSS tüketicide kalır.
 
-1. Ihtiyac duyulan feature listesini belirleyin.
-2. Gerekli CSS ve JS dosyalarini yerel `features/` yollarindan ekleyin veya uygunsa `feature-packages/` altindaki `core` / `full` paketlerinden birini kullanin.
-3. Uzun icerigi konu bazli HTML sayfalarina bolun.
-4. Sol navigasyonu tum sayfalarda ayni bilgi mimarisiyle kullanin.
-5. Gerekli feature HTML iskeletlerini canli rehberden alin.
-6. Projeye ozel stilleri `document.css` gibi ayri bir dosyada tutun.
-7. Giris kartlarinda `Konuyu ac` gibi tekrar eden aksiyon satirlari kullanmayin.
+## Brand eşleme ve geliştirme
+
+OX geometrisi, kimlik renkleri ve izinli istisnaların sahibi Oxara.Brand'dır.
+Eşleme varsayılan olarak kardeş depoyu kullanır; başka konum için
+`OXARA_BRAND_HOME` verilebilir. Üretilen `theme-colors.css`, `base.css` ile
+birlikte tüketilir. [Brand kaynak bilgisi](docs/BRAND-ASSETS.md).
+
+```powershell
+npm ci --ignore-scripts
+node scripts/sync-brand-consumer.mjs
+npm test
+node scripts/sync-brand-consumer.mjs --check
+```
+
+`--check` yazmadan drift denetler. Testler tema kontrastı, loader sırası/hata
+akışı, hero lifecycle, drawer güvenliği ve yayın denetimi regresyonlarını kapsar.
+
+## Yayın ve sürümleme
+
+[Audit → quality → finalize](tools/release-checks/README.md) motoru tüketicinin
+release config'iyle çalışır. `quality`, aynı artifact'e bağlı gerçek tarayıcı
+kanıtını ve kaynak kontrollerini ister. `finalize` paket hazırlığını doğrular;
+Git veya hosting yayını yapmaz. Teknik geçiş ve yaratıcı kabul ayrı kayıtlardır.
+`routingMode: "cloudflare-pages"`, denetimde `.html` kaynaklarını hosting'in
+uzantısız adresleriyle eşler. Varsayılan dosya modu ve GitHub Pages değişmez;
+ortak yol politikası `scripts/public-route-addresses.mjs` sahibindedir.
+
+Kullanıcıya görünen değişiklikler aynı commit'te [changelog](docs/changelog.html)
+içine yazılır. Sürüm commit'i annotated SemVer etiketi ve aynı notlarla GitHub
+Release üzerinden yayımlanır. Yayımlanmış etiket değiştirilmez; düzeltme yeni
+patch sürümüdür. Canlı dokümantasyon GitHub Pages'in `main` dalı/kök çıktısıdır.
 
 ## Lisans
 
-MIT
-
-### Generated behavior entries
-
-`node scripts/build-behavior-packages.mjs` generates `feature-packages/core.js`
-and `full.js` from `scripts/behavior-packages.mjs`. Use `--check` to reject drift,
-and `node --test scripts/behavior-packages.test.mjs` for lifecycle regressions.
-Downloads start together; ordered classic-script evaluation retains feature
-initialization order. Both entries share a per-document in-flight registry.
-Consumer copies belong in the Brand shared-file drift contract.
-
-## Tema uyumu
-
-Ink/Graphite semantik sistemi ve14bileşen kapsamı: [THEME-COMPATIBILITY](docs/THEME-COMPATIBILITY.md). [Canlı tema önizlemesi](docs/theme-preview.html). Theme kaynağını değiştirdikten sonra `node scripts/sync-brand-consumer.mjs`, `npm test` ve `node scripts/sync-brand-consumer.mjs --check` çalıştırılır.
-
-### Illustrated presentation implementation
-
-Fixed painterly 2D defaults replace the initial vector demo following the user’s explicit generate-and-use instruction. Follow the [visual constraints](docs/ILLUSTRATED-VISUAL-STANDARD.md).
-
-The landing uses registered document-hero; [live defaults and API](docs/illustrated-presentation.html). Omit custom art/prop slots to use fixed assets/presentation/atlas-painted-v1.webp and book-painted-v1.webp. Supply slots to override them; no topic-specific generation is required. document-hero is in core/full; illustrated-card is in full or imported with resource-card. Personal artwork/catalog/biography remain consumer-owned.
-
-For a custom feature copy, include its `assets` and `requires` manifest entries along with CSS/JS. All default illustrations are fixed painterly WebP assets maintained in this repository. The normal landing intentionally supplies no custom image slots, proving the fallback contract rather than a consumer-specific mockup.
-
-Görsel üretim kuralları, katman promptları ve meyvesiz dal/yaprak düzeltmesi: [ILLUSTRATION-GENERATION.md](docs/ILLUSTRATION-GENERATION.md). Canlı Görselli Sunum sayfasında da bulunur.
+[MIT](LICENSE).

@@ -3,6 +3,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {parse} from 'parse5';
+import {publicPagePath} from '../../scripts/public-route-addresses.mjs';
 
 export const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 export async function readJson(file){return JSON.parse(await fs.readFile(file,'utf8'));}
@@ -24,10 +25,10 @@ export function elements(html){
 }
 const nodeText=node=>(node.childNodes||[]).map(n=>n.nodeName==='#text'?n.value:nodeText(n)).join('');
 export function inside(root,file){return file===root||file.startsWith(root+path.sep);}
-export async function targetFile(root,pathname){
+export async function targetFile(root,pathname,mode='files'){
  let decoded;try{decoded=decodeURIComponent(pathname);}catch{return null;}
  const file=path.resolve(root,'.'+decoded);if(!inside(root,file))return null;
- const stat=await fs.stat(file).catch(()=>null);if(!stat)return null;
+ const stat=await fs.stat(file).catch(()=>null);if(!stat){if(mode==='cloudflare-pages'&&!pathname.endsWith('/'))return await fs.stat(file+'.html').then(s=>s.isFile()?file+'.html':null,()=>null);return null;}
  const candidate=stat.isDirectory()?path.join(file,'index.html'):file;
  return await fs.stat(candidate).then(s=>s.isFile()?candidate:null,()=>null);
 }
@@ -36,16 +37,17 @@ export async function audit(config,root){
  const artifact=path.resolve(root,config.artifact),rows=await inventory(artifact),issues=[],warnings=[];
  const fail=(file,rule,detail)=>issues.push({file,rule,detail});
  const origin=new URL(config.origin).origin,indexed=new Map(),redirects=new Map();
+ const resolveTarget=pathname=>targetFile(artifact,pathname,config.routingMode);
  const forbidden=config.forbiddenPublicSegments||['work','.planning','.git','node_modules'];
  for(const row of rows)if(row.file.split('/').some(p=>forbidden.includes(p)))fail(row.file,'public-boundary','Private/dependency path in public artifact');
  for(const required of config.requiredFiles||[])if(!rows.some(r=>r.file===required))fail(required,'required-file','Missing from public artifact');
  const redirectSource=await fs.readFile(path.join(artifact,'_redirects'),'utf8').catch(()=>'');
  for(const line of redirectSource.split(/\r?\n/).filter(l=>l.trim()&&!l.startsWith('#'))){const [from,to,status,...extra]=line.trim().split(/\s+/);if(!from||!to||!/^30[1278]$/.test(status)||extra.length)fail('_redirects','redirect-syntax',line);else if(redirects.has(from))fail('_redirects','duplicate-redirect',from);else redirects.set(from,{to,status:Number(status)});}
- for(const [from,{to}]of redirects){if(from.includes('*')){fail('_redirects','unsupported-rule','Use explicit redirects for auditable page migrations');continue;}if(redirects.has(to))fail('_redirects','redirect-chain',`${from} -> ${to}`);const destination=new URL(to,origin);if(destination.origin===origin&&!await targetFile(artifact,destination.pathname))fail('_redirects','missing-target',to);}
+ for(const [from,{to}]of redirects){if(from.includes('*')){fail('_redirects','unsupported-rule','Use explicit redirects for auditable page migrations');continue;}if(redirects.has(to))fail('_redirects','redirect-chain',`${from} -> ${to}`);const destination=new URL(to,origin);if(destination.origin===origin&&!await resolveTarget(destination.pathname))fail('_redirects','missing-target',to);}
  let htmlCount=0,jsonLdCount=0,linkCount=0;
  for(const row of rows.filter(r=>r.file.endsWith('.html'))){
   htmlCount++;const html=await fs.readFile(path.join(artifact,row.file),'utf8'),nodes=elements(html);
-  const page=new URL('/'+row.file.replace(/index\.html$/,''),origin);
+  const page=new URL(publicPagePath('/'+row.file.replace(/index\.html$/,''),config.routingMode),origin);
   const metas=nodes.filter(n=>n.tag==='meta'),noindex=metas.some(n=>n.attrs.name==='robots'&&/noindex/i.test(n.attrs.content||''));
   const canonicals=nodes.filter(n=>n.tag==='link'&&n.attrs.rel==='canonical');
   if(row.file!=='404.html'){
@@ -64,14 +66,14 @@ export async function audit(config,root){
    for(const raw of candidates){if(/^(?:#|data:|mailto:|tel:)/i.test(raw))continue;let url;try{url=new URL(raw,page);}catch{fail(row.file,'invalid-url',raw);continue;}
     if(url.origin!==origin)continue;linkCount++;
     if(!noindex&&redirects.has(url.pathname))fail(row.file,'legacy-link',raw);
-    if(!await targetFile(artifact,url.pathname))fail(row.file,'missing-local-link',raw);
+    if(!await resolveTarget(url.pathname))fail(row.file,'missing-local-link',raw);
    }
   }
   for(const phrase of config.forbiddenPublicText||[])if(html.includes(phrase))fail(row.file,'private-source-reference','Disallowed local production reference');
  }
  for(const row of rows.filter(r=>r.file.endsWith('.css'))){
   const css=await fs.readFile(path.join(artifact,row.file),'utf8'),base=new URL('/'+row.file,origin);
-  for(const match of css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)){const raw=match[1].trim();if(/^(data:|#)/i.test(raw)||raw.includes('var('))continue;let url;try{url=new URL(raw,base);}catch{continue;}if(url.origin===origin&&!await targetFile(artifact,url.pathname))fail(row.file,'missing-css-asset',raw);}
+  for(const match of css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)){const raw=match[1].trim();if(/^(data:|#)/i.test(raw)||raw.includes('var('))continue;let url;try{url=new URL(raw,base);}catch{continue;}if(url.origin===origin&&!await resolveTarget(url.pathname))fail(row.file,'missing-css-asset',raw);}
  }
  for(const row of rows.filter(r=>/\.(?:mjs|js)$/.test(r.file))){
   const result=spawnSync(process.execPath,['--check',path.join(artifact,row.file)],{encoding:'utf8',timeout:15000});
