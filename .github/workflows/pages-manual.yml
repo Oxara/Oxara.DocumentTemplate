@@ -31,7 +31,6 @@ jobs:
       contents: read
       pages: read
     env:
-      OXARA_BRAND_HOME: ${{ runner.temp }}/dt-brand-release-input
       REVIEWED_SHA: ${{ inputs.reviewed_sha }}
       EXPECTED_ARTIFACT_DIGEST: ${{ inputs.artifact_digest }}
     steps:
@@ -40,6 +39,7 @@ jobs:
           [[ "$REVIEWED_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$GITHUB_SHA" == "$REVIEWED_SHA" ]]
           [[ "$EXPECTED_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          echo "OXARA_BRAND_HOME=$RUNNER_TEMP/dt-brand-release-input" >> "$GITHUB_ENV"
 
       - name: Checkout the dispatch commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
