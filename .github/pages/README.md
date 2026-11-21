@@ -32,7 +32,10 @@ Workflow yalnız manuel dispatch ile incelenen commit ve artifact digest’ini d
    denmez. Başarısız digest/test kapısı bypass edilmez.
 7. Başarılı yayın ve canlı doğrulama sonrasında `draft`'ı yayımlanan `main`
    commit'ine **fast-forward** edin ve normal push yapın. Örnek: `git fetch origin`,
-   `git switch draft`, `git merge --ff-only origin/main`, `git push origin draft`.
+   `git switch main`, `git merge --ff-only origin/main`, `git switch draft`,
+   `git merge --ff-only origin/main`, `git push origin draft`. Yerel `main` henüz
+   yoksa `git switch --track origin/main` ile oluşturun. Her iki dalda da farklı
+   yerel iş veya commit varsa işi ezmeden durun; fast-forward koşulunu kaldırmayın.
    Yerel ve uzak `draft`/`main` uçlarının hem tam commit SHA'sı hem tree SHA'sı
    birebir eşit olmalıdır; makbuza ikisini de kaydedin. Force push/reset ile
    farklı işi silmeyin. `draft` ilerlemiş veya ayrışmışsa eşitlik sağlanmış gibi
