@@ -126,6 +126,7 @@
 }
 
 .search-input {
+    min-width:0;
     flex: 1;
     background: transparent;
     border: none;
@@ -138,6 +139,7 @@
 .search-input::placeholder { color: var(--text-dim); }
 
 .search-close {
+    min-width:32px; min-height:32px;
     background: transparent;
     border: none;
     font-size: 1.5rem;
@@ -159,12 +161,14 @@
 }
 
 .search-result-item {
+    display:block; text-decoration:none; color:var(--text);
     padding: 0.9rem 1.2rem;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
     transition: background 0.1s ease;
 }
 
+.search-result-item:focus-visible { outline:2px solid var(--ui-focus); outline-offset:-3px; }
 .search-result-item:hover,
 .search-result-item.selected { background: var(--surface-2); }
 
@@ -235,3 +239,5 @@
         transition: none;
     }
 }
+
+@media(pointer:coarse) { .search-close { min-width:40px; min-height:40px; } }

@@ -25,9 +25,7 @@
 [data-document-hero] .docs-eyebrow { color: var(--hero-accent, var(--brand-light)); }
 [data-document-hero] :is(h1,h2) { max-width: 12ch; font-size: clamp(2.8rem, 5.7vw, 5.1rem); line-height: 1.04; letter-spacing: -.05em; overflow-wrap: anywhere; color: var(--hero-text, #f2f7f7); }
 .document-hero-copy > p:not(.docs-eyebrow) { max-width: 49ch; margin: 1.8rem 0 0; color: var(--hero-muted, #d4e5e8); font-size: clamp(1rem, 1.4vw, 1.13rem); line-height: 1.75; }
-[data-document-hero] .docs-primary-action { min-height: 48px; padding: .8rem 1.25rem; color: var(--hero-action-text, var(--ui-primary-foreground)); background: var(--hero-action-bg, var(--ui-primary)); border: 1px solid var(--hero-action-border, var(--ui-primary)); }
-[data-document-hero] .docs-primary-action:hover { background: var(--hero-action-hover, var(--ui-primary-hover)); }
-[data-document-hero] a:focus-visible { outline: 3px solid var(--hero-focus, var(--ui-focus)); outline-offset: 5px; }
+[data-document-hero] a:focus-visible { outline:3px solid var(--hero-focus,#F4F7F8); outline-offset:5px; }
 .document-hero-book { justify-self: center; width: min(100%, 290px); transform: translateY(var(--document-book-y, 0px)) rotate(4deg); }
 .document-hero-book svg { display: block; width: 100%; height: auto; max-height: 390px; filter: drop-shadow(3px 5px 3px #00121c66) drop-shadow(10px 20px 16px #00121c66); }
 .document-hero-edge { position: absolute; bottom: -1px; left: 0; width: 100%; height: 42px; fill: var(--bg); }
@@ -59,7 +57,6 @@
 }
 
 .document-hero-book img {display:block;width:100%;height:auto;max-height:390px;object-fit:contain;}
-[data-document-hero] .docs-secondary-action {color:var(--hero-text,#f2f7f7);}
 @media print {[data-document-hero].docs-home-hero {min-height:0;margin:0 0 2rem;padding:1rem;background:none;color:var(--text);} .document-hero-art,.document-hero-book,.document-hero-edge {display:none;} [data-document-hero] :is(h1,h2),.document-hero-copy>p:not(.docs-eyebrow){color:var(--text);}}
 
 [data-document-hero] h2 {border:0;padding:0;display:block;}

@@ -30,30 +30,45 @@
             copyButton.type      = 'button';
             copyButton.textContent = COPY_LABEL;
 
+            var resetTimer;
+            copyButton.setAttribute('aria-live', 'polite');
             copyButton.addEventListener('click', function () {
+                clearTimeout(resetTimer);
+                copyButton.classList.remove('is-copied', 'is-error');
                 var text = code.textContent || '';
-                navigator.clipboard.writeText(text).then(function () {
+                copyButton.disabled = true;
+                copyButton.setAttribute('aria-busy', 'true');
+                var restoreFocus = false;
+                function fallback() {
+                    return new Promise(function (resolve, reject) {
+                        var field = document.createElement('textarea');
+                        field.value = text;
+                        field.setAttribute('readonly', '');
+                        field.style.cssText = 'position:fixed;top:-999px;opacity:0';
+                        document.body.appendChild(field);
+                        field.select();
+                        try {
+                            if (document.execCommand('copy')) resolve();
+                            else reject(new Error('Copy command failed'));
+                        } catch (error) { reject(error); }
+                        finally { restoreFocus = document.activeElement === field; field.remove(); }
+                    });
+                }
+                var operation = navigator.clipboard && navigator.clipboard.writeText
+                    ? navigator.clipboard.writeText(text).catch(fallback) : fallback();
+                operation.then(function () {
                     copyButton.textContent = COPIED_LABEL;
                     copyButton.classList.add('is-copied');
-                    setTimeout(function () {
-                        copyButton.textContent = COPY_LABEL;
-                        copyButton.classList.remove('is-copied');
-                    }, RESET_MS);
                 }).catch(function () {
-                    /* Clipboard API başarısız → fallback execCommand */
-                    var fallbackTextarea = document.createElement('textarea');
-                    fallbackTextarea.value = text;
-                    fallbackTextarea.style.position = 'fixed';
-                    fallbackTextarea.style.opacity  = '0';
-                    document.body.appendChild(fallbackTextarea);
-                    fallbackTextarea.select();
-                    try { document.execCommand('copy'); } catch (error) { /* sessiz */ }
-                    document.body.removeChild(fallbackTextarea);
-                    copyButton.textContent = COPIED_LABEL;
-                    copyButton.classList.add('is-copied');
-                    setTimeout(function () {
+                    copyButton.textContent = 'Copy failed';
+                    copyButton.classList.add('is-error');
+                }).finally(function () {
+                    copyButton.disabled = false;
+                    copyButton.removeAttribute('aria-busy');
+                    if (restoreFocus) copyButton.focus({preventScroll:true});
+                    resetTimer = setTimeout(function () {
                         copyButton.textContent = COPY_LABEL;
-                        copyButton.classList.remove('is-copied');
+                        copyButton.classList.remove('is-copied', 'is-error');
                     }, RESET_MS);
                 });
             });

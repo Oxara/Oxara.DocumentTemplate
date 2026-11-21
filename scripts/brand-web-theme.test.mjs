@@ -1,0 +1,8 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validateBrandWebTheme} from './brand-web-theme.mjs';
+function fixture(){return {manifest:{consumerTheme:{brand:'#19C7B5',primaryBackground:'#19C7B5',primaryHover:'#BAC68D',primaryForeground:'#0B1D29',neutralInk:'#0B1D29'},contrastExceptions:[]},profile:{consumerTheme:{primaryBackground:'webAction.primary.background',primaryHover:'webAction.primary.hover',primaryForeground:'webAction.primary.foreground'}},resolved:{values:{background:'#19C7B5',hover:'#BAC68D',foreground:'#0B1D29'}}};}
+const check=f=>validateBrandWebTheme(f.manifest,f.profile,f.resolved);
+test('typed web normal and independent hover meet AA',()=>{const r=check(fixture());assert.ok(r.primaryContrast>=4.5);assert.ok(r.hoverContrast>=4.5);});
+test('legacy non-web alias cannot stand in for the typed web foreground',()=>{const f=fixture();f.profile.consumerTheme.primaryForeground='color.semantic.uiPrimary.foreground';assert.throws(()=>check(f),/typed web/);});
+test('resolved source and exported web roles cannot drift',()=>{for(const role of ['primaryBackground','primaryHover','primaryForeground']){const f=fixture();f.manifest.consumerTheme[role]='#FFFFFF';assert.throws(()=>check(f),/resolved source/);}});
+test('old white contrast exception cannot travel into an Ink web pair',()=>{const f=fixture();f.manifest.contrastExceptions=[{rule:'ui-primary-contrast'}];assert.throws(()=>check(f),/legacy white/);});
+test('typed provenance does not waive unreadable hover text',()=>{const f=fixture();f.manifest.consumerTheme.primaryHover=f.resolved.values.hover='#0B1D29';assert.throws(()=>check(f),/contrast/);});

@@ -1,8 +1,6 @@
 # Manuel GitHub Pages yayın tarifi
 
-Bu dosyalar yalnız incelemeye hazır yayın kodudur. Workflow çalıştırılmadı;
-GitHub ayarı, commit/push veya yayın yapılmadı. README'deki tarihî `main`/root
-Pages kaynağı bu hazırlıkla değişmez; güncel uzak ayar burada doğrulanmadı.
+Workflow yalnız manuel dispatch ile incelenen commit ve artifact digest’ini dağıtır. 21 Kasım2026 salt okunur kontrolünde uzak Pages build_type=workflow idi; domain ve environment korumaları değiştirilmez. Yeni release için kaynak/test/artifact bağlaması yeniden doğrulanır.
 
 ## Yetkili yayın aşamasındaki sıra
 
@@ -32,7 +30,7 @@ Yerelde incelenen Windows çalışma ağacı ile daha sonra commit edilmiş Linu
 checkout'u satır sonu normalizasyonu nedeniyle farklı byte/hash üretebilir.
 Onaylanacak digest, **tam yayın commit'inin** incelenmiş çıktısına ait olmalıdır;
 önceki yerel hash'in bütün gelecek commit/runner'larda aynı olduğu varsayılmaz.
-Bu hazırlıkta runner veya deploy çalıştırılmadı. Uyumsuzluk varsa yeni artifact
+Önceki bir başarılı runner/deploy yeni release’in geçtiği anlamına gelmez. Uyumsuzluk varsa yeni artifact
 incelenir; digest kapısı kaldırılarak yayın yapılmaz.
 
 ## Dar izinler ve bağımlılıklar
@@ -86,3 +84,5 @@ container digest'i değildir; dış runner/deployment davranışı henüz sınan
 
 Dokümandaki örnek major sürümler yerine release API'sinde doğrulanan güncel
 sürümler sabitlendi. Bu, GitHub.com içindir; GHES uyumluluğu varsayılmaz.
+
+The reviewed web input includes typed web-action, companion-palette and resolver source hashes. CI binds these manifest inputs and the explicit published release status and source commit to the provenance snapshot; it does not treat the source checkout HEAD as a new Brand release. The live sibling sync validator checks all eight source hashes and resolves the three aliases through the verified Brand resolver.

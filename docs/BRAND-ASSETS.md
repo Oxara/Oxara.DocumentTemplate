@@ -1,15 +1,14 @@
 # Oxara Brand asset provenance
 
-DocumentTemplate kurumsal marka assetleri, aktif `Oxara.Brand` çalışma
-ağacındaki `document-template-web` profilinin normatif exportundan alınır.
+DocumentTemplate kurumsal marka assetleri, yayımlanmış `Oxara.Brand v1.1.0` kaynağının `document-template-web` release exportundan alınır.
 Consumer dosyaları elle çizilmez, yeniden renklendirilmez veya farklı bir
 geometriyle üretilmez.
 
 - Consumer authorization: `Oxara-Brand-Consumer-1.0`
 - Base geometry: `ox-v1`
 - Profile: `document-template-web`
-- Profile SHA-256: `7753c63dc4587ee9d75e49c157e87b54d9c87d743ba9626b28ab50e0e3034990`
-- Manifest SHA-256: `4111e6e7e69ae13b1f8b1bf7fd2c6286ad7476078f43323f35bdb0c6c0434e4f`
+- Profile SHA-256: `ce1ccb1ee33d87e0b103e17f64834b3699440030308ac84e33d7388d4a5e2aa5`
+- Manifest SHA-256: `2caecbe84b38557975c117cb71962dfac40d166b76b296fc0bbacbd7593d1129`
 - Identity accent: Oxara Turquoise 500 `#19C7B5`
 - Consumer: `Oxara.DocumentTemplate`
 
@@ -61,3 +60,9 @@ Identity accent ve primary action ayrı roller olarak kalır fakat aynı canonic
 Turquoise değerine resolve olur. DocumentTemplate site veya doküman tipine özgü token yayımlamaz.
 Brand geçişi; başlıkları butonlaştırmayı, gradient/glow eklemeyi, içerik
 gridlerini kartlaştırmayı veya layout hiyerarşisini değiştirmeyi kapsamaz.
+
+## Web action roles
+
+The published Brandv1.1.0 web export binds primaryBackground, primaryForeground and primaryHover to typed aliases in Brand assets/tokens/web-actions.json. Current pairs are #19C7B5 / #0B1D29 and #BAC68D / #0B1D29; no contrast exception is carried forward. Non-web color.semantic.uiPrimary is unchanged. Source hashes for web actions, companion palette and the canonical resolver are checked before consumption.
+
+This input is the real Brandv1.1.0 release artifact from commit7d9598cff104700c3d4bc95ddbc0d5fba27f5f50. The byte-identical manifest is retained under .github/pages with its published tag/commit and source-input hashes; the working-tree export is not relabelled. Use OXARA_BRAND_HOME for the verified release-artifact root (which contains exports/document-template-web and the required provenance sources).

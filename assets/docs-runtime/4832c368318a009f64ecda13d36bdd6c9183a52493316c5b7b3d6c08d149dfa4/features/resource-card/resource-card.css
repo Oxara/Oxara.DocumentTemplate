@@ -1,0 +1,26 @@
+/* ============================================================
+   RESOURCE-CARD.CSS - Multi-destination product/resource cards
+   ============================================================ */
+
+.resource-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; margin: 1.4rem 0; }
+.resource-card { display: flex; flex-direction: column; padding: 1.3rem; background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--identity-accent); border-radius: 8px; box-shadow: var(--shadow); }
+.resource-card .resource-card__meta { margin-bottom: .8rem; color: var(--text-dim); font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.resource-card .resource-card__title { margin: 0 0 .55rem; color: var(--text); font-size: 1.05rem; font-weight: 700; line-height: 1.35; }
+.resource-card .resource-card__description { margin: 0; color: var(--text-muted); font-size: .86rem; line-height: 1.55; }
+.resource-card__links { display: flex; flex-wrap: wrap; gap: .55rem 1rem; margin-top: auto; padding-top: 1.2rem; }
+.resource-card__link { color: var(--ui-link); font-size: .78rem; font-weight: 700; text-underline-offset: .2em; }
+.resource-card__link:hover { color: var(--ui-link-hover); }
+.resource-card__link:focus-visible { border-radius: 2px; outline: 2px solid var(--ui-focus); outline-offset: 3px; }
+.resource-card__links--buttons { gap: .55rem; }
+.resource-card__action { display: inline-flex; min-height: 38px; padding: 0; align-items: stretch; justify-content: center; gap: 0; overflow: hidden; color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; font-size: .75rem; font-weight: 700; line-height: 1; text-decoration: none; transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease; }
+.resource-card__action:hover { color: var(--text); background: var(--surface); border-color: var(--ui-primary); text-decoration: none; transform: translateY(-1px); }
+.resource-card__action--primary, .resource-card__action--primary:hover { color: #FFFFFF; background: var(--ui-primary); border-color: var(--ui-primary); }
+.resource-card__action:focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 3px; }
+.resource-card__action-icon { box-sizing: content-box; width: 16px; height: 16px; flex: 0 0 16px; padding: 10px; color: var(--oxara-ink); background: var(--ui-primary); fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.4; }
+.resource-card__action-label { display: inline-flex; padding: 0 .72rem; align-items: center; }
+.resource-card__action--primary .resource-card__action-icon { color: var(--ui-link); background: var(--surface-2); }
+
+
+/* Original compact resource-card appearance is intentionally retained.
+   Its white primary label is the task-start legacy pair, independent of the
+   new shared web-action Ink foreground; no shared CTA frame/leaf treatment. */

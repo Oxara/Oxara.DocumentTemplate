@@ -8,8 +8,8 @@
     --brand-border: rgba(25, 199, 181, .18);
     --identity-accent: var(--brand);
     --ui-primary: #19C7B5;
-    --ui-primary-hover: #19C7B5;
-    --ui-primary-foreground: #FFFFFF;
+    --ui-primary-hover: #BAC68D;
+    --ui-primary-foreground: #0B1D29;
     --ui-link: #0F786D;
     --ui-link-hover: #0A5049;
     --ui-focus: #0F786D;
@@ -77,8 +77,8 @@
     --brand-border: rgba(25, 199, 181, .28);
     --identity-accent: var(--brand);
     --ui-primary: #19C7B5;
-    --ui-primary-hover: #19C7B5;
-    --ui-primary-foreground: #FFFFFF;
+    --ui-primary-hover: #BAC68D;
+    --ui-primary-foreground: #0B1D29;
     --ui-link: #19C7B5;
     --ui-link-hover: #47D3C3;
     --ui-focus: #19C7B5;

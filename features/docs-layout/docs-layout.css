@@ -425,21 +425,7 @@
     margin-top: 2rem;
 }
 
-.docs-primary-action,
-.docs-secondary-action {
-    display: inline-flex;
-    align-items: center;
-    min-height: 42px;
-    padding: .65rem 1rem;
-    border-radius: 8px;
-    font-size: .84rem;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.docs-primary-action { color: var(--ui-primary-foreground); background: var(--ui-primary); }
-.docs-secondary-action { color: var(--text); border: 1px solid var(--border); }
-.docs-secondary-action:hover { background: var(--surface); }
+/* Shared CTA states are owned by base/actions.css. */
 
 .docs-home-section { margin-bottom: 7rem; }
 .docs-home-section-heading {

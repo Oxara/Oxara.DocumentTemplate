@@ -4,6 +4,8 @@ import { access, copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import {renderThemeColors} from './theme-colors.mjs';
+import {pathToFileURL} from 'node:url';
+import {validateBrandWebTheme} from './brand-web-theme.mjs';
 
 const consumerRoot = path.resolve(import.meta.dirname, '..');
 const brandRoot = path.resolve(process.env.OXARA_BRAND_HOME || path.join(consumerRoot, '..', 'Oxara.Brand'));
@@ -24,7 +26,10 @@ for (const [hashKey, pathKey] of [
   ['registrySha256', 'registry'],
   ['profileSha256', 'profile'],
   ['generatorSourceSha256', 'generatorSource'],
-  ['tokenSourceSha256', 'tokenSource']
+  ['tokenSourceSha256', 'tokenSource'],
+  ['webActionSourceSha256', 'webActionSource'],
+  ['companionSourceSha256', 'companionSource'],
+  ['webActionResolverSourceSha256', 'webActionResolverSource']
 ]) {
   const relativePath = manifest.inputs?.[pathKey];
   const expected = manifest.inputs?.[hashKey];
@@ -32,31 +37,21 @@ for (const [hashKey, pathKey] of [
   if (sha256(await readFile(path.join(brandRoot, relativePath))) !== expected) throw new Error(`Stale Brand manifest input: ${relativePath}`);
 }
 
+for (const [key, expectedPath] of Object.entries({webActionSource:'assets/tokens/web-actions.json',companionSource:'assets/tokens/companion-colors.json',webActionResolverSource:'scripts/lib/web-action-tokens.mjs'})) {
+  if (manifest.inputs[key] !== expectedPath) throw Error('Unexpected canonical Brand web input: ' + key);
+}
+// Resolve only after all source hashes and canonical paths have been verified.
+const {loadWebActionTokens} = await import(pathToFileURL(path.join(brandRoot, manifest.inputs.webActionResolverSource)).href);
+const resolvedWeb = await loadWebActionTokens(brandRoot);
+for (const [key, value] of Object.entries(resolvedWeb.inputs)) {
+  if (manifest.inputs[key] !== value) throw Error("Brand web source changed during validation: " + key);
+}
+const sourceProfile = JSON.parse(await readFile(path.join(brandRoot, manifest.inputs.profile), 'utf8'));
+const {primaryContrast, hoverContrast} = validateBrandWebTheme(manifest, sourceProfile, resolvedWeb);
 const theme = manifest.consumerTheme;
 for (const key of ['brand', 'brandLight', 'primaryBackground', 'primaryHover', 'primaryForeground']) {
   if (!/^#[0-9A-F]{6}$/.test(theme?.[key] || '')) throw new Error(`Invalid consumerTheme.${key}`);
 }
-if (theme.brand !== theme.primaryBackground || theme.brand !== theme.primaryHover) throw new Error('DocumentTemplate requires one canonical identity/primary color.');
-
-const relativeLuminance = hex => {
-  const channels = hex.slice(1).match(/../g).map(channel => Number.parseInt(channel, 16) / 255)
-    .map(channel => channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4);
-  return .2126 * channels[0] + .7152 * channels[1] + .0722 * channels[2];
-};
-const contrastRatio = (first, second) => {
-  const [lighter, darker] = [relativeLuminance(first), relativeLuminance(second)].sort((a, b) => b - a);
-  return (lighter + .05) / (darker + .05);
-};
-const primaryContrast = contrastRatio(theme.primaryBackground, theme.primaryForeground);
-const primaryException = (manifest.contrastExceptions || []).find(exception =>
-  exception.rule === 'ui-primary-contrast'
-  && exception.resolvedPair?.background === theme.primaryBackground
-  && exception.resolvedPair?.foreground === theme.primaryForeground
-);
-if (primaryContrast < 4.5 && !primaryException) {
-  throw new Error(`Primary CTA contrast ${primaryContrast.toFixed(2)}:1 requires an exact Brand-approved exception.`);
-}
-
 const changes = [];
 const themePath=path.join(consumerRoot,'features/base/theme-colors.css');
 const expectedTheme=await renderThemeColors(theme);
@@ -90,7 +85,9 @@ const provenanceUnchanged = evidence.brandComplianceProfile.contractSha256 === n
 const approvalPreserved = provenanceUnchanged && evidence.workflow?.userApproval === 'approved';
 const changedTracked = execFileSync('git', ['diff', '--name-only', 'HEAD', '--'], { cwd: consumerRoot, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const changedUntracked = execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: consumerRoot, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-const actualChangedFiles = new Set([...changedTracked, ...changedUntracked].map(file => file.replaceAll('\\', '/')));
+// Evidence describes source changes, not private records or historical generated graphs.
+const sourceBoundary = file => !/^(?:work|\.planning|dist|node_modules|assets\/docs-runtime)\//.test(file);
+const actualChangedFiles = new Set([...changedTracked, ...changedUntracked].map(file => file.replaceAll('\\', '/')).filter(sourceBoundary));
 const changeKinds = new Map(changedUntracked.map(file => [file.replaceAll('\\', '/'), 'add']));
 for (const line of execFileSync('git', ['diff', '--name-status', 'HEAD', '--'], { cwd: consumerRoot, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean)) {
   const [status, ...paths] = line.split('\t');
@@ -114,7 +111,7 @@ evidence.media.profileVersion = manifest.profileVersion;
 evidence.workflow.userApproval = approvalPreserved ? 'approved' : 'pending';
 evidence.workflow.rollout = 'awaiting-owner-review';
 evidence.riskReview.humanAestheticReview = approvalPreserved
-  ? { status: 'approved', evidence: 'User confirmed satisfaction with the current coordinated Brand outputs on 2026-09-24; later revisions are separate changes.' }
+  ? evidence.riskReview.humanAestheticReview
   : { status: 'pending', evidence: 'Awaiting user review of the current Brand provenance.' };
 if (!checkOnly) evidence.media.outputs = (evidence.media.outputs || []).filter(output => actualChangedFiles.has(output.repoPath));
 for (const evidenceOutput of evidence.media.outputs) {
@@ -138,16 +135,12 @@ if (!checkOnly) {
   });
   evidence.media.changed = evidence.media.outputs.length > 0 || evidence.media.metadataChangedFiles.length > 0;
 }
-evidence.roles.uiPrimary.foregroundRole = 'white';
-evidence.roles.uiPrimary.foregroundEvidence = 'Both theme scopes publish --ui-primary-foreground from the active Brand contract and primary controls consume it';
-evidence.roles.uiPrimary.contrast = primaryContrast >= 4.5
-  ? { status: 'verified', normalTextRatio: Number(primaryContrast.toFixed(2)), evidence: 'Resolved Brand primary CTA pair meets WCAG AA for normal text.' }
-  : {
-      status: 'approved-exception',
-      normalTextRatio: Number(primaryContrast.toFixed(2)),
-      evidence: `Brand approval ${primaryException.approvalId} binds the exact ${theme.primaryBackground} / ${theme.primaryForeground} pair; the measured WCAG contrast failure remains explicit and is not generalized beyond ${primaryException.scope}.`,
-      exceptionRule: primaryException.rule
-    };
+evidence.roles.uiPrimary.foregroundRole = 'ink';
+evidence.roles.uiPrimary.foregroundEvidence = 'Both theme scopes publish typed webAction.primary.foreground (Ink) from the hash-verified Brand working-tree export; no legacy white exception applies';
+evidence.roles.uiPrimary.contrast = {
+  status:'verified', normalTextRatio:Number(primaryContrast.toFixed(2)),
+  evidence:'Resolved typed Brand web action normal/hover pairs meet WCAG AA; ratios ' + primaryContrast.toFixed(2) + ' / ' + hoverContrast.toFixed(2) + ':1. No legacy white exception applies.'
+};
 evidence.exceptions = (evidence.exceptions || []).filter(exception => exception.rule !== 'ui-primary-contrast');
 evidence.exceptions = evidence.exceptions.filter(exception => !(exception.rule === 'decorative-gradient' && exception.file === 'scripts/sync-brand-consumer.mjs'));
 evidence.exceptions.push({
@@ -156,14 +149,6 @@ evidence.exceptions.push({
   approvedBy: 'user',
   reason: 'The user explicitly required preserving the pre-existing top/bottom page atmosphere; this generator only recolors those existing gradient tokens from the central Brand master and may not add a new treatment.'
 });
-if (primaryException) {
-  evidence.exceptions.push({
-    rule: primaryException.rule,
-    file: '../../Oxara.Brand/docs/PRODUCT-EXPERIENCE.md',
-    approvedBy: primaryException.approvedBy,
-    reason: `Brand approval ${primaryException.approvalId} covers only the exact ${theme.primaryBackground} background and ${theme.primaryForeground} foreground pair for ${primaryException.scope}; measured contrast is ${primaryContrast.toFixed(2)}:1.`
-  });
-}
 let expectedEvidence = `${JSON.stringify(evidence, null, 2)}\n`;
 if (!checkOnly && expectedEvidence !== evidenceSource && !evidence.applicationBoundary.changedFiles.includes('docs/BRAND-COMPATIBILITY.evidence.json')) {
   evidence.applicationBoundary.changedFiles.push('docs/BRAND-COMPATIBILITY.evidence.json');

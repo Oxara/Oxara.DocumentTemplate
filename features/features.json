@@ -15,23 +15,31 @@
       "content figures",
       "subtle page-edge indicator with forced-colours fallback",
       "Brand-derived semantic theme colors and light/dark contrast roles",
-      "local Manrope and JetBrains Mono fonts with OFL provenance"
+      "local Manrope and JetBrains Mono fonts with OFL provenance",
+      "shared primary and secondary actions; calm document default and illustrated-context frame/leaf motion",
+      "quiet utility actions and shared control focus/availability states"
     ],
     "html": [
       ".skip-link",
       ".section-dividers",
       ".slogan-banner",
-      ".content-figure"
+      ".content-figure",
+      ".docs-primary-action",
+      ".docs-secondary-action",
+      ".document-utility-action"
     ],
     "assets": [
       "features/base/fonts.css",
+      "features/base/actions.css",
+      "features/base/controls.css",
       "features/base/page-scrollbar.css",
       "features/base/theme-colors.css",
       "assets/fonts/provenance.json",
       "assets/fonts/jetbrainsmono/JetBrainsMono[wght].ttf",
       "assets/fonts/jetbrainsmono/OFL.txt",
       "assets/fonts/manrope/Manrope[wght].ttf",
-      "assets/fonts/manrope/OFL.txt"
+      "assets/fonts/manrope/OFL.txt",
+      "assets/presentation/growth-leaves-v2.webp"
     ]
   },
   "resource-card": {

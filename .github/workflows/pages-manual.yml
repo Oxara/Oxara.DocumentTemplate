@@ -68,9 +68,14 @@ jobs:
           const provenance = JSON.parse(await readFile('.github/pages/brand-input.provenance.json', 'utf8'));
           if (provenance.exportSha256 !== actual ||
               provenance.profileSha256 !== manifest.inputs.profileSha256 ||
+              JSON.stringify(provenance.inputs) !== JSON.stringify(manifest.inputs) ||
+              JSON.stringify(provenance.release) !== JSON.stringify(manifest.release) ||
               manifest.inputs.profileSha256 !== evidence.brandComplianceProfile.profileSha256 ||
               manifest.profile !== evidence.brandComplianceProfile.profileId ||
               manifest.profileVersion !== evidence.brandComplianceProfile.profileVersion ||
+              manifest.release?.status !== 'release' ||
+              manifest.release?.commit !== provenance.sourceHead ||
+              !/^v[0-9]+\.[0-9]+\.[0-9]+$/.test(manifest.release?.tag || '') ||
               !/^[a-f0-9]{40}$/.test(provenance.sourceHead)) {
             throw Error('Brand release input provenance/profile mismatch');
           }

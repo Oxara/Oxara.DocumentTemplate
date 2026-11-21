@@ -2,11 +2,34 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-11-21",
   "sourceRepository": "https://github.com/Oxara/Oxara.Brand",
-  "sourceHead": "802a06769e3194a3ffc4af92a9e7d5641cb518a4",
-  "sourceState": "reviewed dirty working-tree export; sourceHead identifies the checkout base, not a committed release of these bytes",
+  "sourceHead": "7d9598cff104700c3d4bc95ddbc0d5fba27f5f50",
+  "sourceState": "published tagged-source release artifact; immutable source tagv1.1.0, not a working-tree stamp",
   "sourceExport": "exports/document-template-web/manifest.json",
-  "exportSha256": "ed6fe1194112d3139ff0e7016e234c257b6bde00da1303cdf1ae1e7e8b6f7618",
-  "profileSha256": "e49e1ca7977492cf76889f8b4ae2c8d4d65783cb5a42970203c9fd20245d6e41",
+  "exportSha256": "2caecbe84b38557975c117cb71962dfac40d166b76b296fc0bbacbd7593d1129",
+  "profileSha256": "ce1ccb1ee33d87e0b103e17f64834b3699440030308ac84e33d7388d4a5e2aa5",
   "consumerEvidence": "docs/BRAND-COMPATIBILITY.evidence.json",
-  "purpose": "offline canonical export input for the existing theme tests on a clean CI runner; not a live Brand parity check and not public artifact content"
+  "purpose": "offline canonical export input for the existing theme tests on a clean CI runner; not a live Brand parity check and not public artifact content",
+  "inputs": {
+    "geometrySource": "assets/logo/svg/oxara-mark-primary.svg",
+    "geometrySourceSha256": "bbbfe80987de3c6b3b21890e8d0881fcf511c3f236b43cd964c8ae87bc2f2be4",
+    "registry": "assets/tokens/accent-registry.json",
+    "registrySha256": "068fc24399ae31ba036aaae286918b52d0135d619e3f61aaa83204cabfd7e8af",
+    "profile": "profiles/document-template-web.json",
+    "profileSha256": "ce1ccb1ee33d87e0b103e17f64834b3699440030308ac84e33d7388d4a5e2aa5",
+    "generatorSource": "scripts/export-profile.mjs",
+    "generatorSourceSha256": "901441ed8c2f6ff32f99fdd6eaf5b18252d295960e207a817657839e269ff9d0",
+    "tokenSource": "assets/tokens/colors.json",
+    "tokenSourceSha256": "21e76af5e4fb41e7db6b08000da55804d2ad954003290db53b16953f2f716e30",
+    "webActionSource": "assets/tokens/web-actions.json",
+    "webActionSourceSha256": "517cbeca3c457c567b338649e8f7aaf61b5ce070137584ed2aba384087995ddc",
+    "companionSource": "assets/tokens/companion-colors.json",
+    "companionSourceSha256": "d423f0e145d9a1062dd6b94284f86ee733789151498806df240a4f5ebcbd360a",
+    "webActionResolverSource": "scripts/lib/web-action-tokens.mjs",
+    "webActionResolverSourceSha256": "526968e43d1acf32269a1e8d9f438b664ad5ffa508fcb7baf01330601eb1c554"
+  },
+  "release": {
+    "status": "release",
+    "tag": "v1.1.0",
+    "commit": "7d9598cff104700c3d4bc95ddbc0d5fba27f5f50"
+  }
 }

@@ -12,6 +12,7 @@ const ratio=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
 for(const [mode,tokens]of Object.entries(modes))test(`${mode}: normal text, links, status and code remain readable`,()=>{
  const page=rgb(value(tokens,'bg'));
  const check=(fg,bg,min=4.5)=>{const back=rgb(value(tokens,bg),page),front=rgb(value(tokens,fg),back),r=ratio(front,back);assert.ok(r>=min,`${mode} ${fg}/${bg}: ${r.toFixed(2)} < ${min}`);};
+ check('ui-primary-foreground','ui-primary');check('ui-primary-foreground','ui-primary-hover');
  for(const bg of ['bg','surface','surface-2'])for(const fg of ['text','text-muted','text-dim','ui-link','ui-link-hover'])check(fg,bg);
  for(const bg of ['code-bg','code-surface'])for(const fg of ['code-text','code-keyword','code-string','code-number','code-punctuation','code-tag','code-attr','code-comment'])check(fg,bg);
  for(const type of ['success','warning','error','info'])check(type,type+'-bg');

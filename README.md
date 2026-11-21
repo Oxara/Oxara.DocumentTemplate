@@ -5,7 +5,7 @@ bileşenleri. İçerik ve ürüne özel görseller tüketicide; ortak okuma, gez
 tema ve bileşen davranışları bu depoda yönetilir.
 
 [Canlı dokümantasyon](https://oxara.github.io/Oxara.DocumentTemplate/) ·
-[Sürüm 1.2.3](https://github.com/Oxara/Oxara.DocumentTemplate/releases/tag/v1.2.3) ·
+[Sürüm 1.3.0](https://github.com/Oxara/Oxara.DocumentTemplate/releases/tag/v1.3.0) ·
 [Değişiklikler](docs/changelog.html)
 
 ## Başlangıç
@@ -138,8 +138,7 @@ ortak yol politikası `scripts/public-route-addresses.mjs` sahibindedir.
 Kullanıcıya görünen değişiklikler aynı commit'te [changelog](docs/changelog.html)
 içine yazılır. Sürüm commit'i annotated SemVer etiketi ve aynı notlarla GitHub
 Release üzerinden yayımlanır. Yayımlanmış etiket değiştirilmez; düzeltme yeni
-patch sürümüdür. Tarihî GitHub Pages yapılandırması `main` dalı/kök çıktısını kullanır; bu çalışma
-hosting ayarını değiştirmez. Çalışma ağacını bütünüyle yayınlamak, `work/` gibi
+patch sürümüdür. Güncel GitHub Pages kaynağı GitHub Actions workflow’udur; yayın yalnız incelenen public artifact üzerinden yapılır. Çalışma ağacını bütünüyle yayınlamak, `work/` gibi
 özel kayıtları taşıyabilir. İncelenen public dağıtım sınırı `dist/docs/` dizinidir:
 
 ```powershell
@@ -156,15 +155,13 @@ Bu çıktı GitHub Pages artifact'i olarak kullanılabilir; Actions/Pages ayarı
 canlı yayın bu komutlarla yapılmaz. Raw repo root dağıtımı bu artifact'in özel
 kaynak sınırı garantisini devralmaz. Yayın onayından sonra yayın sorumlusu mevcut
 Pages source ayarını doğrular; onaylı dağıtım işi `dist/docs/` dizinini artifact
-olarak yükleyecek şekilde seçilir. Bu onay ve hosting geçişi yapılana kadar
-`main`/root yapılandırmasının değiştiği varsayılmaz. Dosya URL'leri ve consumer
+olarak yükleyecek şekilde seçilir. Yayın sorumlusu uzak Pages kaynağını her release öncesinde doğrular; mevcut workflow ayarı gereksiz yere değiştirilmez. Dosya URL'leri ve consumer
 API'leri aynı kalır; yeni route veya hosting sağlayıcısı zorunlu değildir.
 
-İncelemeye hazır [manuel Pages workflow'u](.github/workflows/pages-manual.yml)
+[Manuel Pages workflow'u](.github/workflows/pages-manual.yml)
 ve [yayın runbook'u](.github/pages/README.md), yalnız `workflow_dispatch` ile
 incelenen commit ve artifact digest'ini doğrular; yalnız `dist/docs` yüklenir.
-Önce yetkili sorumlu Pages source'u Actions'a çevirir, ardından incelenen commit
-yetkili olarak alınır ve manuel run seçilir. Bu yerel hazırlık hosting ayarını
+Yetkili sorumlu Pages source'un Actions olduğunu doğrular; ardından incelenen commit alınır ve manuel run seçilir. Bu yerel hazırlık hosting ayarını
 değiştirmez ve yayın yapmaz.
 
 ## Lisans

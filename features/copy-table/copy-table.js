@@ -20,30 +20,31 @@
     var DEFAULT_ERROR_LABEL = 'Error';
     var RESET_MS = 1500;
 
-    function copyWithFallback(text) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            return navigator.clipboard.writeText(text);
+    function copyWithFallback(text, onFallbackFocus) {
+        function fallback() {
+            return new Promise(function (resolve, reject) {
+                var fallbackTextarea = document.createElement('textarea');
+                fallbackTextarea.value = text;
+                fallbackTextarea.setAttribute('readonly', '');
+                fallbackTextarea.style.position = 'fixed';
+                fallbackTextarea.style.top = '-999px';
+                fallbackTextarea.style.opacity = '0';
+                document.body.appendChild(fallbackTextarea);
+                fallbackTextarea.select();
+
+                try {
+                    if (document.execCommand('copy')) resolve();
+                    else reject(new Error('Copy command failed'));
+                } catch (error) {
+                    reject(error);
+                } finally {
+                    if (document.activeElement === fallbackTextarea) onFallbackFocus();
+                    document.body.removeChild(fallbackTextarea);
+                }
+            });
         }
-
-        return new Promise(function (resolve, reject) {
-            var fallbackTextarea = document.createElement('textarea');
-            fallbackTextarea.value = text;
-            fallbackTextarea.setAttribute('readonly', '');
-            fallbackTextarea.style.position = 'fixed';
-            fallbackTextarea.style.top = '-999px';
-            fallbackTextarea.style.opacity = '0';
-            document.body.appendChild(fallbackTextarea);
-            fallbackTextarea.select();
-
-            try {
-                if (document.execCommand('copy')) resolve();
-                else reject(new Error('Copy command failed'));
-            } catch (error) {
-                reject(error);
-            } finally {
-                document.body.removeChild(fallbackTextarea);
-            }
-        });
+        return navigator.clipboard && navigator.clipboard.writeText
+            ? navigator.clipboard.writeText(text).catch(fallback) : fallback();
     }
 
     function getText(source) {
@@ -67,18 +68,25 @@
         var button = document.createElement('button');
         button.className = 'copy-table-button';
         button.type = 'button';
+        button.setAttribute('aria-live', 'polite');
         button.textContent = source.dataset.copyLabel || table.dataset.copyLabel || DEFAULT_LABEL;
         button.setAttribute('aria-label', source.dataset.copyAriaLabel || table.dataset.copyAriaLabel || 'Copy value');
 
+        var resetTimer;
         button.addEventListener('click', function () {
+            clearTimeout(resetTimer);
+            button.classList.remove('is-copied', 'is-error');
             var text = getText(source);
             var label = source.dataset.copyLabel || table.dataset.copyLabel || DEFAULT_LABEL;
             var successLabel = source.dataset.copySuccessLabel || table.dataset.copySuccessLabel || DEFAULT_SUCCESS_LABEL;
             var errorLabel = source.dataset.copyErrorLabel || table.dataset.copyErrorLabel || DEFAULT_ERROR_LABEL;
 
-            copyWithFallback(text).then(function () {
+            button.disabled = true;
+            button.setAttribute('aria-busy', 'true');
+            var restoreFocus = false;
+            copyWithFallback(text, function () { restoreFocus = true; }).then(function () {
                 setButtonState(button, successLabel, 'is-copied');
-                setTimeout(function () {
+                resetTimer = setTimeout(function () {
                     setButtonState(button, label, '');
                 }, RESET_MS);
             }).catch(function () {
@@ -86,6 +94,10 @@
                 setTimeout(function () {
                     setButtonState(button, label, '');
                 }, RESET_MS);
+            }).finally(function () {
+                button.disabled = false;
+                button.removeAttribute('aria-busy');
+                if (restoreFocus) button.focus({preventScroll:true});
             });
         });
 

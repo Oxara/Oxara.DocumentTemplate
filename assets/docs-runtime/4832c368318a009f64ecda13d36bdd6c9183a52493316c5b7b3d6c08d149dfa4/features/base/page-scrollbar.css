@@ -1,0 +1,28 @@
+/* Shared page-edge indicator; nested code/menu scrollbars keep their own UI. */
+html, body {
+    --page-scrollbar-thumb: color-mix(in srgb, var(--ui-indicator, var(--teal, #19c7b5)) 42%, transparent);
+    --page-scrollbar-hover: color-mix(in srgb, var(--ui-indicator, var(--teal, #19c7b5)) 76%, transparent);
+    scrollbar-gutter: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--page-scrollbar-thumb) transparent;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar { width: 3px; height: 3px; }
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track,
+html::-webkit-scrollbar-corner, body::-webkit-scrollbar-corner { background: transparent; }
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+    background: var(--page-scrollbar-thumb);
+    border: 0;
+    border-radius: 999px;
+}
+html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:active, body::-webkit-scrollbar-thumb:active { background: var(--page-scrollbar-hover); }
+html::-webkit-scrollbar-button, body::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+/* Chromium's standard 'thin' overrides the precise native pseudo width. */
+@supports selector(::-webkit-scrollbar) {
+    html, body { scrollbar-width: auto; scrollbar-color: auto; }
+}
+@media (forced-colors: active) {
+    html, body { scrollbar-width: auto; scrollbar-color: auto; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { width: auto; height: auto; }
+    html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb { background: ButtonText; }
+}

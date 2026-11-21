@@ -4,15 +4,50 @@
   "applicationBoundary": {
     "targetProduct": "Oxara.DocumentTemplate",
     "productOwner": "Oxara.DocumentTemplate owner agent",
-    "objective": "Canonical Oxara identity assets, separated semantic UI roles and the user-approved reusable resource-card feature without changing existing documentation hierarchy or unrelated components.",
+    "objective": "Publish the canonical shared illustrated CTA and quiet control standard while retaining the user-selected original38px resource-card appearance, navigation semantics and consumer-owned composition.",
     "changedFiles": [
+      ".github/pages/README.md",
+      ".github/pages/brand-input.provenance.json",
+      ".github/pages/document-template-web.manifest.json",
+      ".github/workflows/pages-manual.yml",
+      ".gitignore",
       "README.md",
+      "docs/BRAND-ASSETS.md",
       "docs/BRAND-COMPATIBILITY.evidence.json",
+      "docs/BUTTON-INVENTORY.md",
+      "docs/DESIGN-GUARDRAILS.md",
       "docs/changelog.html",
-      "scripts/public-route-addresses.mjs",
-      "tools/release-checks/README.md",
-      "tools/release-checks/lib.mjs",
-      "tools/release-checks/test.mjs"
+      "docs/code-features.html",
+      "docs/configuration.html",
+      "docs/document-components.html",
+      "docs/getting-started.html",
+      "docs/illustrated-presentation.html",
+      "docs/navigation.html",
+      "docs/reference.html",
+      "docs/theme-preview.html",
+      "features/base/actions.css",
+      "features/base/base.css",
+      "features/base/controls.css",
+      "features/base/theme-colors.css",
+      "features/code-tabs/code-tabs.css",
+      "features/copy-code/copy-code.css",
+      "features/copy-code/copy-code.js",
+      "features/copy-table/copy-table.css",
+      "features/copy-table/copy-table.js",
+      "features/docs-layout/docs-layout.css",
+      "features/document-hero/document-hero.css",
+      "features/features.json",
+      "features/resource-card/resource-card.css",
+      "features/search/search.css",
+      "features/search/search.js",
+      "index.html",
+      "package.json",
+      "scripts/brand-web-theme.mjs",
+      "scripts/brand-web-theme.test.mjs",
+      "scripts/copy-code.test.mjs",
+      "scripts/search-keyboard.test.mjs",
+      "scripts/sync-brand-consumer.mjs",
+      "scripts/theme-colors.test.mjs"
     ],
     "changeTypes": [
       "assets",
@@ -39,13 +74,13 @@
   },
   "brandComplianceProfile": {
     "contractPath": "../../Oxara.Brand/docs/PRODUCT-EXPERIENCE.md",
-    "contractSha256": "ede8194d7249775027e9e3ac12659881e4b804a31af49f301851b323ae53c13b",
+    "contractSha256": "febbab2f32b8df0096476e5b17e251b199403da7375836c14886290c58c30a55",
     "profilePath": "../../Oxara.Brand/profiles/document-template-web.json",
-    "profileSha256": "e49e1ca7977492cf76889f8b4ae2c8d4d65783cb5a42970203c9fd20245d6e41",
+    "profileSha256": "ce1ccb1ee33d87e0b103e17f64834b3699440030308ac84e33d7388d4a5e2aa5",
     "profileId": "document-template-web",
-    "profileVersion": "1.0.2",
-    "manifestPath": "../../Oxara.Brand/exports/document-template-web/manifest.json",
-    "manifestSha256": "ed6fe1194112d3139ff0e7016e234c257b6bde00da1303cdf1ae1e7e8b6f7618",
+    "profileVersion": "1.1.0",
+    "manifestPath": "../.github/pages/document-template-web.manifest.json",
+    "manifestSha256": "2caecbe84b38557975c117cb71962dfac40d166b76b296fc0bbacbd7593d1129",
     "provenanceStatus": "verified",
     "literalBrandValues": false
   },
@@ -58,13 +93,12 @@
       "contractEvidence": "features/base/base.css maps --ui-primary roles to the active Brand contract",
       "lightRole": "ui-primary",
       "darkRole": "ui-primary",
-      "foregroundRole": "white",
-      "foregroundEvidence": "Both theme scopes publish --ui-primary-foreground from the active Brand contract and primary controls consume it",
+      "foregroundRole": "ink",
+      "foregroundEvidence": "Both theme scopes publish typed webAction.primary.foreground (Ink) from the hash-verified Brand working-tree export; no legacy white exception applies",
       "contrast": {
-        "status": "approved-exception",
-        "normalTextRatio": 2.13,
-        "evidence": "Brand approval user-primary-cta-2026-09-24 binds the exact #19C7B5 / #FFFFFF pair; the measured WCAG contrast failure remains explicit and is not generalized beyond primary-cta.",
-        "exceptionRule": "ui-primary-contrast"
+        "status": "verified",
+        "normalTextRatio": 8.08,
+        "evidence": "Resolved typed Brand web action normal/hover pairs meet WCAG AA; ratios 8.08 / 9.45:1. No legacy white exception applies."
       }
     },
     "documentAccent": {
@@ -80,7 +114,7 @@
   "workflow": {
     "brandContract": "verified",
     "productOwnerPilot": "complete",
-    "userApproval": "pending",
+    "userApproval": "approved",
     "rollout": "awaiting-owner-review",
     "auditEngine": "document-template-release-checks",
     "legacyDevkitAudit": "not-available"
@@ -94,18 +128,18 @@
     "unnecessaryCardification": false,
     "redesignByAccident": false,
     "humanAestheticReview": {
-      "status": "pending",
-      "evidence": "Awaiting user review of the current Brand provenance."
+      "status": "approved",
+      "evidence": "User accepted the final new illustrated hero CTA plus original38px split icon/label resource-card appearance and explicitly authorized publication of the three web projects and canonical DT standard on2026-11-21. No new capture session was used."
     }
   },
   "media": {
     "changed": false,
     "profileId": "document-template-web",
-    "profileVersion": "1.0.2",
+    "profileVersion": "1.1.0",
     "profilePath": "../../Oxara.Brand/profiles/document-template-web.json",
-    "profileSha256": "e49e1ca7977492cf76889f8b4ae2c8d4d65783cb5a42970203c9fd20245d6e41",
-    "manifestPath": "../../Oxara.Brand/exports/document-template-web/manifest.json",
-    "manifestSha256": "ed6fe1194112d3139ff0e7016e234c257b6bde00da1303cdf1ae1e7e8b6f7618",
+    "profileSha256": "ce1ccb1ee33d87e0b103e17f64834b3699440030308ac84e33d7388d4a5e2aa5",
+    "manifestPath": "../.github/pages/document-template-web.manifest.json",
+    "manifestSha256": "2caecbe84b38557975c117cb71962dfac40d166b76b296fc0bbacbd7593d1129",
     "provenanceStatus": "verified",
     "publicUrlOwner": "consumer",
     "metadataChangedFiles": [],
@@ -117,12 +151,6 @@
       "file": "scripts/sync-brand-consumer.mjs",
       "approvedBy": "user",
       "reason": "The user explicitly required preserving the pre-existing top/bottom page atmosphere; this generator only recolors those existing gradient tokens from the central Brand master and may not add a new treatment."
-    },
-    {
-      "rule": "ui-primary-contrast",
-      "file": "../../Oxara.Brand/docs/PRODUCT-EXPERIENCE.md",
-      "approvedBy": "user",
-      "reason": "Brand approval user-primary-cta-2026-09-24 covers only the exact #19C7B5 background and #FFFFFF foreground pair for primary-cta; measured contrast is 2.13:1."
     }
   ]
 }

@@ -160,7 +160,7 @@
     bottom: 0;
     left: .45rem;
     height: 2px;
-    background: var(--brand);
+    background: var(--ui-focus);
     border-radius: 999px 999px 0 0;
 }
 

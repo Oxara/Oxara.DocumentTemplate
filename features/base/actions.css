@@ -1,0 +1,90 @@
+/* One priority/palette owner; plain surfaces are calm, illustrated contexts opt into decoration. */
+:is(.docs-primary-action,.docs-secondary-action) {
+  position:relative; isolation:isolate; display:inline-flex; align-items:center; justify-content:center;
+  min-height:48px; max-width:100%; padding:.8rem 1.35rem; gap:0;
+  border:var(--action-border,1px solid var(--action-flat-line)); border-radius:var(--action-radius,6px); font:inherit; font-size:.84rem;
+  font-weight:700; line-height:1.4; text-align:center; text-decoration:none; cursor:pointer;
+  touch-action:manipulation; transition:background-color .2s ease,box-shadow .15s ease;
+  --action-separator:var(--oxara-ink,#0B1D29); --action-focus:#F4F7F8;
+  background:var(--action-fill); color:var(--action-text);
+  box-shadow:var(--action-shadow,inset 0 0 0 1px var(--action-press-color,transparent));
+}
+.docs-primary-action {
+  --action-text:var(--hero-action-text,var(--oxara-ink,#0B1D29));
+  --action-fill:var(--hero-action-bg,var(--ui-primary,#19C7B5));
+  --action-fill-hover:var(--hero-action-hover,var(--action-primary-hover,#BAC68D));
+  --action-flat-line:var(--action-text);
+  --action-line:#8EA6B3; --action-line-hover:#F4F7F8;
+  --action-frame:var(--hero-action-border,var(--action-text)); --action-frame-hover:var(--action-frame);
+  --action-texture-color:var(--action-text);
+}
+.docs-secondary-action {
+  --action-text:var(--action-secondary-text,#F4F7F8);
+  --action-fill:var(--action-secondary-bg,var(--oxara-graphite,#173344));
+  --action-fill-hover:var(--action-secondary-hover-bg,#375C72);
+  --action-flat-line:var(--action-current-line,var(--action-line));
+  --action-line:var(--action-secondary-outline,#5D7D90);
+  --action-line-hover:var(--action-secondary-hover-outline,#BAC9D1);
+  --action-frame:var(--action-secondary-border,#5D7D90);
+  --action-frame-hover:var(--action-secondary-hover-border,#BAC9D1);
+  --action-texture-color:var(--action-secondary-texture-color,var(--action-text));
+}
+/* Existing illustrated regions opt in. Resource-card actions keep their separate original owner. */
+:where([data-document-hero],.document-hero,.docs-home-hero,.illustrated-card) :is(.docs-primary-action,.docs-secondary-action) {
+  --action-border:0; --action-radius:6px 13px 6px 13px;
+  --action-frame-content:''; --action-texture-display:block;
+  --action-shadow:inset 0 0 0 2px var(--action-press-color,transparent),0 0 0 1px var(--action-separator),0 0 0 2px var(--action-current-line,var(--action-line));
+  --action-focus-shadow:inset 0 0 0 2px var(--action-press-color,transparent),0 0 0 1px var(--action-separator),0 0 0 2px var(--action-current-line),0 0 0 5px var(--action-separator);
+}
+:is(.docs-primary-action,.docs-secondary-action):is(:link,:visited,:hover,:focus-visible,:active),button:is(.docs-primary-action,.docs-secondary-action) { color:var(--action-text); text-decoration:none; }
+:is(.docs-primary-action,.docs-secondary-action)::before,:is(.docs-primary-action,.docs-secondary-action)::after {
+  content:var(--action-frame-content,none); position:absolute; inset:3px; border:1.5px solid var(--action-frame);
+  border-radius:3px 11px 3px 11px; opacity:1; pointer-events:none; z-index:1;
+  transition:clip-path .3s ease,border-color .2s ease;
+}
+:is(.docs-primary-action,.docs-secondary-action)::before { clip-path:inset(0 50% 0 0); }
+:is(.docs-primary-action,.docs-secondary-action)::after { clip-path:inset(0 0 0 50%); }
+:is(.docs-primary-action,.docs-secondary-action):is(:hover,:focus-visible)::before,
+:is(.docs-primary-action,.docs-secondary-action):is(:hover,:focus-visible)::after { border-color:var(--action-frame-hover); }
+.document-action-label { position:relative; z-index:2; }
+/* Clear pixels next to the inner stroke preserve its intended contrast pair. */
+.document-action-texture { display:var(--action-texture-display,none); position:absolute; inset:0; z-index:0; border-radius:inherit; clip-path:inset(6px round 3px 8px); overflow:hidden; pointer-events:none; }
+.document-action-texture::before,.document-action-texture::after {
+  content:''; position:absolute; inset-block:0; width:50%; background:var(--action-texture-color,var(--oxara-ink,#0B1D29)); opacity:0;
+  mask-image:linear-gradient(to left,#000 40%,transparent 98%),url('../../assets/presentation/growth-leaves-v2.webp');
+  mask-size:100% 100%,200px 134px; mask-position:center,right bottom; mask-repeat:no-repeat; mask-composite:intersect;
+  clip-path:inset(0 0 0 100%); transition:clip-path .38s ease,opacity .3s ease;
+}
+.document-action-texture::before { left:0; transform:scaleX(-1); }
+.document-action-texture::after { right:0; }
+:is(.docs-primary-action,.docs-secondary-action):focus-visible { background:var(--action-fill-hover); --action-current-line:var(--action-line-hover); }
+:is(.docs-primary-action,.docs-secondary-action):focus-visible::before { clip-path:inset(0 75% 0 0); }
+:is(.docs-primary-action,.docs-secondary-action):focus-visible::after { clip-path:inset(0 0 0 75%); }
+:is(.docs-primary-action,.docs-secondary-action):focus-visible .document-action-texture::before,:is(.docs-primary-action,.docs-secondary-action):focus-visible .document-action-texture::after { opacity:.07; clip-path:inset(0); }
+:is(.docs-primary-action,.docs-secondary-action):focus-visible {
+  outline:3px solid var(--action-focus); outline-offset:5px;
+  box-shadow:var(--action-focus-shadow,inset 0 0 0 1px var(--action-press-color,transparent),0 0 0 5px var(--action-separator));
+}
+@media(hover:hover) and (pointer:fine) {
+  :is(.docs-primary-action,.docs-secondary-action):hover { background:var(--action-fill-hover); --action-current-line:var(--action-line-hover); }
+  :is(.docs-primary-action,.docs-secondary-action):hover::before { clip-path:inset(0 75% 0 0); }
+  :is(.docs-primary-action,.docs-secondary-action):hover::after { clip-path:inset(0 0 0 75%); }
+  :is(.docs-primary-action,.docs-secondary-action):hover .document-action-texture::before,:is(.docs-primary-action,.docs-secondary-action):hover .document-action-texture::after { opacity:.07; clip-path:inset(0); }
+}
+:is(.docs-primary-action,.docs-secondary-action):active { background:var(--action-fill-hover); --action-current-line:var(--action-line-hover); --action-press-color:var(--action-frame-hover); }
+@media(prefers-reduced-motion:reduce) {
+  .docs-primary-action,.docs-secondary-action,:is(.docs-primary-action,.docs-secondary-action)::before,:is(.docs-primary-action,.docs-secondary-action)::after,.document-action-texture::before,.document-action-texture::after { transition:none; }
+}
+@media(forced-colors:active) {
+  :is(.docs-primary-action,.docs-secondary-action) { --action-text:ButtonText; --action-fill:ButtonFace; --action-fill-hover:ButtonFace; --action-line:ButtonText; --action-line-hover:ButtonText; --action-frame:ButtonText; --action-frame-hover:ButtonText; --action-separator:Canvas; --action-focus:Highlight; border:1px solid ButtonText; }
+  :is(.docs-primary-action,.docs-secondary-action)::before,:is(.docs-primary-action,.docs-secondary-action)::after,.document-action-texture { display:none; }
+}
+
+/* Availability is a state, not another action priority. Keep readable colours. */
+:is(.docs-primary-action,.docs-secondary-action):is(:disabled,[aria-disabled="true"],[aria-busy="true"]) {
+  background:var(--action-fill); color:var(--action-text); --action-current-line:var(--action-line); --action-press-color:transparent; cursor:not-allowed;
+}
+:is(.docs-primary-action,.docs-secondary-action):is(:disabled,[aria-disabled="true"],[aria-busy="true"])::before { clip-path:inset(0 50% 0 0); }
+:is(.docs-primary-action,.docs-secondary-action):is(:disabled,[aria-disabled="true"],[aria-busy="true"])::after { clip-path:inset(0 0 0 50%); }
+:is(.docs-primary-action,.docs-secondary-action):is(:disabled,[aria-disabled="true"],[aria-busy="true"]) .document-action-texture { visibility:hidden; }
+:is(.docs-primary-action,.docs-secondary-action)[aria-busy="true"] { cursor:progress; }

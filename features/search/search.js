@@ -231,16 +231,32 @@
                 ? '<span class="search-result-section">' + result.sectionType + '</span>'
                 : '';
 
+            // Anchors retain native keyboard navigation and open-in-new-tab behaviour.
+            var target = (result.url || '') + (anchor ? '#' + encodeURIComponent(anchor) : (result.sectionId ? '#' + encodeURIComponent(result.sectionId) : ''));
+            var escapedTarget = target.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
             resultsHtml +=
-                '<div class="search-result-item"' +
-                ' onclick="search.navigateToResult(\'' + anchor + '\',\'' + result.sectionId + '\',\'' + (result.url || '') + '\')">' +
+                '<a class="search-result-item" href="' + escapedTarget + '" data-search-result="' + resultIndex + '">' +
                 badge +
                 '<div class="search-result-title">' + (highlightedTitle || '(Başlıksız)') + '</div>' +
                 '<div class="search-result-content">' + highlightedPreview + '</div>' +
-                '</div>';
+                '</a>';
         });
 
         searchResults.innerHTML = resultsHtml;
+        searchResults.querySelectorAll('[data-search-result]').forEach(function (link) {
+            link.addEventListener('focus', function () {
+                searchResults.querySelectorAll('.selected').forEach(function (item) { item.classList.remove('selected'); });
+                selectedIndex = Number(link.dataset.searchResult);
+                link.classList.add('selected');
+            });
+            link.addEventListener('click', function (event) {
+                if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+                var result = results[Number(link.dataset.searchResult)];
+                if (result.url) return;
+                event.preventDefault();
+                navigateToResult(result.id || '', result.sectionId, '');
+            });
+        });
         selectedIndex = -1;
     }
 
@@ -294,6 +310,7 @@
                     if (selectedIndex >= 0) resultItems[selectedIndex].classList.remove('selected');
                     selectedIndex = Math.min(selectedIndex + 1, resultItems.length - 1);
                     resultItems[selectedIndex].classList.add('selected');
+                    resultItems[selectedIndex].focus();
                     resultItems[selectedIndex].scrollIntoView({ block: 'nearest' });
                 }
                 break;
@@ -304,11 +321,14 @@
                     if (selectedIndex >= 0) resultItems[selectedIndex].classList.remove('selected');
                     selectedIndex = Math.max(selectedIndex - 1, 0);
                     resultItems[selectedIndex].classList.add('selected');
+                    resultItems[selectedIndex].focus();
                     resultItems[selectedIndex].scrollIntoView({ block: 'nearest' });
                 }
                 break;
 
             case 'Enter':
+                // Anchors keep native normal/modified keyboard activation.
+                if (event.target !== searchInput || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) break;
                 event.preventDefault();
                 if (selectedIndex >= 0 && resultItems[selectedIndex]) {
                     resultItems[selectedIndex].click();

@@ -1,0 +1,29 @@
+/* Quiet actions share colour/state ownership; feature files own placement and size. */
+button:is(.code-copy-button,.copy-table-button,.search-close,.sidenav-close),.document-utility-action {
+  color:var(--text-muted); background:var(--surface); border:1px solid var(--border); border-radius:6px;
+  cursor:pointer; font-family:inherit; font-weight:650; touch-action:manipulation;
+  transition:background-color .15s ease,color .15s ease,border-color .15s ease;
+}
+button:is(.code-copy-button,.copy-table-button,.search-close,.sidenav-close):hover,.document-utility-action:hover {
+  color:var(--text); background:var(--surface-2); border-color:var(--ui-focus);
+}
+button:is(.code-copy-button,.copy-table-button,.search-close,.sidenav-close):active,.document-utility-action:active {
+  color:var(--text); background:var(--surface-2); box-shadow:inset 0 0 0 1px var(--ui-focus);
+}
+:is(.document-utility-action,.code-copy-button,.copy-table-button,.search-close,.sidenav-close,.docs-menu-toggle,.menu-toggle,.theme-toggle,.search-trigger,.scroll-top,.code-tab,.code-tabs-global button,details.example-details>summary):focus-visible {
+  outline:2px solid var(--ui-focus); outline-offset:2px;
+}
+button:is(.code-copy-button,.copy-table-button):is(.is-copied,.is-error) {
+  color:var(--text); background:var(--surface-2); border-color:var(--ui-focus); opacity:1;
+}
+button:is(.code-copy-button,.copy-table-button,.search-close,.sidenav-close,.docs-menu-toggle,.menu-toggle,.theme-toggle,.search-trigger,.scroll-top,.code-tab,.code-tabs-global button,.document-utility-action):is(:disabled,[aria-disabled="true"],[aria-busy="true"]) {
+  color:var(--text-muted); background:var(--surface); border-color:var(--border); box-shadow:none; transform:none; cursor:not-allowed;
+}
+button[aria-busy="true"] { cursor:progress; }
+.document-utility-action { min-height:32px; padding:.35rem .65rem; font:inherit; font-size:.78rem; }
+@media(prefers-reduced-motion:reduce) {
+  button:is(.code-copy-button,.copy-table-button,.search-close,.sidenav-close),.document-utility-action { transition:none; }
+}
+@media(forced-colors:active) {
+  button:is(.code-copy-button,.copy-table-button,.search-close,.sidenav-close),.document-utility-action { border-color:ButtonText; }
+}
