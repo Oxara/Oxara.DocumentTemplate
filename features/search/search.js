@@ -261,7 +261,7 @@
         if (!target) return;
 
         setTimeout(function () {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
             target.style.transition = 'background 0.3s';
             target.style.background = 'var(--brand-subtle)';
             setTimeout(function () { target.style.background = ''; }, 1500);
@@ -275,6 +275,17 @@
         if (!searchOverlay || !searchOverlay.classList.contains('active')) return;
 
         var resultItems = document.querySelectorAll('.search-result-item');
+
+        if (event.key === 'Tab') {
+            var modal = searchOverlay.querySelector('.search-modal');
+            var controls = modal ? Array.from(modal.querySelectorAll('input, button:not([disabled]), a[href]')).filter(function (item) { return !item.hidden; }) : [];
+            var first = controls[0], last = controls[controls.length - 1];
+            if (first && (!modal.contains(document.activeElement) || (event.shiftKey && document.activeElement === first) || (!event.shiftKey && document.activeElement === last))) {
+                event.preventDefault();
+                (event.shiftKey ? last : first).focus();
+            }
+            return;
+        }
 
         switch (event.key) {
             case 'ArrowDown':
@@ -315,21 +326,32 @@
     /* ══════════════════════════════════════════════════════════
        PUBLIC API
     ══════════════════════════════════════════════════════════ */
+    var searchReturnFocus;
+    var searchPreviousOverflow = '';
+
     function openSearch() {
         if (!searchOverlay) return;
+        if (!searchOverlay.classList.contains('active')) {
+            searchReturnFocus = document.activeElement;
+            searchPreviousOverflow = document.body.style.overflow;
+        }
         searchOverlay.classList.add('active');
-        setTimeout(function () {
-            if (searchInput) { searchInput.focus(); searchInput.select(); }
-        }, 100);
+        searchOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (searchInput) { searchInput.focus(); searchInput.select(); }
         document.addEventListener('keydown', handleKeyboard);
     }
 
     function closeSearch() {
-        if (!searchOverlay) return;
+        if (!searchOverlay || !searchOverlay.classList.contains('active')) return;
         searchOverlay.classList.remove('active');
+        searchOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = searchPreviousOverflow;
+        if (debounceTimer) { clearTimeout(debounceTimer); debounceTimer = null; }
         if (searchInput) searchInput.value = '';
         renderResults([]);
         document.removeEventListener('keydown', handleKeyboard);
+        if (searchReturnFocus && searchReturnFocus.isConnected) searchReturnFocus.focus();
     }
 
     function closeSearchOnOverlay(event) {
@@ -352,6 +374,14 @@
 
         if (!searchOverlay) return;
 
+        searchOverlay.setAttribute('aria-hidden', 'true');
+        var modal = searchOverlay.querySelector('.search-modal');
+        if (modal) {
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('aria-label', 'Dokümanlarda ara');
+        }
+        if (searchInput && !searchInput.hasAttribute('aria-label')) searchInput.setAttribute('aria-label', 'Arama metni');
         buildIndex();
 
         /* Input debounce */

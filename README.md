@@ -11,6 +11,19 @@ tema ve bileşen davranışları bu depoda yönetilir.
 ## Başlangıç
 
 Repoyu indirin veya fork'layın; sayfalar statik bir HTTP sunucusuyla çalışır.
+Yerel incelemede `npm run preview` kullanın (varsayılan `http://127.0.0.1:4203/`;
+başka port: `npm run preview -- 4204`). Bu geliştirme sunucusu HTML/CSS/JS dahil
+kaynakları `Cache-Control: no-cache` ve içerik tabanlı ETag ile her kullanımda
+doğrular; browser cache açık kalır. Genel `python -m http.server` bu politikayı
+sağlamaz ve eski menü/scriptlerin güncel dosyalarla karışmasına yol açabilir.
+Docs üreticisi HTML kaynaklarını içerik hash'li `assets/docs-runtime/<revision>/`
+grafiğine bağlar. CSS importları, görseller ve paket yükleyicisinin feature
+scriptleri aynı değişmez ağaçtadır; bir alt kaynak değişirse HTML yeni revizyona
+bağlanır. Üretilmiş ağacı elle düzenlemeyin; `npm run docs:build` kullanın.
+Önceki revizyonlar açık eski sayfaların bağımlılıkları için korunur. Eski açık
+HTML geriye dönük değişmez; normal yenileme yeni HTML'i ve yeni kaynak URL'lerini
+alır. Hosting'in HTML doğrulama politikası ayrıca tüketiciye aittir. Bu sunucu
+hosting/yayın değildir.
 Hazır paketi sayfanızın göreli yoluna göre yükleyin:
 
 ```html
@@ -52,7 +65,19 @@ node scripts/build-behavior-packages.mjs
 node scripts/build-behavior-packages.mjs --check
 ```
 
-## Tasarım ve görselli sunum
+## Dokümantasyon gezinmesi
+
+Menü, arama dizini ve önceki/sonraki zincirinin tek kaynağı `docs/pages.json` dosyasıdır. Yeni rehber önce bu kataloğa eklenir; HTML içindeki ortak gezinme blokları ayrı ayrı düzenlenmez.
+
+```powershell
+npm run docs:build
+npm run docs:check
+npm test
+```
+
+`docs:build` mevcut içeriği koruyarak ortak blokları ve eksik bölüm başlık adreslerini üretir. `docs:check` drift, yerel link/anchor/asset, ARIA hedefi ve feature bağımlılıklarını denetler. Tarayıcıda mobil/masaüstü ve gerçek etkileşim kontrolünün yerine geçmez.
+
+## Tasarım, hero ve kartlar
 
 Okunabilir içerik, tutarlı bilgi yoğunluğu ve erişilebilir gezinme önceliklidir.
 Brand değişikliği düzeni yeniden tasarlama izni değildir. Başlıkları pill/badge
@@ -64,6 +89,11 @@ hedefleri farklıysa `resource-card` içinde ayrı ve açık bağlantılar kulla
 İç içe link ve aynı hedef için tekrarlanan aksiyon satırları kullanılmaz.
 
 `document-hero` core/full paketlerinde, `illustrated-card` full paketindedir.
+Base yerel Manrope ve JetBrains Mono fontlarını, OFL lisanslarını ve kaynak
+provenance'ını içerir; tekil kurulumda manifestteki base `assets` alanı da taşınır.
+Tüketicinin mevcut typography foundation'u varsa yalnız gerekli bileşenleri ve
+semantik tema renklerini kullanabilir.
+
 Özel artwork verilmezse aynı sabit atlas, kapalı kitap ve meyvesiz dal/yaprak
 seti kullanılır. Konu başına veya çalışma anında görsel üretilmez.
 Özel arka plan/prop/growth slotları varsayılanları değiştirir; kişisel sahne,
@@ -108,7 +138,34 @@ ortak yol politikası `scripts/public-route-addresses.mjs` sahibindedir.
 Kullanıcıya görünen değişiklikler aynı commit'te [changelog](docs/changelog.html)
 içine yazılır. Sürüm commit'i annotated SemVer etiketi ve aynı notlarla GitHub
 Release üzerinden yayımlanır. Yayımlanmış etiket değiştirilmez; düzeltme yeni
-patch sürümüdür. Canlı dokümantasyon GitHub Pages'in `main` dalı/kök çıktısıdır.
+patch sürümüdür. Tarihî GitHub Pages yapılandırması `main` dalı/kök çıktısını kullanır; bu çalışma
+hosting ayarını değiştirmez. Çalışma ağacını bütünüyle yayınlamak, `work/` gibi
+özel kayıtları taşıyabilir. İncelenen public dağıtım sınırı `dist/docs/` dizinidir:
+
+```powershell
+npm run docs:build
+npm run docs:public
+npm run docs:public:check
+```
+
+Üretici yalnız on sayfa, bileşen/paket kaynakları, aktif içerik revizyonlu graph,
+bağımlı görseller/fontlar/lisanslar ve isteğe bağlı teknik Markdown rehberlerini
+taşır. `work`, `.planning`, AGENTS, test/araç kaynakları ve tarihî runtime graphları
+çıktıda bulunmaz. `public-manifest.json` bütün public dosyaları hash ile tanımlar.
+Bu çıktı GitHub Pages artifact'i olarak kullanılabilir; Actions/Pages ayarı veya
+canlı yayın bu komutlarla yapılmaz. Raw repo root dağıtımı bu artifact'in özel
+kaynak sınırı garantisini devralmaz. Yayın onayından sonra yayın sorumlusu mevcut
+Pages source ayarını doğrular; onaylı dağıtım işi `dist/docs/` dizinini artifact
+olarak yükleyecek şekilde seçilir. Bu onay ve hosting geçişi yapılana kadar
+`main`/root yapılandırmasının değiştiği varsayılmaz. Dosya URL'leri ve consumer
+API'leri aynı kalır; yeni route veya hosting sağlayıcısı zorunlu değildir.
+
+İncelemeye hazır [manuel Pages workflow'u](.github/workflows/pages-manual.yml)
+ve [yayın runbook'u](.github/pages/README.md), yalnız `workflow_dispatch` ile
+incelenen commit ve artifact digest'ini doğrular; yalnız `dist/docs` yüklenir.
+Önce yetkili sorumlu Pages source'u Actions'a çevirir, ardından incelenen commit
+yetkili olarak alınır ve manuel run seçilir. Bu yerel hazırlık hosting ayarını
+değiştirmez ve yayın yapmaz.
 
 ## Lisans
 

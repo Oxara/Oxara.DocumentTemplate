@@ -1,0 +1,60 @@
+{
+  "pages": [
+    {
+      "file": "getting-started.html",
+      "title": "Başlangıç",
+      "label": "Genel Bakış",
+      "description": "Document Template, hazır paketler ve tekil feature'larla doküman sitenizi hızlıca kurmanızı sağlar. İhtiyacınıza en yakın başlangıç yolunu seçin.",
+      "group": "Başlangıç"
+    },
+    {
+      "file": "document-components.html",
+      "title": "Doküman Bileşenleri",
+      "label": "Doküman Bileşenleri",
+      "description": "Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.",
+      "group": "Feature’lar"
+    },
+    {
+      "file": "illustrated-presentation.html",
+      "title": "Hero ve Kartlar",
+      "label": "Hero ve Kartlar",
+      "description": "Rehberler için görsel girişler ve içerik kartları; hazır örnekler, kurulum ve kendi görsellerinizle özelleştirme.",
+      "group": "Feature’lar"
+    },
+    {
+      "file": "code-features.html",
+      "title": "Kod Özellikleri",
+      "label": "Kod Özellikleri",
+      "description": "Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.",
+      "group": "Feature’lar"
+    },
+    {
+      "file": "navigation.html",
+      "title": "Navigasyon ve Okuma",
+      "label": "Navigasyon ve Okuma",
+      "description": "Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.",
+      "group": "Feature’lar"
+    },
+    {
+      "file": "configuration.html",
+      "title": "Tema ve Yapılandırma",
+      "label": "Tema ve Yapılandırma",
+      "description": "Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.",
+      "group": "Feature’lar"
+    },
+    {
+      "file": "reference.html",
+      "title": "Feature Referansı",
+      "label": "Feature Referansı",
+      "description": "Çok sayfalı doküman kabuğu, bağımsız feature'lar ve hazır feature paketleri için dosya, bağımlılık ve yükleme özeti.",
+      "group": "Referans"
+    },
+    {
+      "file": "changelog.html",
+      "title": "Değişiklikler",
+      "label": "Değişiklikler",
+      "description": "Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.",
+      "group": "Referans"
+    }
+  ]
+}

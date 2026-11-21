@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-21",
+  "sourceRepository": "https://github.com/Oxara/Oxara.Brand",
+  "sourceHead": "802a06769e3194a3ffc4af92a9e7d5641cb518a4",
+  "sourceState": "reviewed dirty working-tree export; sourceHead identifies the checkout base, not a committed release of these bytes",
+  "sourceExport": "exports/document-template-web/manifest.json",
+  "exportSha256": "ed6fe1194112d3139ff0e7016e234c257b6bde00da1303cdf1ae1e7e8b6f7618",
+  "profileSha256": "e49e1ca7977492cf76889f8b4ae2c8d4d65783cb5a42970203c9fd20245d6e41",
+  "consumerEvidence": "docs/BRAND-COMPATIBILITY.evidence.json",
+  "purpose": "offline canonical export input for the existing theme tests on a clean CI runner; not a live Brand parity check and not public artifact content"
+}

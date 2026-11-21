@@ -1,0 +1,4 @@
+/* Local Brand typography; file provenance and OFL licenses: assets/fonts/. */
+@font-face { font-family: Manrope; font-style: normal; font-weight: 200 800; font-display: swap; src: url('../../assets/fonts/manrope/Manrope[wght].ttf') format('truetype'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 100 800; font-display: swap; src: url('../../assets/fonts/jetbrainsmono/JetBrainsMono[wght].ttf') format('truetype'); }
+:root { --font-sans: Manrope, 'Segoe UI', Arial, sans-serif; --font-code: 'JetBrains Mono', Consolas, monospace; }

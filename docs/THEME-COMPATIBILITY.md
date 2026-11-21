@@ -2,6 +2,10 @@
 
 2026-11-20 kullanıcı kararı: Ink `#0B1D29`, Graphite `#173344`.
 Brand kimlik/neutral kaynağıdır; DocumentTemplate arayüz semantiklerinin sahibidir.
+Tipografi `features/base/fonts.css` üzerinden yerel Manrope (arayüz 500–700) ve
+JetBrains Mono (kod 400–600) dosyalarını yükler. Brand ile aynı byte'lar,
+`assets/fonts/provenance.json` ve ailelerin OFL dosyalarıyla korunur. Brand'ın
+sunum reseti veya `brand.css` dosyası DT'ye import edilmez; DT düzeni korunur.
 Turkuaz kimlik ve ana CTA aynı kalır. Koyu görünüm kişisel sitenin manzarasını
 veya maskotunu ortak şablona zorunlu olarak taşımaz.
 

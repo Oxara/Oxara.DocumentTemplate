@@ -12,7 +12,7 @@ Ortak document-hero / illustrated-card API, paket ve fallback mekanizması uygul
 - Ink #0B1D29, Graphite #173344, Turquoise #19C7B5; isteğe bağlı zeytin ve sınırlı sıcak ahşap/kâğıt/amber malzemeler. Lacivert yüzeyler korunur; kömür siyahı, baskın sarı/turuncu ve dikkat dağıtan beyaz konturlar eklenmez. Her iki temada okunurluk sağlanır.
 - Hero: arka plan ve kapalı temsilci prop ayrı katmanlardır. Metne ferah alan, dengeli tipografi, çok hafif rotation/float/parallax ve ölçülü yumuşak gölge. Masa çevresi görünen kırpık açık kitap hero kapağı değildir.
 - Aynı rehber kitabı kartta doğrudan karşıdan aynı cepheyle, hero'da hafif rotation ile tutarlı kullanılır. Konuya özel normal teknik kompozisyon + eşleşmiş hover zeytin katmanı (EFCore/Hangfire dahil) korunur. Default sabit olabilir; özel konu kartlarının hepsine aynı fonu veya yaprak/sayfa kıvrımını zorlamaz. Makale/paket/araç kendi konusunu anlatabilir; yapraklar ortak aksan olabilir.
-- Masa geçişleri sitede kalır: rehber kitap, makale dosya, paket ekran, araç küp. Beyaz dikdörtgen flash ve bütün masayı hero'ya taşıma yok. Masa/karakter/doğa DT'nin zorunlu davranışı değildir.
+- Masa nesnesi/kategori/rota eşlemesi site SITE-PRESENTATION ve route registry sahibindedir; bu belge değişken site eşlemesini kopyalamaz. Beyaz dikdörtgen flash ve bütün masayı hero'ya taşıma yok. Masa/karakter/doğa DT'nin zorunlu davranışı değildir.
 - Onaylı navigasyonun dili korunur. Çapraz ok veya yeni parlak turkuaz dikdörtgen CTA varsayılan bir görsel standart ilan edilmez. Ana sayfanın ayrı konturlu koyu ahşap/turkuaz ışık/zeytin yapraklı resimsel butonları da her dokümana körlemesine yayılmaz. Yeni CTA tasarımı ayrı karşılaştırmalı kabul gerektirir.
 - Sakin ve amaçlı hareket; metne okuma süresi, reduced-motion, klavye/touch/mobil odak. Kesik resim kenarı/boş şerit yerine yeterli overscan ve doğal kadraj kırpması. Teknik animasyon açıklamaları ürün metnine taşınmaz.
 
@@ -33,4 +33,34 @@ Commit/push/merge/tag/yayın için ayrıca açık kullanıcı yetkisi gerekir.
 
 Son kullanıcı düzeltmesi: yalnız dal ve yaprak; zeytin meyvesi görünmez. Aktif growth katmanı growth-leaves-v2.webp; meyveli v1 aktif kaynaklardan çıkarıldı. Arka plan/kitap korunur.
 
-Üretim kuralları ve yeniden kullanılabilir promptlar: [ILLUSTRATION-GENERATION.md](ILLUSTRATION-GENERATION.md); canlı sunumda generation-rules bölümü.
+Üretim kuralları ve yeniden kullanılabilir promptlar: [ILLUSTRATION-GENERATION.md](ILLUSTRATION-GENERATION.md). Public Hero ve Kartlar sayfasındaki generation-rules/prompt-examples adresleri, ürünün görsel seçeneklerine ve isteğe bağlı teknik rehber girişine açılır; üretici promptları ana anlatıma gömülmez.
+
+<a id="ozel-prop-slot-ve-fallback-sozlesmesi"></a>
+
+## Özel prop, slot ve fallback sözleşmesi
+
+2026-11-21 gerçek kaynak: `features/document-hero/document-hero.css`. `data-document-hero` yalnız hareket seçicisi değildir; CSS sabit dekorasyon da ekler:
+
+| Durum | Güncel davranış | Tüketici kontrolü |
+| --- | --- | --- |
+| `.document-hero-art` yok | `::before` sabit atlas ve scrim çizer | Özel background sağlayınca slot/katmanı açıkça ver |
+| `.document-hero-book` yok | `::after` sabit kitap çizer; özel propun başka sınıfla bulunması bunu engellemez | Özel prop kapsayıcısında mevcut `.document-hero-book` slot markerını kullan; kitapla çift çizim olmadığını doğrula |
+| `data-hero-layout="text"` | Varsayılan pseudo background/kitap kapatılır; metin düzeni seçilir | Bunu genel özel prop API'si sanma; ilgili layout kuralını ve tüketici yerleşimini kontrol et |
+
+Örnek özel prop slotu: `<div class="document-hero-book"><img src="project-prop.webp" alt="" aria-hidden="true"></div>`. Sınıfın tarihî adı nesneyi kitaba dönüştürmez, fakat mevcut width/rotation/grid kuralları taşır. Çoklu prop grubunda sarmalayıcı sözleşmesini ve özel yerleşimi kontrollü tanımla; yalnız yeni sınıf ekleyerek fallback'in kapandığını varsayma. Site düzeltmesi ürün sahibindedir; DT kopyasında fork yapılmaz.
+
+**Açık API değerlendirmesi:** semantik `prop` slotu ile açık default/none/custom seçimi, kitap adlı marker bağımlılığını uzun vadede kaldırabilir. Bugün böyle yeni data-attribute/API uygulanmış değildir. Karar ve uyumluluk/göç testleri DT sahibinde yapılmadan belgede çalışıyor diye sunulmaz; bu görev runtime değiştirmez.
+
+Kaynak testine ek olarak computed `::before`/`::after` content/display/background ve gerçek görüntüde tek prop/no çift kitap kontrol edilir. NoJS, forced-colors, print, her iki tema ve dar ekranda link/metin işlevi korunur.
+
+## Nesne ailesi ve kapsamlı hareket kontrolü
+
+Brand `docs/ILLUSTRATION-FAMILY.md` kitap/kartın somut form/stil referansını tutar; [üretim rehberi](ILLUSTRATION-GENERATION.md) referans → ortak form → konu → alpha/export → DT tüketimi → site → QA sırasını tanımlar. Aynı ailede canvas ve **görünür siluet**, köşe, kalınlık ve perspektif beraber kıyaslanır. Yeni Projeler kartı taslağı final onaylı defaulta dönüşmez.
+
+Projeler hero'sundaki hover öne geçmeme kararı tüketiciye özgüdür. Hover ile scale/translate/elevation/z-index değişmez; ambient motion ve focus ayrı incelenir. Ortak `illustrated-card` bileşeninin onaylı hover davranışı bu kararla topluca kaldırılmaz. Site kategori header/hero-topics/wave/collection-more/footer kabuğu ve route/portal ilişkisi siteye aittir.
+
+QA kaydında kaynak/asset hashleri + slot/pseudo kontrolü + eşleşen viewport'ta görsel kıyas + normal/reduced/hidden/offscreen hareket + klavye/touch ve portal başlangıç/orta/son ayrı satırlardır. Yeni public byte eski Phase17 veya release pass'ini devralmaz; audit → runtime → quality → finalize zinciri yeni aday digestine bağlanır. Bu belge güncellemesi ürünün yaratıcı kabulünü veya yayın yetkisini kapatmaz.
+
+## Bileşen kullanımı ve mevcut ürün kabuğu
+
+Bir DT bileşenini kullanma talebi, tüketicinin bütün sayfasını DT doküman sitesine dönüştürme yetkisi değildir. Brand mevcut hero/üst menü/sunum kabuğunu korur; yalnız gereken referans kartı alanında ortak resource-card tüketilir. Brand kendi temel reset/tipografisini sağlar; komponentin semantik renk rolleri ayrı theme-colors kaynağından gelir. Bu sınırlı tüketimde global base/reset ve docs-layout CSS yüklenmez. Genel tüketici manifestinin base bağımlılığı değişmez; burada mevcut host için açık entegrasyon sınırı kayıtlıdır. Kamuya dönük sunum ürünün kullanımını açıklar; üretici/ajan komutları ayrı teknik rehberde kalır. Teknik promptlar ILLUSTRATION-GENERATION.md içinde korunur; public ana sayfada prompt sekmeleri veya üretim checklisti bulunmaz. Mevcut code-tabs/kopyalama bileşenleri gerçek kod örnekleri için kullanılabilir.

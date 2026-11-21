@@ -1,3 +1,4 @@
+@import url('./fonts.css');
 @import url('./theme-colors.css');
 @import url('./page-scrollbar.css');
 
@@ -16,7 +17,8 @@ body {
     position: relative;
     isolation: isolate;
     min-height: 100vh;
-    font-family: Inter, 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-sans);
+    font-weight: 500;
     background-color: var(--bg);
     background-image: var(--page-start-gradient);
     background-position: top center;
@@ -123,7 +125,7 @@ h2 {
     align-items: center;
     gap: .75rem;
     font-size: 1.45rem;
-    font-weight: 750;
+    font-weight: 700;
     margin: 0 0 1.4rem;
     padding: 0 0 .65rem;
     color: var(--text);
@@ -171,7 +173,8 @@ code {
     background: var(--code-bg);
     padding: .12rem .4rem;
     border-radius: 4px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: var(--font-code);
+    font-weight: 400;
     font-size: .82rem;
     color: var(--ui-link);
 }
@@ -217,7 +220,7 @@ td > code:first-child { margin-left: -.4rem; }
     margin: 0;
     color: var(--text);
     font-size: 1.45rem;
-    font-weight: 750;
+    font-weight: 700;
     line-height: 1.35;
 }
 .slogan-highlight { color: var(--ui-link); }

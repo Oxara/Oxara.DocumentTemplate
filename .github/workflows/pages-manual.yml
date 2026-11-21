@@ -1,0 +1,139 @@
+name: Publish reviewed DT docs (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      reviewed_sha:
+        description: Reviewed default-branch commit (full 40-character SHA)
+        required: true
+        type: string
+      artifact_digest:
+        description: Approved public-manifest inventoryDigest (64-character SHA256)
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: read
+    env:
+      OXARA_BRAND_HOME: ${{ runner.temp }}/dt-brand-release-input
+      REVIEWED_SHA: ${{ inputs.reviewed_sha }}
+      EXPECTED_ARTIFACT_DIGEST: ${{ inputs.artifact_digest }}
+    steps:
+      - name: Require the reviewed commit and artifact
+        run: |
+          [[ "$REVIEWED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$GITHUB_SHA" == "$REVIEWED_SHA" ]]
+          [[ "$EXPECTED_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+
+      - name: Checkout the dispatch commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Set up the reviewed Node version
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26.13.0'
+          package-manager-cache: false
+
+      - name: Verify the canonical Brand release input
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile, mkdir, writeFile} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const bytes = await readFile('.github/pages/document-template-web.manifest.json');
+          const evidence = JSON.parse(await readFile('docs/BRAND-COMPATIBILITY.evidence.json', 'utf8'));
+          const expected = evidence.brandComplianceProfile.manifestSha256;
+          const actual = createHash('sha256').update(bytes).digest('hex');
+          if (actual !== expected) throw Error('Brand release input differs from reviewed consumer evidence');
+          const manifest = JSON.parse(bytes);
+          const provenance = JSON.parse(await readFile('.github/pages/brand-input.provenance.json', 'utf8'));
+          if (provenance.exportSha256 !== actual ||
+              provenance.profileSha256 !== manifest.inputs.profileSha256 ||
+              manifest.inputs.profileSha256 !== evidence.brandComplianceProfile.profileSha256 ||
+              manifest.profile !== evidence.brandComplianceProfile.profileId ||
+              manifest.profileVersion !== evidence.brandComplianceProfile.profileVersion ||
+              !/^[a-f0-9]{40}$/.test(provenance.sourceHead)) {
+            throw Error('Brand release input provenance/profile mismatch');
+          }
+          const target = path.join(process.env.OXARA_BRAND_HOME, 'exports/document-template-web');
+          await mkdir(target, {recursive:true});
+          await writeFile(path.join(target, 'manifest.json'), bytes);
+          NODE
+
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Build docs
+        run: npm run docs:build
+
+      - name: Check docs
+        run: npm run docs:check
+
+      - name: Test DT
+        run: npm test
+
+      - name: Build public artifact
+        run: npm run docs:public
+
+      - name: Check public artifact
+        run: npm run docs:public:check
+
+      - name: Require the approved artifact digest
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';
+          const manifest = JSON.parse(await readFile('dist/docs/public-manifest.json', 'utf8'));
+          if (manifest.inventoryDigest !== process.env.EXPECTED_ARTIFACT_DIGEST) {
+            throw Error('Artifact differs from the approved inventory digest; do not deploy');
+          }
+          console.log('Approved public artifact:', manifest.inventoryDigest);
+          NODE
+
+      - name: Read existing Pages configuration
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+        with:
+          enablement: 'false'
+
+      - name: Upload only the public docs directory
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          name: github-pages
+          path: dist/docs
+          retention-days: 1
+          include-hidden-files: 'false'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the checked public artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          artifact_name: github-pages

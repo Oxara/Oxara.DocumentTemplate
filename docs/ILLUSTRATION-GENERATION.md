@@ -1,6 +1,6 @@
 # Sabit 2D illüstrasyon üretim rehberi ve promptlar
 
-Bu rehber Görselli Sunum sayfasının üretim kaynağıdır. Özel artwork isteğe bağlıdır. Özel görsel verilmezse sabit genel atlas/kapalı kitap/dal-yaprak seti tekrar kullanılır; her konu için yeni üretim gerekmez.
+Bu rehber Hero ve Kartlar sayfasının üretim kaynağıdır. Özel artwork isteğe bağlıdır. Özel görsel verilmezse sabit genel atlas/kapalı kitap/dal-yaprak seti tekrar kullanılır; her konu için yeni üretim gerekmez.
 
 ## Üretim kuralları
 
@@ -41,3 +41,40 @@ Precise edit: remove EVERY olive/fruit/berry/bud/round ornament. Leave ONLY bran
 4. Orijinal çıktıyı ve kullanılan promptu sakla. WebP exportunda alpha'yı koru; yeni sürüm adı/hash ile ilişkilendir. Özel üretim yoksa aynı sabit seti kullan.
 5. Hero + kart/focus/hover, açık/koyu tema,320–390px mobil, reduced-motion ve noJS görünümünü gerçek sayfada incele. Metin okunur, prop tam ve yatay taşma yok olmalı.
 6. Teknik test, görsel karşılaştırma ve kullanıcı yaratıcı kabulünü ayrı kaydet. Üretim/entegrasyon commit/push/yayın izni değildir.
+
+## Üretim sırası ve sahipler — 2026-11-21
+
+1. **Brand referansı:** `Oxara.Brand/docs/ILLUSTRATION-FAMILY.md` ve `showcase.html#illustration-family` somut kitap/kart örneklerini ve kabul durumlarını gösterir. Önce mevcut onaylı görsel aile/form/stil okunur; son taslak çıktı başlangıç standardı ilan edilmez.
+2. **Ortak nesne sözleşmesi:** aynı aile için en-boy oranı, köşe geometrisi, kalınlık, perspektif, malzeme/ışık, görünür siluet, iç güvenli alan, alpha padding ve export ölçüsü kaydedilir. Eşit canvas tek başına tutarlı nesne değildir. Kitap ve proje kartı ayrı aile olabilir; aile içindeki kare/dikdörtgen karışımı kabul edilmez. Sayısal oran henüz kabul edilmediyse briefte açık karar olarak kalır.
+3. **Konu üretimi:** ortak form referansını sabitle, sonra her konu/proje için bir bütünlüklü özgün boyalı/fasetli illüstrasyon üret. Gerçek orijinal karakter/logo korunur; olmayan kurumsal logo/katkı üretilmez. Metin HTML kalır. Yukarıdaki genel “logo yok” promptu, sağlanmış gerçek logoyu özgün biçimiyle koruma isteğini geçersiz kılmaz.
+4. **Ayrı asset/export:** her kart/prop ayrı alpha dosyası; background/yaprak ayrı. Prompt, referans, orijinal, maske, ölçü/alpha sınırı, hash ve dönüşüm kaydı korunur. KatalogN öğeli iseN ayrı kaynak kullanılır; tek yedi-kart birleşik raster yeniden kullanılabilir sistem değildir.
+5. **DT tüketimi:** [prop/slot/fallback sözleşmesini](ILLUSTRATED-VISUAL-STANDARD.md#ozel-prop-slot-ve-fallback-sozlesmesi) kontrol et. Varsayılan sabit set isteğe bağlı özel kaynakla değiştirilir; otomatik konu üretimi yapılmaz.
+6. **Site entegrasyonu:** katalog/grup/sıra, nesnelerin açı/örtüşmesi, route/portal ve kategori kabuğu tüketiciye aittir. Ortak nesne formu siteye mekanik eşit aralıklı grid dayatmaz.
+7. **Gerçek kabul:** desktop/mobile, siluet kıyaslama, hover/focus, reduced-motion, görünmezken durma, doğrudan giriş ve portal varış/geri dönüş kontrol edilir. Teknik kaynak doğrulaması, görsel aile kıyası, kullanıcı yaratıcı kabulü ve yayın izni ayrı statüdedir.
+
+Bu sıra bağımlılık akışıdır; mevcut kabul edilmiş kaynak uygunsa her adımda yeniden görsel/kod üretilmez. DT, siteye özgü yedi kategori bölgesinin sahibi değildir; site PAGE-CONTRACTS ve ortak `category-shell` kaynakları tüketilir.
+
+## Aynı ailede yeni kart için form eki
+
+Aşağıdaki alanları üretimden önce doldur; belirsiz alanı modelin keyfî tamamlamasına bırakma. Form referansı hem ilk hem sonraki varyantlarda aynı dosya/hash olmalıdır. Aracın sonucu birebir garanti ettiği varsayılmaz; gerçek alpha/siluet kıyası ayrıca yapılır.
+
+```text
+Use the supplied accepted FORM reference [file + SHA256] for this object family.
+Keep the same visible silhouette, aspect ratio [W:H], corner geometry [spec],
+physical thickness [spec], perspective [spec], material/light direction [spec],
+inner safe area [spec] and transparent padding [spec]. Export [canvas W x H].
+Create ONE complete painted, lightly faceted 2D topic illustration for [subject].
+Integrate the subject as a coherent composition; do not paste a centered icon
+or logo plaque into a generic app-window frame. Preserve supplied originals
+[identity assets] exactly as instructed; do not redraw the user's character,
+invent logos, text or product claims. Genuine alpha, full isolated object.
+No multi-card collage, identical icon tiles, plastic3D or fake transparency.
+```
+
+## Tüketici örneği: erdemozkara.com Projeler
+
+Bu örnek DT'nin bütün tüketicilerine zorunlu tema veya hareket değildir. Kullanıcı küçük eşit aralıklı app-window/ikon plakalarını reddetti; ayrı büyük, konuya özgü bütünlüklü kartlar ve kitapların doğal dağılım/örtüşme ilkesini istedi. Kitap nesnesine veya albüme dönülmez. Proje kartlarının ortak fiziksel formu korunur; `personal` daha karakterli/serbest/organik, `team` daha ölçülü/teknik-ürün anlatımlı çalışma yönüdür. Bu yorum ve yeni assetler nihai yaratıcı kabul değildir; `group` ayrımı ve gerçek katkı içerikleri siteye aittir.
+
+Projeler hero kartlarında hover büyümesi/yükselmesi/perspektif sıçraması/z-index sırası değişimi yoktur. Sakin bağımsız ortam hareketi, reduced-motion/offscreen pause ve gerçek link focus'u ayrı kontrol edilir. Bu tercih başka kartların onaylı hover davranışını kaldırmaz. Kişisel karakter sağlanan orijinaliyle; Tekin gerçek sol anahtarı/yaprak logosuyla; Madene Hayır doğayı koruma/maden karşıtlığı anlamıyla korunur. Gerçek logo/orijinal yoksa uydurmak yerine eksik kaynak kaydedilir.
+
+Brand'deki yeni proje kartı **taslaktır**; oran/köşe/kalınlık/perspektifin kabul edilmiş ortak görünümüyle yan yana karşılaştırılıp ancak gerçek kullanıcı kabulü sonrası onaylı referansa dönüşebilir.

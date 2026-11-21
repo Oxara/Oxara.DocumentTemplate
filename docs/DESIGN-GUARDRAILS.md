@@ -2,6 +2,24 @@
 
 DocumentTemplate is a restrained, content-first documentation shell. Brand migrations must preserve that character. A color, logo or token task is not authorization to redesign layout or components.
 
+## Public product language
+
+The public documentation presents DocumentTemplate to people who want to use it.
+Introduce the benefit and suitable use, then working examples, installation,
+customization and relevant accessibility limits. Component rules and accurate HTML
+examples belong here; agent instructions, artwork-generation prompts, internal
+approval status and orchestration checklists do not belong in the main narrative.
+Technical generation sources and originals stay in their canonical guides. A short
+optional guide link may remain, and existing public anchors remain compatible.
+Changing the audience and content flow is required; replacing a few imperative
+verbs alone does not implement this boundary. This rule applies to new sections
+throughout the docs, not only Hero ve Kartlar.
+
+The interface uses the Brand Manrope family at 500–700 and code uses JetBrains
+Mono at 400–600. Local font files and OFL provenance are distributed with base;
+Segoe UI/Arial and Consolas are fallbacks. DT keeps its own content hierarchy and
+semantic theme roles; Brand's presentation stylesheet is not imported as a reset.
+
 ## Allowed in a brand migration
 
 - Replace approved logo, favicon and application-icon assets.

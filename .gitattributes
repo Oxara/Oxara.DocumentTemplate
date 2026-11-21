@@ -13,3 +13,7 @@ assets/favicon.svg -text
 assets/oxara-mark.svg -text
 assets/oxara-mark-on-dark.svg -text
 
+# Preserve the reviewed license bytes across Windows/Linux checkouts.
+assets/fonts/**/OFL.txt text eol=lf
+LICENSE text eol=crlf
+

@@ -87,6 +87,8 @@
 .search-overlay.active {
     opacity: 1;
     visibility: visible;
+    /* Visibility must change immediately so opening keyboard focus can enter. */
+    transition-property: opacity;
 }
 
 /* ── Modal kutu ── */

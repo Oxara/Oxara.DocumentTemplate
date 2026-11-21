@@ -14,13 +14,24 @@
       "slogan banner",
       "content figures",
       "subtle page-edge indicator with forced-colours fallback",
-      "Brand-derived semantic theme colors and light/dark contrast roles"
+      "Brand-derived semantic theme colors and light/dark contrast roles",
+      "local Manrope and JetBrains Mono fonts with OFL provenance"
     ],
     "html": [
       ".skip-link",
       ".section-dividers",
       ".slogan-banner",
       ".content-figure"
+    ],
+    "assets": [
+      "features/base/fonts.css",
+      "features/base/page-scrollbar.css",
+      "features/base/theme-colors.css",
+      "assets/fonts/provenance.json",
+      "assets/fonts/jetbrainsmono/JetBrainsMono[wght].ttf",
+      "assets/fonts/jetbrainsmono/OFL.txt",
+      "assets/fonts/manrope/Manrope[wght].ttf",
+      "assets/fonts/manrope/OFL.txt"
     ]
   },
   "resource-card": {
@@ -99,6 +110,17 @@
     "api": [
       "docsLayout.toggleNavigation()",
       "docsLayout.closeNavigation()"
+    ],
+    "assets": [
+      "assets/oxara-mark.svg",
+      "assets/oxara-mark-on-dark.svg",
+      "assets/oxara-mark.png",
+      "assets/oxara-mark-96.png",
+      "assets/oxara-mark-192.png",
+      "assets/favicon.svg",
+      "assets/favicon.ico",
+      "favicon-48.png",
+      "apple-touch-icon.png"
     ]
   },
   "theme": {

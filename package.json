@@ -3,7 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tools/release-checks/test.mjs scripts/behavior-packages.test.mjs scripts/theme-colors.test.mjs scripts/sidemenu.test.mjs scripts/document-hero.test.mjs"
+    "test": "node --test tools/release-checks/test.mjs scripts/behavior-packages.test.mjs scripts/theme-colors.test.mjs scripts/sidemenu.test.mjs scripts/document-hero.test.mjs scripts/docs-navigation.test.mjs scripts/docs-layout.test.mjs scripts/preview.test.mjs scripts/docs-runtime.test.mjs scripts/public-readiness.test.mjs",
+    "preview": "node scripts/preview.mjs",
+    "docs:build": "node scripts/build-docs-navigation.mjs",
+    "docs:check": "node scripts/build-docs-navigation.mjs --check && node scripts/audit-docs.mjs",
+    "docs:public": "node scripts/build-docs-navigation.mjs --check && node scripts/build-public-docs.mjs",
+    "docs:public:check": "node scripts/build-public-docs.mjs --check && node scripts/audit-docs.mjs --root dist/docs"
   },
   "dependencies": {
     "parse5": "8.1.1"

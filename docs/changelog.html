@@ -2,15 +2,15 @@
 <html lang="tr" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<script src="../features/theme/theme-boot.js"></script>
+<script src="../assets/docs-runtime/0c9e973f43050083155b18fbeb0f9e9bbccbdca817068471b8cf4c63aafd9927/features/theme/theme-boot.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Değişiklikler — Oxara Document Template</title>
-<meta name="description" content="Oxara Document Template sürüm geçmişi, değişiklik notları ve önce-sonra demoları.">
+<meta name="description" content="Her sürümde eklenen davranışlar, değişen standartlar ve görsel karşılaştırmalar.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/favicon.ico" sizes="any">
 <link rel="icon" href="../favicon-48.png" type="image/png" sizes="48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
-<link rel="stylesheet" href="../feature-packages/full.css">
+<link rel="stylesheet" href="../assets/docs-runtime/0c9e973f43050083155b18fbeb0f9e9bbccbdca817068471b8cf4c63aafd9927/feature-packages/full.css">
 <style>
 .release-list { display: grid; gap: 4rem; }
 .release-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
@@ -40,7 +40,7 @@
 }
 .release-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
 .release-demo { min-width: 0; padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
-.release-demo-label { display: block; margin-bottom: 1rem; color: var(--text-dim); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.release-demo-label { display: block; margin-bottom: 1rem; color: var(--text-dim); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .release-demo-stage { min-height: 100px; padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
 .release-demo-actions { display: flex; align-items: center; justify-content: flex-end; min-height: 56px; }
 .release-demo-header { display: flex; align-items: center; justify-content: flex-end; gap: .5rem; min-height: 56px; }
@@ -116,32 +116,17 @@
 </header>
 <div class="docs-overlay" data-docs-overlay></div>
 <div class="docs-shell">
-    <aside class="docs-sidebar" data-docs-sidebar>
-        <div class="docs-sidebar-inner">
-            <div class="docs-nav-group">
-                <div class="docs-nav-label">Başlangıç</div>
-                <a class="docs-nav-link" href="getting-started.html">Genel Bakış</a>
-            </div>
-            <div class="docs-nav-group">
-                <div class="docs-nav-label">Feature'lar</div>
-                <a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
-    <a class="docs-nav-link" href="illustrated-presentation.html">Görselli Sunum</a>
-                <a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
-                <a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
-                <a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a>
-            </div>
-            <div class="docs-nav-group">
-                <div class="docs-nav-label">Feature Paketleri</div>
-                <a class="docs-nav-link" href="reference.html#hazir-paketler">Hazır Paketler</a>
-            </div>
-            <div class="docs-nav-group">
-                <div class="docs-nav-label">Referans</div>
-                <a class="docs-nav-link" href="reference.html">Feature Referansı</a>
-                <a class="docs-nav-link active" href="changelog.html">Değişiklikler</a>
-                <a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a>
-            </div>
-</div>
-    </aside>
+    <aside class="docs-sidebar" id="docs-navigation" data-docs-sidebar><div class="docs-sidebar-inner">
+<div class="docs-nav-group"><div class="docs-nav-label">Başlangıç</div><a class="docs-nav-link" href="getting-started.html">Genel Bakış</a></div>
+<div class="docs-nav-group"><div class="docs-nav-label">Feature’lar</div><a class="docs-nav-link" href="document-components.html">Doküman Bileşenleri</a>
+<a class="docs-nav-link" href="illustrated-presentation.html">Hero ve Kartlar</a>
+<a class="docs-nav-link" href="code-features.html">Kod Özellikleri</a>
+<a class="docs-nav-link" href="navigation.html">Navigasyon ve Okuma</a>
+<a class="docs-nav-link" href="configuration.html">Tema ve Yapılandırma</a></div>
+<div class="docs-nav-group"><div class="docs-nav-label">Feature Paketleri</div><a class="docs-nav-link" href="reference.html#hazir-paketler">Hazır Paketler</a></div>
+<div class="docs-nav-group"><div class="docs-nav-label">Referans</div><a class="docs-nav-link" href="reference.html">Feature Referansı</a>
+<a class="docs-nav-link active" href="changelog.html" aria-current="page">Değişiklikler</a><a class="docs-nav-link" href="https://github.com/Oxara/Oxara.DocumentTemplate">GitHub</a></div>
+</div></aside>
     <main class="docs-main" id="main-content" tabindex="-1">
         <article class="docs-article">
             <header class="docs-article-header">
@@ -158,7 +143,7 @@
             <div class="release-list">
                 <section id="unreleased">
                     <div class="release-header"><h2>Yayımlanmamış</h2><span class="release-date">Sonraki sürüm</span></div>
-                    <p>Henüz yayımlanmamış değişiklik bulunmuyor.</p>
+                    <ul class="release-changes"><li>Hero ve Kartlar, kurulum ve özelleştirme örnekleriyle ürün kullanımına odaklanır; görsel üretim promptları teknik rehberde korunur. Yerel Manrope ve JetBrains Mono dosyaları ve tekil feature bağımlılıkları pakete eklendi.</li><li>Dokümantasyon menüsü, sayfa araması ve önceki/sonraki bağlantıları ortak sayfa kataloğundan üretilir; eksik menü bağlantısı ve atlanan okuma adımı düzeltildi.</li><li>İlgili bölümün adı Hero ve Kartlar olarak netleştirildi; mevcut URL korundu.</li><li>Mobil menü ve arama penceresinde klavye odağı, Escape, odak dönüşü ve erişilebilir açık/kapalı durumları düzeltildi.</li><li>Dokümantasyon kaynakları, CSS importları ve paket alt scriptleri içerik revizyonlu tek bir ağaca bağlandı. Yerel önizleme sunucusu ETag ile cache doğrulaması yapar; güncel HTML eski alt kaynaklarla karışmaz.</li><li>Tema ve Yapılandırma sayfasında arama üreticisinin örnek kod yerine gerçek çalışma ayarını güncellemesi sağlandı. Arama açılışında görünürlük geçişinin klavye odağını engellemesi giderildi.</li></ul>
                 </section>
                 <section id="v1-1-0">
                     <div class="release-header"><h2>v1.1.0</h2><span class="release-date">24 Eylül 2026</span></div>
@@ -324,8 +309,7 @@
                     </ul>
                 </section>
             </div>
-            <nav class="docs-pagination" aria-label="Sayfalar">
-                <a class="docs-page-link docs-page-previous" href="reference.html"><span>Önceki</span><strong>Feature Referansı</strong></a></nav>
+            <nav class="docs-pagination" aria-label="Sayfalar"><a class="docs-page-link docs-page-previous" href="reference.html"><span>Önceki</span><strong>Feature Referansı</strong></a></nav>
         </article>
     </main>
     <aside class="docs-toc" aria-label="Bu sayfada">
@@ -343,9 +327,9 @@
 </div>
 <button class="scroll-top" id="scrollTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
 <script>
-window.SEARCH_CONFIG = { contentSelector: '.docs-article', maxResults: 30 };
+window.SEARCH_CONFIG = {"contentSelector":".docs-article","maxResults":30,"externalItems":[{"title":"Başlangıç","text":"Document Template, hazır paketler ve tekil feature'larla doküman sitenizi hızlıca kurmanızı sağlar. İhtiyacınıza en yakın başlangıç yolunu seçin.","keywords":"Başlangıç Başlangıç","url":"getting-started.html","sectionType":"Sayfa"},{"title":"Doküman Bileşenleri","text":"Tipografi, başlık ritmi, tablolar, callout'lar, diyagramlar ve ortak içerik bileşenleri.","keywords":"Doküman Bileşenleri Feature’lar","url":"document-components.html","sectionType":"Sayfa"},{"title":"Hero ve Kartlar","text":"Rehberler için görsel girişler ve içerik kartları; hazır örnekler, kurulum ve kendi görsellerinizle özelleştirme.","keywords":"Hero ve Kartlar Feature’lar","url":"illustrated-presentation.html","sectionType":"Sayfa"},{"title":"Kod Özellikleri","text":"Kod renklendirme, kopyalama ve aynı örneğin farklı istemci ya da provider seçenekleriyle sunulması.","keywords":"Kod Özellikleri Feature’lar","url":"code-features.html","sectionType":"Sayfa"},{"title":"Navigasyon ve Okuma","text":"Çok sayfalı gezinme, sayfa içi başlıklar, arama, okuma ilerlemesi ve başa dön davranışları.","keywords":"Navigasyon ve Okuma Feature’lar","url":"navigation.html","sectionType":"Sayfa"},{"title":"Tema ve Yapılandırma","text":"Tema davranışı, opsiyonel feature ayarları ve proje bazlı özelleştirme sınırları.","keywords":"Tema ve Yapılandırma Feature’lar","url":"configuration.html","sectionType":"Sayfa"},{"title":"Feature Referansı","text":"Çok sayfalı doküman kabuğu, bağımsız feature'lar ve hazır feature paketleri için dosya, bağımlılık ve yükleme özeti.","keywords":"Feature Referansı Referans","url":"reference.html","sectionType":"Sayfa"}]};
 window.READING_PROGRESS_CONFIG = { elementId: 'readingProgress', contentSelector: '.docs-article' };
 </script>
-<script src="../feature-packages/full.js"></script>
+<script src="../assets/docs-runtime/0c9e973f43050083155b18fbeb0f9e9bbccbdca817068471b8cf4c63aafd9927/feature-packages/full.js"></script>
 </body>
 </html>
