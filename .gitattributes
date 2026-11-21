@@ -17,3 +17,33 @@ assets/oxara-mark-on-dark.svg -text
 assets/fonts/**/OFL.txt text eol=lf
 LICENSE text eol=crlf
 
+# Keep the reviewed source bytes; runtime hashes include original CRLF/mixed EOL.
+# Explicit exceptions preserve the approved artifact on clean CI checkouts.
+assets/docs-runtime/** -text
+README.md -text
+assets/example-article-cover.svg -text
+assets/fonts/provenance.json -text
+docs/ILLUSTRATED-VISUAL-STANDARD.md -text
+docs/ILLUSTRATION-GENERATION.md -text
+docs/changelog.html -text
+docs/code-features.html -text
+docs/configuration.html -text
+docs/document-components.html -text
+docs/getting-started.html -text
+docs/illustrated-presentation.html -text
+docs/navigation.html -text
+docs/pages.json -text
+docs/reference.html -text
+docs/theme-preview.html -text
+features/base/base.css -text
+features/base/fonts.css -text
+features/code-tabs/code-tabs.css -text
+features/copy-table/copy-table.css -text
+features/docs-layout/docs-layout.css -text
+features/docs-layout/docs-layout.js -text
+features/features.json -text
+features/resource-card/resource-card.css -text
+features/search/search.js -text
+package.json -text
+scripts/audit-docs.mjs -text
+scripts/build-docs-navigation.mjs -text
