@@ -4,19 +4,24 @@ Workflow yalnız manuel dispatch ile incelenen commit ve artifact digest’ini d
 
 ## Yetkili yayın aşamasındaki sıra
 
-1. Bağımsız QA'nın onayladığı ürün, workflow ve public artifact'i seçin. Tam
-   commit SHA'sını ve `dist/docs/public-manifest.json` içindeki `inventoryDigest`
-   değerini yayın kaydına bağlayın. Git ve yayın için ayrı açık yetki gerekir.
-2. Yayın sorumlusu **önce** repository Settings → Pages → Build and deployment →
-   Source alanını **GitHub Actions** yapar. Mevcut domain ve URL ayarları korunur.
-   Eski branch/root seçiliyken push yapmak eski root yayımını tetikleyebilir;
-   bu nedenle bu geçiş, incelenen commit'in yetkili push'ından önce yapılır.
-3. Ayrı Git yetkisiyle incelenen commit ve workflow default branch'e alınır.
-   `workflow_dispatch` dosyası default branch'te bulunmalıdır. Push bu workflow'u
-   çalıştırmaz. `github-pages` environment'ının mevcut koruma/izinli branch
-   ayarlarını doğrulayın; workflow bunları gevşetmez.
-4. Actions → **Publish reviewed DT docs (manual)** → Run workflow: default branch'i
-   seçin; `reviewed_sha` alanına incelenen tam commit SHA'sını,
+1. Çalışma dalı `draft`, yayın ve default dalı `main`'dir. Yeni işe son yayın
+   sonrasında eşitlenmiş `draft` üzerinden başlayın. Değişiklikleri `draft`'a
+   commit/push edin ve `draft` → `main` PR'ı açın. Doğrudan `main` push'ı ile
+   inceleme adımını atlamayın. Git ve yayın için açık yetki gerekir.
+2. PR kapsamını ve ilgili test/artifact kanıtlarını bağımsız QA ve yayın
+   sorumlusunun incelemesine sunun. Onaylanan PR'ı normal **merge commit** ile
+   `main`'e alın; squash/rebase kullanmayın. İncelemenin ardından ek değişiklik
+   gelirse yeniden inceleyin. Bu akış ürün sürümü/tag artışını tek başına gerektirmez.
+3. Yayın sorumlusu Pages Source'un **GitHub Actions** olduğunu ve `github-pages`
+   environment'ının mevcut koruma/izinli branch ayarlarını doğrular. Mevcut domain,
+   URL ve korumalar korunur; ayar zaten doğruysa değiştirilmez. Eski branch/root
+   kaynağı kullanılıyorsa yetkili sorumlu merge'den önce geçişi tamamlar.
+4. Tam `main` merge commit'inin checkout'undan ilgili build/check/test ve public
+   artifact kontrollerini çalıştırın. İncelenen merge commit SHA'sını ve
+   `dist/docs/public-manifest.json` içindeki `inventoryDigest` değerini yayın
+   kaydına bağlayın. `workflow_dispatch` dosyası `main`'de bulunmalıdır; push bu
+   workflow'u çalıştırmaz. Actions → **Publish reviewed DT docs (manual)** → Run
+   workflow: `main`'i seçin; `reviewed_sha` alanına incelenen tam merge commit SHA'sını,
    `artifact_digest` alanına onaylı 64 karakterli envanter hash'ini girin.
    Branch ucu ilerlemişse commit karşılaştırması çalışmayı durdurur.
 5. Başarılı kurulum, docs build/check/test, public build/check ve digest kapısından
@@ -25,6 +30,16 @@ Workflow yalnız manuel dispatch ile incelenen commit ve artifact digest’ini d
 6. Gerçek run sonrası commit, run/deployment kimlikleri, artifact manifesti ve
    dönen Pages URL'siyle canlı kontrol yapılır. Bu kontroller olmadan “yayın geçti”
    denmez. Başarısız digest/test kapısı bypass edilmez.
+7. Başarılı yayın ve canlı doğrulama sonrasında `draft`'ı yayımlanan `main`
+   commit'ine **fast-forward** edin ve normal push yapın. Örnek: `git fetch origin`,
+   `git switch main`, `git merge --ff-only origin/main`, `git switch draft`,
+   `git merge --ff-only origin/main`, `git push origin draft`. Yerel `main` henüz
+   yoksa `git switch --track origin/main` ile oluşturun. Her iki dalda da farklı
+   yerel iş veya commit varsa işi ezmeden durun; fast-forward koşulunu kaldırmayın.
+   Yerel ve uzak `draft`/`main` uçlarının hem tam commit SHA'sı hem tree SHA'sı
+   birebir eşit olmalıdır; makbuza ikisini de kaydedin. Force push/reset ile
+   farklı işi silmeyin. `draft` ilerlemiş veya ayrışmışsa eşitlik sağlanmış gibi
+   raporlamayın; ilgili değişiklikleri inceleyip aynı PR/yayın akışıyla çözün.
 
 Yerelde incelenen Windows çalışma ağacı ile daha sonra commit edilmiş Linux
 checkout'u satır sonu normalizasyonu nedeniyle farklı byte/hash üretebilir.
