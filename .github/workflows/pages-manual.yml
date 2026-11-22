@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       reviewed_sha:
-        description: Reviewed default-branch commit (full 40-character SHA)
+        description: Reviewed publish merge commit (full 40-character SHA)
         required: true
         type: string
       artifact_digest:
@@ -24,7 +24,7 @@ defaults:
 
 jobs:
   build:
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/publish'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
@@ -46,6 +46,19 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
+
+      - name: Require a normal draft to publish PR merge
+        run: |
+          node --input-type=module <<'NODE'
+          import {execFileSync} from 'node:child_process';
+          const commit = execFileSync('git', ['cat-file', '-p', process.env.GITHUB_SHA], {encoding:'utf8'});
+          const [headers, ...message] = commit.split('\n\n');
+          const parents = headers.split('\n').filter(line => line.startsWith('parent '));
+          const subject = message.join('\n\n').split('\n')[0];
+          if (parents.length !== 2 || !/^Merge pull request #\d+ from Oxara\/draft$/.test(subject)) {
+            throw Error('Publish requires a normal same-repository Oxara/draft PR merge; no direct, squash or rebase release');
+          }
+          NODE
 
       - name: Set up the reviewed Node version
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -128,6 +141,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/publish'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:

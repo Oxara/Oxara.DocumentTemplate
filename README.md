@@ -114,6 +114,8 @@ OX geometrisi, kimlik renkleri ve izinli istisnaların sahibi Oxara.Brand'dır.
 Eşleme varsayılan olarak kardeş depoyu kullanır; başka konum için
 `OXARA_BRAND_HOME` verilebilir. Üretilen `theme-colors.css`, `base.css` ile
 birlikte tüketilir. [Brand kaynak bilgisi](docs/BRAND-ASSETS.md).
+Yeni ürün/doküman OG kapağı için [Brand üretim ve DT metadata sahipliği](docs/BRAND-ASSETS.md#og-kapakları-brand-üretimi-dt-tüketimi)
+yolunu izleyin; ortak kapak master'ı ve exporter Brand'de kalır.
 
 ```powershell
 npm ci --ignore-scripts

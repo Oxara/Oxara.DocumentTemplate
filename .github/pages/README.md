@@ -1,27 +1,28 @@
 # Manuel GitHub Pages yayın tarifi
 
-Workflow yalnız manuel dispatch ile incelenen commit ve artifact digest’ini dağıtır. 21 Kasım2026 salt okunur kontrolünde uzak Pages build_type=workflow idi; domain ve environment korumaları değiştirilmez. Yeni release için kaynak/test/artifact bağlaması yeniden doğrulanır.
+Workflow yalnız manuel dispatch ile incelenen `publish` merge commit'ini ve artifact digest’ini dağıtır. Pages kaynağı GitHub Actions olarak korunur; domain değişmez. Environment dal izni yalnız `publish` olur; diğer korumalar korunur. Yeni release için kaynak/test/artifact bağlaması yeniden doğrulanır.
 
 ## Yetkili yayın aşamasındaki sıra
 
-1. Çalışma dalı `draft`, yayın ve default dalı `main`'dir. Yeni işe son yayın
+1. Varsayılan/birikim dalı `draft`, tek yayın dalı `publish` olur. `main` eski yayın dalıdır; yeni yayın hedefi olarak kullanılmaz. Yeni işe son yayın
    sonrasında eşitlenmiş `draft` üzerinden başlayın. Değişiklikleri `draft`'a
-   commit/push edin ve `draft` → `main` PR'ı açın. Doğrudan `main` push'ı ile
+   commit/push edin ve `draft` → `publish` PR'ı açın. Doğrudan `publish` push'ı ile
    inceleme adımını atlamayın. Git ve yayın için açık yetki gerekir.
 2. PR kapsamını ve ilgili test/artifact kanıtlarını bağımsız QA ve yayın
    sorumlusunun incelemesine sunun. Onaylanan PR'ı normal **merge commit** ile
-   `main`'e alın; squash/rebase kullanmayın. İncelemenin ardından ek değişiklik
+   `publish`'e alın; squash/rebase kullanmayın. İncelemenin ardından ek değişiklik
    gelirse yeniden inceleyin. Bu akış ürün sürümü/tag artışını tek başına gerektirmez.
 3. Yayın sorumlusu Pages Source'un **GitHub Actions** olduğunu ve `github-pages`
    environment'ının mevcut koruma/izinli branch ayarlarını doğrular. Mevcut domain,
-   URL ve korumalar korunur; ayar zaten doğruysa değiştirilmez. Eski branch/root
+   URL ve korumalar korunur; izinli deployment branch listesi yalnız `publish`
+   olmalıdır. `main`, `gh-pages`, tag veya wildcard izni kullanılmaz. Eski branch/root
    kaynağı kullanılıyorsa yetkili sorumlu merge'den önce geçişi tamamlar.
-4. Tam `main` merge commit'inin checkout'undan ilgili build/check/test ve public
+4. Tam `publish` merge commit'inin checkout'undan ilgili build/check/test ve public
    artifact kontrollerini çalıştırın. İncelenen merge commit SHA'sını ve
    `dist/docs/public-manifest.json` içindeki `inventoryDigest` değerini yayın
-   kaydına bağlayın. `workflow_dispatch` dosyası `main`'de bulunmalıdır; push bu
+   kaydına bağlayın. `workflow_dispatch` dosyası default `draft` dalında ve dispatch edilen `publish` commit’inde bulunmalıdır; push bu
    workflow'u çalıştırmaz. Actions → **Publish reviewed DT docs (manual)** → Run
-   workflow: `main`'i seçin; `reviewed_sha` alanına incelenen tam merge commit SHA'sını,
+   workflow: `publish`'i seçin; `reviewed_sha` alanına incelenen tam merge commit SHA'sını,
    `artifact_digest` alanına onaylı 64 karakterli envanter hash'ini girin.
    Branch ucu ilerlemişse commit karşılaştırması çalışmayı durdurur.
 5. Başarılı kurulum, docs build/check/test, public build/check ve digest kapısından
@@ -30,13 +31,13 @@ Workflow yalnız manuel dispatch ile incelenen commit ve artifact digest’ini d
 6. Gerçek run sonrası commit, run/deployment kimlikleri, artifact manifesti ve
    dönen Pages URL'siyle canlı kontrol yapılır. Bu kontroller olmadan “yayın geçti”
    denmez. Başarısız digest/test kapısı bypass edilmez.
-7. Başarılı yayın ve canlı doğrulama sonrasında `draft`'ı yayımlanan `main`
+7. Başarılı yayın ve canlı doğrulama sonrasında `draft`'ı yayımlanan `publish`
    commit'ine **fast-forward** edin ve normal push yapın. Örnek: `git fetch origin`,
-   `git switch main`, `git merge --ff-only origin/main`, `git switch draft`,
-   `git merge --ff-only origin/main`, `git push origin draft`. Yerel `main` henüz
-   yoksa `git switch --track origin/main` ile oluşturun. Her iki dalda da farklı
+   `git switch publish`, `git merge --ff-only origin/publish`, `git switch draft`,
+   `git merge --ff-only origin/publish`, `git push origin draft`. Yerel `publish` henüz
+   yoksa `git switch --track origin/publish` ile oluşturun. Her iki dalda da farklı
    yerel iş veya commit varsa işi ezmeden durun; fast-forward koşulunu kaldırmayın.
-   Yerel ve uzak `draft`/`main` uçlarının hem tam commit SHA'sı hem tree SHA'sı
+   Yerel ve uzak `draft`/`publish` uçlarının hem tam commit SHA'sı hem tree SHA'sı
    birebir eşit olmalıdır; makbuza ikisini de kaydedin. Force push/reset ile
    farklı işi silmeyin. `draft` ilerlemiş veya ayrışmışsa eşitlik sağlanmış gibi
    raporlamayın; ilgili değişiklikleri inceleyip aynı PR/yayın akışıyla çözün.
@@ -48,6 +49,10 @@ Onaylanacak digest, **tam yayın commit'inin** incelenmiş çıktısına ait olm
 Önceki bir başarılı runner/deploy yeni release’in geçtiği anlamına gelmez. Uyumsuzluk varsa yeni artifact
 incelenir; digest kapısı kaldırılarak yayın yapılmaz.
 
+## 22 Kasım 2026 — publish bootstrap sınırı
+
+`publish`, son başarılı Pages kaynağı olan `3ce4cbfde16db34e34dc64b8c66df2f5098f14e3` commit’inden oluşturuldu; yerel ürün adayı bootstrap kaynağı değildir. Default `draft`, environment yalnız `publish`, normal merge açık ve squash/rebase kapalıdır. Bootstrap bir deployment başlatmaz. Eski `main` ref’i bu geçişte tarihî kaynak olarak tutulur; yeni release rotasında kullanılmaz. Kök QA onayından sonra aynı repository içindeki `draft` → `publish` PR’ı normal merge edilir; manuel dispatch yalnız incelenmiş tam merge SHA ve artifact digest ile yapılır. Workflow iki raw parent kaydını ve standart `Merge pull request #N from Oxara/draft` başlığını da denetler; bu prosedürel kontrol PR incelemesinin yerine geçmez.
+
 ## Dar izinler ve bağımlılıklar
 
 - Workflow genelinde `permissions: {}`. Build: `contents: read`, `pages: read`.
@@ -55,7 +60,7 @@ incelenir; digest kapısı kaldırılarak yayın yapılmaz.
 - `configure-pages` için `enablement: false`; eksik Pages kaynağını veya siteyi
   otomatik açmaz. Gerekli dış ayar yukarıdaki yetkili sorumluda kalır.
 - Yalnız `workflow_dispatch` vardır. Push, PR, schedule, workflow_run veya
-  repository_dispatch tetikleyicisi yoktur. Varsayılan branch dışı run deploy etmez.
+  repository_dispatch tetikleyicisi yoktur. Yalnız `refs/heads/publish` run build/deploy eder; default `draft` run yayın yapamaz.
 - `npm ci --ignore-scripts` kilitli bağımlılıkları kurar. Ürün komutları mevcut
   package.json scriptleridir. Raw repo root, çalışma kayıtları veya başka bir
   dizin artifact olarak yüklenmez. Dosya URL'leri ve consumer API değişmez.

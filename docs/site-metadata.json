@@ -1,0 +1,9 @@
+{
+  "siteName": "DocumentTemplate",
+  "baseUrl": "https://oxara.github.io/Oxara.DocumentTemplate/",
+  "manifestPath": "docs/product-media.manifest.json",
+  "manifestSha256": "f7e88a3d02bc50c7c2a9b02241d87b2a8406d77880148165952b61644fcda8a9",
+  "outputId": "document-template.png",
+  "imagePath": "assets/social/document-template-og.png",
+  "imageAlt": "DocumentTemplate — El kitapları, rehberler ve teknik makaleler için ortak web bileşenleri."
+}
