@@ -46,8 +46,9 @@ kapak üretildiği, onaylandığı ya da yayımlandığı anlamına gelmez.
 DT metadata bağlaması `docs/site-metadata.json` içindedir: kanonik base URL,
 ürün sahibinin alt metni, tüketilen output ID ve public görsel yolu burada tutulur.
 `docs/product-media.manifest.json`, Brand teslim manifestinin byte-identical
-kopyasıdır; mevcut teslimin `working-tree` durumu yayımlanmış release gibi
-gösterilmez. Bu medya girdisi, yukarıdaki sabit web asset pininden ayrıdır.
+kopyasıdır; medya girdisi yayımlanmış [Brand v1.3.0](https://github.com/Oxara/Oxara.Brand/releases/tag/v1.3.0)
+paketinden alınır ve release commit'i manifestte korunur. Bu medya girdisi,
+yukarıdaki sabit web asset pininden ayrıdır.
 `npm run docs:build` ortak metadata'yı üretir; `npm run docs:check` ve
 `npm run docs:public:check` manifest/hash, PNG ölçü/MIME ve public dosya dahil
 oluşunu doğrular. Home kanonik base URL'yi, rehberler kendi dosya URL'lerini
