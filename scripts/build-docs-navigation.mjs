@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {parse} from 'parse5';
 import {buildDocsRuntime} from './docs-runtime.mjs';
+import {buildDocsMetadata} from './docs-metadata.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const attr=(n,k)=>n.attrs?.find(a=>a.name===k)?.value;
@@ -52,6 +53,7 @@ export async function buildDocsNavigation({check=false}={}){
   if(check){if(next!==original)throw Error('Stale shared documentation navigation: '+page.file);}
   else await writeFile(file,next);
  }
+ await buildDocsMetadata(root,{check});
  const runtime=await buildDocsRuntime(root,['index.html',...pages.map(p=>'docs/'+p.file),'docs/theme-preview.html'],{check});
  console.log(`${check?'Verified':'Generated'} shared sidebar/search/pagination for ${pages.length} documentation pages; runtime ${runtime.revision}.`);
 }

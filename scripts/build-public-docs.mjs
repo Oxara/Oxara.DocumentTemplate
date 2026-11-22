@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {parse} from 'parse5';
 import {buildDocsRuntime} from './docs-runtime.mjs';
+import {buildDocsMetadata} from './docs-metadata.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -24,7 +25,9 @@ export async function buildPublicDocs(directory = root, {check = false} = {}) {
     const {pages} = JSON.parse(await readFile(path.join(directory, 'docs/pages.json'), 'utf8'));
     const html = ['index.html', ...pages.map(p => 'docs/' + p.file), 'docs/theme-preview.html'];
     const graph = await buildDocsRuntime(directory, html, {check:true});
-    const selected = new Set([...html, 'docs/pages.json', 'LICENSE']);
+    const metadata = await buildDocsMetadata(directory, {check:true});
+    // Absolute OG/Twitter meta URLs are not local src/href dependencies. Include their verified source explicitly.
+    const selected = new Set([...html, 'docs/pages.json', 'LICENSE', ...metadata.publicFiles]);
     for (const folder of ['features', 'feature-packages']) {
         for (const file of await list(path.join(directory, folder))) selected.add(folder + '/' + file);
     }

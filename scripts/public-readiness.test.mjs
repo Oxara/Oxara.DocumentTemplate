@@ -43,6 +43,8 @@ test('public build excludes private source roots and rejects artifact injection'
     await writeFile(path.join(fixture, 'AGENTS.md'), 'private');
     const built = await buildPublicDocs(fixture);
     const manifest = JSON.parse(await readFile(path.join(built.output, 'public-manifest.json'), 'utf8'));
+    const metadata = JSON.parse(await readFile(path.join(fixture,'docs/site-metadata.json'),'utf8'));
+    assert.ok(manifest.files[metadata.imagePath], 'Absolute OG image must be explicitly included in the public artifact');
     assert.ok(!Object.keys(manifest.files).some(file => /^(?:work|\.planning|scripts|tools|node_modules)\//.test(file) || file === 'AGENTS.md'));
     await buildPublicDocs(fixture, {check:true});
     await writeFile(path.join(built.output, 'AGENTS.md'), 'injected');

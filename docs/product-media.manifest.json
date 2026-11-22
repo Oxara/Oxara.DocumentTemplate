@@ -1,0 +1,223 @@
+{
+  "$schema": "../../schemas/media-export-manifest.schema.json",
+  "schemaVersion": 1,
+  "profile": "product-covers",
+  "consumer": "Oxara product OG family",
+  "profileVersion": "1.2.0",
+  "designLanguageVersion": "1.1.0",
+  "dimensionProfileVersion": "1.0.0",
+  "release": {
+    "status": "working-tree",
+    "tag": null,
+    "commit": null
+  },
+  "generator": {
+    "name": "@oxara/brand-assets",
+    "version": "1.0.0"
+  },
+  "baseGeometryVersion": "ox-v1",
+  "authorizationId": "Oxara-Brand-Consumer-1.0",
+  "consumerOwned": [
+    "public-og-image-url",
+    "canonical-url",
+    "deployment-metadata",
+    "webmanifest-start-url-and-scope"
+  ],
+  "inputs": {
+    "profile": "profiles/product-covers.json",
+    "profileSha256": "8e92a50b03e1bb5aa368a3b0929c00bd28a0d6461c626612f40df96bfb4d517d",
+    "cardTemplate": "templates/media-card-master.svg",
+    "cardTemplateSha256": "763ddbf650c4d7fa9f31010f12f26240900b4b275ed11fbe20164b60681b5544",
+    "colors": "assets/tokens/colors.json",
+    "colorsSha256": "21e76af5e4fb41e7db6b08000da55804d2ad954003290db53b16953f2f716e30",
+    "generatorSource": "scripts/export-media-profile.mjs",
+    "generatorSourceSha256": "045a35e4cf84daf86d60c83ee8bff0ba13589ae9265f8d86e5e21bc264fea4ec",
+    "rasterFont": "external:Manrope[wght].ttf",
+    "rasterFontSha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+    "rasterFontPolicy": "explicit-file; system-font-loading-disabled",
+    "lightReferenceSource": "assets/styles/loading-surfaces.css",
+    "lightReferenceSourceSha256": "81fe371c592324b9b78b1fe8bd0c72d8246ee0f2bf21b04d36a8da26c3a29cc3",
+    "productCoverRendererSource": "scripts/lib/product-cover.mjs",
+    "productCoverRendererSourceSha256": "8f29e505ef5b5705b63bef5ad78ff89bec4cd002ce164703f8c6c08329930bac",
+    "productCoverFont": "assets/fonts/manrope/Manrope[wght].ttf",
+    "productCoverFontSha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+    "productCoverLeaves": "vendor/document-template/assets/presentation/growth-leaves-v2.webp",
+    "productCoverLeavesSha256": "27a68d91c0ef75b19c3d43560fe4c7d754caa03b8c0e47924cfa6559d29776d8",
+    "rendererPackageSource": "package.json",
+    "rendererPackageSourceSha256": "43556cf662ee2444d9bd27cecaa989b6c91bad0926e03448a8d86275d55418e8",
+    "rendererLockSource": "pnpm-lock.yaml",
+    "rendererLockSourceSha256": "a4417b6c756ce61cbab55ccec06a9a7bcabad8b8d67ca0bed2f1e7718c35d4d9",
+    "rasterRenderer": "chromium/playwright-core",
+    "rasterRendererVersion": "157.0.8103.51",
+    "rasterRendererClientVersion": "1.62.1",
+    "rasterPlatform": "win32",
+    "rasterBrowser": "external:chrome.exe",
+    "rasterBrowserSha256": "5b835c10836045119334d9524e62437110e00e1bd20612c9072a0ae155f94a17",
+    "profileSchema": "schemas/media-profile.schema.json",
+    "profileSchemaSha256": "ec81f5a2f961f1753d9212098db75c530dfbc2ce5a3cf76017e8743672119423"
+  },
+  "outputs": [
+    {
+      "logicalAssetId": "document-template.png",
+      "mediaType": "image/png",
+      "width": 1200,
+      "height": 630,
+      "family": "product-repository",
+      "purpose": null,
+      "accentToken": "color.brand.turquoise",
+      "resolvedAccent": "#19C7B5",
+      "openGraph": {
+        "imageType": "image/png",
+        "width": 1200,
+        "height": 630,
+        "alt": "DocumentTemplate — El kitapları, rehberler ve teknik makaleler için ortak web bileşenleri.",
+        "publicUrl": "consumer-owned"
+      },
+      "safeZone": {
+        "insetPercent": 6
+      },
+      "product": {
+        "canonicalUrl": "https://oxara.github.io/Oxara.DocumentTemplate/",
+        "source": {
+          "repository": "Oxara/Oxara.DocumentTemplate",
+          "path": "README.md",
+          "revision": "062b4a399a36d553274095337e8a2e99ffff0bbcaf1d2a8b9e2a29d4cb712d6c"
+        }
+      },
+      "path": "png/document-template.png",
+      "sha256": "40f7b4c7ef1425fa1de09d72b6855cceb3e33d296e8a273f7d0aeec30c130bac"
+    },
+    {
+      "logicalAssetId": "local-change-guard.png",
+      "mediaType": "image/png",
+      "width": 1200,
+      "height": 630,
+      "family": "product-repository",
+      "purpose": null,
+      "accentToken": "color.brand.turquoise",
+      "resolvedAccent": "#19C7B5",
+      "openGraph": {
+        "imageType": "image/png",
+        "width": 1200,
+        "height": 630,
+        "alt": "Local Change Guard — Yerel Git parçalarını görünür tutarak commit kapsamını ayırmaya yardımcı olur.",
+        "publicUrl": "consumer-owned"
+      },
+      "safeZone": {
+        "insetPercent": 6
+      },
+      "product": {
+        "canonicalUrl": "https://marketplace.visualstudio.com/items?itemName=oxara.local-change-guard",
+        "source": {
+          "repository": "Oxara/Oxara.VsCode.LocalChangeGuard",
+          "path": "package.json",
+          "revision": "783da5eb27eccd95211ec1a46a426a2d58c53248"
+        }
+      },
+      "path": "png/local-change-guard.png",
+      "sha256": "6b5f6300741ebdd03837800b78b2d1873096df0ccfd5f532aab278b8eb8570e3"
+    },
+    {
+      "logicalAssetId": "oxtensions.png",
+      "mediaType": "image/png",
+      "width": 1200,
+      "height": 630,
+      "family": "product-repository",
+      "purpose": null,
+      "accentToken": "color.brand.turquoise",
+      "resolvedAccent": "#19C7B5",
+      "openGraph": {
+        "imageType": "image/png",
+        "width": 1200,
+        "height": 630,
+        "alt": "Oxtensions — String, tarih ve koleksiyon işlemleri için yeniden kullanılabilir .NET uzantıları.",
+        "publicUrl": "consumer-owned"
+      },
+      "safeZone": {
+        "insetPercent": 6
+      },
+      "product": {
+        "canonicalUrl": "https://www.nuget.org/packages/Oxtensions",
+        "source": {
+          "repository": "Oxara/Oxtensions",
+          "path": "README.md",
+          "revision": "d33fb3bdb65542f0dad7fb81f88412a0c6e5c202"
+        }
+      },
+      "path": "png/oxtensions.png",
+      "sha256": "0263371724dc759210bc16bde1dec26cfdc86ac9a21f8a2e8db7c87a2762f4a3"
+    },
+    {
+      "logicalAssetId": "document-template.svg",
+      "mediaType": "image/svg+xml",
+      "width": 1200,
+      "height": 630,
+      "family": "product-repository",
+      "purpose": null,
+      "accentToken": "color.brand.turquoise",
+      "resolvedAccent": "#19C7B5",
+      "openGraph": null,
+      "safeZone": {
+        "insetPercent": 6
+      },
+      "product": {
+        "canonicalUrl": "https://oxara.github.io/Oxara.DocumentTemplate/",
+        "source": {
+          "repository": "Oxara/Oxara.DocumentTemplate",
+          "path": "README.md",
+          "revision": "062b4a399a36d553274095337e8a2e99ffff0bbcaf1d2a8b9e2a29d4cb712d6c"
+        }
+      },
+      "path": "svg/document-template.svg",
+      "sha256": "48830ea64b51ae40dd4e0bb117b8d78f6fddfe07b451b1b30bd84f75164451e1"
+    },
+    {
+      "logicalAssetId": "local-change-guard.svg",
+      "mediaType": "image/svg+xml",
+      "width": 1200,
+      "height": 630,
+      "family": "product-repository",
+      "purpose": null,
+      "accentToken": "color.brand.turquoise",
+      "resolvedAccent": "#19C7B5",
+      "openGraph": null,
+      "safeZone": {
+        "insetPercent": 6
+      },
+      "product": {
+        "canonicalUrl": "https://marketplace.visualstudio.com/items?itemName=oxara.local-change-guard",
+        "source": {
+          "repository": "Oxara/Oxara.VsCode.LocalChangeGuard",
+          "path": "package.json",
+          "revision": "783da5eb27eccd95211ec1a46a426a2d58c53248"
+        }
+      },
+      "path": "svg/local-change-guard.svg",
+      "sha256": "625b4b23fbdc7dfff7ab2416ebb64ed4edf61d45eb2de0251a3c916eee50a275"
+    },
+    {
+      "logicalAssetId": "oxtensions.svg",
+      "mediaType": "image/svg+xml",
+      "width": 1200,
+      "height": 630,
+      "family": "product-repository",
+      "purpose": null,
+      "accentToken": "color.brand.turquoise",
+      "resolvedAccent": "#19C7B5",
+      "openGraph": null,
+      "safeZone": {
+        "insetPercent": 6
+      },
+      "product": {
+        "canonicalUrl": "https://www.nuget.org/packages/Oxtensions",
+        "source": {
+          "repository": "Oxara/Oxtensions",
+          "path": "README.md",
+          "revision": "d33fb3bdb65542f0dad7fb81f88412a0c6e5c202"
+        }
+      },
+      "path": "svg/oxtensions.svg",
+      "sha256": "1367212fe28df3eb0187a5e1796b14f7c1205f425d13016a2a3285b7e2f077a9"
+    }
+  ]
+}
